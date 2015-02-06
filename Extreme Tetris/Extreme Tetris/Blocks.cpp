@@ -15,7 +15,11 @@ void Blocks::spawnBlock()
 
 }
 
-void Blocks::setTexture(Blocks block)
+void Blocks::texture(Blocks block)
 {
-	block.setTexture(blockTexture);
+	if (!blockTexture.loadFromFile("..\\Graphics\\Block.png"))
+	{
+		std::cout << "Error loading block texture" << std::endl;
+	}
+	// block.setTexture(blockTexture);
 }

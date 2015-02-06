@@ -15,7 +15,7 @@ public:
 	Blocks();
 	~Blocks();
 	void spawnBlock();
-	void setTexture(Blocks block);
+	void texture(Blocks block);
 
 private:
 	Texture blockTexture;

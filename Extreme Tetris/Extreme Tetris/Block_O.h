@@ -9,7 +9,7 @@ class Block_O
 public:
 	Block_O(Sprite block);
 	~Block_O();
-	
+	void setColor(Sprite block);
 
 private:
 	Sprite block_O;

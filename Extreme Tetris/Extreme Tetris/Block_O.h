@@ -2,17 +2,17 @@
 #define BLOCK_O_H
 #include "Blocks.h"
 
-using namespace sf;
+
 
 class Block_O
 {
 public:
-	Block_O(Sprite block);
+	Block_O(sf::Sprite block);
 	~Block_O();
-	void setColor(Sprite block);
+	void setColor(sf::Sprite block);
 
 private:
-	Sprite block_O;
+	sf::Sprite block_O;
 
 };
 

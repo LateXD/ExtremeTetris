@@ -1,12 +1,12 @@
 #include "Game.h"
-#include "StateStart.h"
+#include "MainMenu.h"
 
 int main()
 {
 	Game game;
-	game.pushState(new StateStart(&game));
-	game.gameLoop();		//gameLoop() metodissa pyörii itse peli
-							//ja toimii ns. main.cpp:nä
+	game.pushState(new MainMenu(&game));
+	game.gameLoop();							//gameLoop() metodissa pyörii itse peli
+												//ja toimii ns. main.cpp:nä
 
 	return 0;
 }

@@ -1,5 +1,6 @@
 #include "StateStart.h"
 #include "GameState.h"
+#include "MainMenu.h"
 
 StateStart::StateStart(Game* game) 
 {
@@ -36,8 +37,9 @@ void StateStart::handleInput()
 		{
 			if (event.key.code == sf::Keyboard::Escape)
 			{
-				this->game->window.close();
-				break;
+				this->game->pushState(new MainMenu(this->game));
+				std::cout << "Statestartista - > main menuun";
+				return;
 			}
 		default:
 			break;

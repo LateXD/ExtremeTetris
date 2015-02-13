@@ -66,20 +66,20 @@ Game::Game()
 	this->window.create(sf::VideoMode(800, 600), "Extreme Tetris");
 	this->window.setFramerateLimit(60);
 
-	/*sf::Clock clock;
-	unsigned short frames = 0;
+	//sf::Clock clock;
+	//unsigned short frames = 0;
 
-	if (clock.getElapsedTime().asMicroseconds() >= 500000)
-	{
-		system("cls");
-		std::cout << "FPS: " << frames * 2 << "\n";
-		frames = 0;
-		clock.restart();
-	}
-	else
-	{
-		frames++;
-	}*/
+	//if (clock.getElapsedTime().asMicroseconds() >= 500000)
+	//{
+	//	system("cls");
+	//	std::cout << "FPS: " << frames * 2 << "\n";
+	//	frames = 0;
+	//	clock.restart();
+	//}
+	//else
+	//{
+	//	frames++;
+	//}
 }
 
 

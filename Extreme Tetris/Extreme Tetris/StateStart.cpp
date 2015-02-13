@@ -9,11 +9,15 @@ StateStart::StateStart(Game* game)
 
 void StateStart::draw(const float dt)
 {
-	this->game->window.setView(this->view);
+	// Jos halutaan käyttää toista näkymää (View), tulee
+	// vanha ensiksi ottaa talteen, jotta siihen voidaan palata.
+
+	//this->game->window.setView(this->view);
 	this->game->window.clear(sf::Color::Black);
 
 	return;
 }
+
 
 void StateStart::handleInput()
 {

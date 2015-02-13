@@ -3,6 +3,8 @@
 
 void Game::pushState(GameState* state)
 {
+	state->initialize();
+
 	this->states.push(state);
 
 	return;
@@ -62,8 +64,9 @@ void Game::gameLoop()
 
 Game::Game()
 {
-	
-	this->window.create(sf::VideoMode(800, 600), "Extreme Tetris");
+	windowWidth = 800;
+	windowHeight = 600;
+	this->window.create(sf::VideoMode(windowWidth, windowHeight), "Extreme Tetris");
 	this->window.setFramerateLimit(60);
 
 	//sf::Clock clock;
@@ -82,6 +85,15 @@ Game::Game()
 	//}
 }
 
+
+float Game::getWindowWidth()
+{
+	return windowWidth;
+}
+float Game::getWindowHeight() 
+{
+	return windowHeight;
+}
 
 Game::~Game()
 {

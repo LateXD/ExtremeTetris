@@ -14,7 +14,7 @@ public:
 
 	StateStart(Game* game);
 private:
-	sf::View view;
+	//sf::View view;
 };
 #endif;
 

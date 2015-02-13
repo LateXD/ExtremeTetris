@@ -17,6 +17,8 @@ class GameState;
 class Game
 {
 
+private:
+	float windowWidth, windowHeight;
 public:
 
 	std::stack<GameState*> states;
@@ -27,6 +29,9 @@ public:
 	void popState();
 	void changeState(GameState* state);
 	GameState* peekState();
+
+	float getWindowWidth();
+	float getWindowHeight();
 
 	void gameLoop();
 

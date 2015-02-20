@@ -33,8 +33,8 @@ void MainMenu::onInitialize()
 
 	menu[0].setString("Main Menu");
 	menu[0].setColor(sf::Color::Green);
-	//menu[1].setCharacterSize(50);
-	menu[0].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 1));
+	menu[0].setCharacterSize(50);
+	menu[0].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 2) * 1));
 
 	menu[1].setString("Single Player");
 	menu[1].setColor(sf::Color::Red);
@@ -57,6 +57,31 @@ void MainMenu::onInitialize()
 {
 }*/
 
+void MainMenu::MoveUp()
+{
+	if (selectedItemIndex > 1)
+	{
+		menu[selectedItemIndex].setColor(sf::Color::White);
+		selectedItemIndex--;
+		menu[selectedItemIndex].setColor(sf::Color::Red);
+	}
+}
+
+void MainMenu::MoveDown()
+{
+	if (selectedItemIndex < MAX_NUMBER_OF_ITEMS - 1)
+	{
+		menu[selectedItemIndex].setColor(sf::Color::White);
+		selectedItemIndex++;
+		menu[selectedItemIndex].setColor(sf::Color::Red);
+	}
+}
+
+int MainMenu::GetPressedItem()
+{
+	return selectedItemIndex;
+}
+
 void MainMenu::update(const float dt)
 {
 
@@ -69,20 +94,43 @@ void MainMenu::handleInput()
 	{
 		switch (event.type)
 		{
-		case sf::Event::KeyPressed:
+		case sf::Event::KeyReleased:
 		{
-			if (event.key.code == sf::Keyboard::Space)
+			switch (event.key.code)
 			{
-				this->game->pushState(new StateStart(this->game));
-				std::cout << "Mainmenusta -> statestart";
-				return;
+			case sf::Keyboard::Up:
+				MoveUp();
+				break;
+
+			case sf::Keyboard::Down:
+				MoveDown();
+				break;
+
+			case sf::Keyboard::Return:
+				switch (GetPressedItem())
+				{
+
+				case 1:
+					this->game->pushState(new StateStart(this->game));
+					std::cout << "Single player has started" << std::endl;
+					return;
+				case 2:
+					std::cout << "Options menu" << std::endl;
+					break;
+				case 3:
+					std::cout << "Quit game" << std::endl;
+					break;
+				default:
+					break;
+				}
+			default:
+				break;
 			}
 		}
-		default:
-			break;
 		}
 	}
 }
+
 MainMenu::~MainMenu()
 {
 }

@@ -14,6 +14,9 @@ public:
 	//void Main(float width, float height);
 	void draw(const float dt);
 	void update(const float dt);
+	void MoveUp();
+	void MoveDown();
+	int GetPressedItem();
 	void handleInput();
 
 protected:
@@ -21,7 +24,7 @@ protected:
 private:
 	float width, height;
 	sf::Font font;
-	int selectedItemInder;
+	int selectedItemIndex = 1;
 	sf::Text menu[MAX_NUMBER_OF_ITEMS];
 };
 #endif;

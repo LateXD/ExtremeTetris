@@ -9,9 +9,67 @@ OptionsState::OptionsState(Game* game)
 
 void OptionsState::draw(const float dt)
 {
-	this->game->window.clear(sf::Color::Black);
+	for (int i = 0; i < OPTIONS_ITEMS; i++)
+	{
+		game->window.draw(this->options[i]);
+	}
+}
 
-	return;
+void OptionsState::onInitialize()
+{
+	if (!font.loadFromFile("..\\Graphics\\8bitOperatorPlus8-Regular.ttf"))
+	{
+		//error
+		std::cout << "" << std::endl;
+	}
+	
+	float width = game->getWindowWidth();
+	float height = game->getWindowHeight();
+
+	options[0].setFont(font);
+	options[1].setFont(font);
+	options[2].setFont(font);
+
+	options[0].setString("Options");
+	options[0].setColor(sf::Color::Yellow);
+	options[0].setCharacterSize(50);
+	options[0].setPosition(sf::Vector2f(width / 3, height / (OPTIONS_ITEMS + 2) * 1));
+
+	options[1].setString("Controls");
+	options[1].setColor(sf::Color::Red);
+	options[1].setCharacterSize(40);
+	options[1].setPosition(sf::Vector2f(width / 3, height / (OPTIONS_ITEMS + 1) * 2));
+
+	options[2].setString("Volume");
+	options[2].setColor(sf::Color::White);
+	options[2].setCharacterSize(40);
+	options[2].setPosition(sf::Vector2f(width / 3, height / (OPTIONS_ITEMS + 1) * 3));
+
+}
+
+void OptionsState::MoveUp()
+{
+	if (selectedItemIndex > 1)
+	{
+		options[selectedItemIndex].setColor(sf::Color::White);
+		selectedItemIndex--;
+		options[selectedItemIndex].setColor(sf::Color::Red);
+	}
+}
+
+void OptionsState::MoveDown()
+{
+	if (selectedItemIndex < OPTIONS_ITEMS - 1)
+	{
+		options[selectedItemIndex].setColor(sf::Color::White);
+		selectedItemIndex++;
+		options[selectedItemIndex].setColor(sf::Color::Red);
+	}
+}
+
+int OptionsState::GetPressedItem()
+{
+	return selectedItemIndex;
 }
 
 void OptionsState::handleInput()
@@ -21,27 +79,35 @@ void OptionsState::handleInput()
 	{
 		switch (event.type)
 		{
-		case sf::Event::Closed:
+		case sf::Event::KeyReleased:
 		{
-			game->window.close();
-			break;
-		}
-			//TODO:: IF YOU WANT TO RESIZE THE WINDOW
-
-			/*case sf::Event::Resized:
+			switch (event.key.code)
 			{
-
-			}*/
-		case sf::Event::KeyPressed:
-		{
-			if (event.key.code == sf::Keyboard::Escape)
-			{
+			case sf::Keyboard::Escape:
 				this->game->pushState(new MainMenu(this->game));
-				std::cout << "Back to main menu\n";
 				return;
+			case sf::Keyboard::Up:
+				MoveUp();
+				break;
+			case sf::Keyboard::Down:
+				MoveDown();
+				break;
+
+			case sf::Keyboard::Return:
+				switch (GetPressedItem())
+				{
+				case 1:
+					std::cout << "Inputs" << std::endl;
+					break;
+				case 2:
+					std::cout << "Volume" << std::endl;
+					break;
+				default:
+					break;
+				}
+			default:
+				break;
 			}
-		default:
-			break;
 		}
 		}
 	}

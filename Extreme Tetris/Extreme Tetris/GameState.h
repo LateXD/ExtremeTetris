@@ -5,10 +5,7 @@
 
 class GameState		//GameState manageri
 {
-private:
-	bool initialized;
-protected:
-	virtual void onInitialize();
+
 public:
 
 	Game* game;
@@ -22,6 +19,10 @@ public:
 
 	GameState();
 	~GameState();
+private:
+	bool initialized;
+protected:
+	virtual void onInitialize();
 };
 #endif;
 

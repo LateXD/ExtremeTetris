@@ -39,17 +39,17 @@ void MainMenu::onInitialize()
 
 	menu[1].setString("Single Player");
 	menu[1].setColor(sf::Color::Red);
-	//menu[2].setCharacterSize(40);
+	menu[1].setCharacterSize(40);
 	menu[1].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 2));
 
 	menu[2].setString("Options");
 	menu[2].setColor(sf::Color::White);
-	//menu[3].setCharacterSize(40);
+	menu[2].setCharacterSize(40);
 	menu[2].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 3));
 
 	menu[3].setString("Quit");
 	menu[3].setColor(sf::Color::White);
-	//menu[4].setCharacterSize(40);
+	menu[3].setCharacterSize(40);
 	menu[3].setPosition(sf::Vector2f(width / 2, height / (MAX_NUMBER_OF_ITEMS + 1) * 4));
 
 }
@@ -90,7 +90,7 @@ void MainMenu::update(const float dt)
 void MainMenu::handleInput()
 {
 	sf::Event event;
-
+	system("cls");
 	while (this->game->window.pollEvent(event))
 	{
 		switch (event.type)

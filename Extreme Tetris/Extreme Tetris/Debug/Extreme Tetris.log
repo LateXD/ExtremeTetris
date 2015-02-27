@@ -1,10 +1,14 @@
-﻿Build started 20.2.2015 11:35:24.
+﻿Build started 27.2.2015 9:45:32.
      1>Project "C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Extreme Tetris\Extreme Tetris.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\include" /ZI /nologo /W4 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt MainMenu.cpp
-         MainMenu.cpp
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\mainmenu.cpp(10): warning C4100: 'dt' : unreferenced formal parameter
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\mainmenu.cpp(85): warning C4100: 'dt' : unreferenced formal parameter
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\include" /ZI /nologo /W4 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt OptionsState.cpp StateStart.cpp
+         StateStart.cpp
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(10): warning C4100: 'dt' : unreferenced formal parameter
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(54): warning C4100: 'dt' : unreferenced formal parameter
+         OptionsState.cpp
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\optionsstate.cpp(10): warning C4100: 'dt' : unreferenced formal parameter
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\optionsstate.cpp(50): warning C4100: 'dt' : unreferenced formal parameter
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\lib" freetype.lib glew.lib jpeg.lib opengl32.lib "sfml-graphics-s-d.lib" "sfml-window-s-d.lib" "sfml-system-s-d.lib" winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.lib" /MACHINE:X86 Debug\Blocks.obj
          Debug\Block_O.obj
@@ -12,10 +16,11 @@
          Debug\GameState.obj
          Debug\Main.obj
          Debug\MainMenu.obj
+         Debug\OptionsState.obj
          Debug\StateStart.obj
          Extreme Tetris.vcxproj -> C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.exe
      1>Done Building Project "C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Extreme Tetris\Extreme Tetris.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.72
+Time Elapsed 00:00:01.08

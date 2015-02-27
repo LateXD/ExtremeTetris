@@ -1,5 +1,6 @@
 #include "MainMenu.h"
 #include "StateStart.h"
+#include "OptionsState.h"
 
 
 MainMenu::MainMenu(Game* game)
@@ -112,13 +113,15 @@ void MainMenu::handleInput()
 
 				case 1:
 					this->game->pushState(new StateStart(this->game));
-					std::cout << "Single player has started" << std::endl;
+					std::cout << "Single player" << std::endl;
 					return;
 				case 2:
+					this->game->pushState(new OptionsState(this->game));
 					std::cout << "Options menu" << std::endl;
 					break;
 				case 3:
 					std::cout << "Quit game" << std::endl;
+					this->game->window.close();
 					break;
 				default:
 					break;

@@ -42,7 +42,7 @@ void StateStart::handleInput()
 			if (event.key.code == sf::Keyboard::Escape)
 			{
 				this->game->pushState(new MainMenu(this->game));
-				std::cout << "Statestartista - > main menuun";
+				std::cout << "Back to main menu\n";
 				return;
 			}
 		default:

@@ -6,13 +6,14 @@
 class StateStart : public GameState
 {
 public:
+	StateStart(Game* game);
 	~StateStart();
 
 	void draw(const float dt);
 	void update(const float dt);
 	void handleInput();
 
-	StateStart(Game* game);
+	
 private:
 	//sf::View view;
 };

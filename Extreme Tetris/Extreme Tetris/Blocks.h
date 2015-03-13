@@ -18,6 +18,7 @@ public:
 private:
 	int randomBlock = 0, vectorSize = 4, xPos = 0, yPos = 0;
 	std::vector<sf::Sprite>blockVector;
+	Block_O block_O;
 };
 
 #endif

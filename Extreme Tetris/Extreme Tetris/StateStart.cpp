@@ -5,6 +5,12 @@
 StateStart::StateStart(Game* game) 
 {
 	this->game = game;
+	if (!frameTexture.loadFromFile("..\\Graphics\\Frame.png"))
+	{
+		std::cout << "Can't load texture!";
+	}
+	frame.setTexture(frameTexture);
+	frame.setColor(sf::Color(100, 255, 100));
 }
 
 void StateStart::draw(const float dt)
@@ -18,6 +24,7 @@ void StateStart::draw(const float dt)
 	for (int i = 0; i < 4; i++)
 	{
 		game->window.draw(vector[i]);
+		game->window.draw(frame);
 	}
 	return;
 }
@@ -49,17 +56,20 @@ void StateStart::handleInput()
 				std::cout << "Back to main menu\n";
 				return;
 			}
-			else if (event.key.code == sf::Keyboard::Left)
+			else if (event.key.code == sf::Keyboard::Left && xPos != 0)
 			{
 				block.moveLeft();
+				xPos--;
 			}
-			else if (event.key.code == sf::Keyboard::Right)
+			else if (event.key.code == sf::Keyboard::Right && xPos != 8)
 			{
 				block.moveRight();
+				xPos++;
 			}
-			else if (event.key.code == sf::Keyboard::Down)
+			else if (event.key.code == sf::Keyboard::Down && yPos != 16)
 			{
 				block.moveDown();
+				yPos++;
 			}
 			else if (event.key.code == sf::Keyboard::M)
 			{
@@ -73,7 +83,12 @@ void StateStart::handleInput()
 }
 void StateStart::update(const float dt)
 {
-	
+	if (clock.getElapsedTime().asMicroseconds() >= 500000 && yPos != 16)
+	{
+		yPos++;
+		block.moveDown();
+		clock.restart();
+	}
 }
 StateStart::~StateStart()
 {

@@ -16,7 +16,11 @@ public:
 	
 private:
 	//sf::View view;
+	int xPos = 3, yPos = 1;
 	Blocks block;
+	sf::Clock clock;
+	sf::Sprite frame;
+	sf::Texture frameTexture;
 	std::vector<sf::Sprite> vector;
 };
 #endif;

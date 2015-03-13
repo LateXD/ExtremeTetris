@@ -1,25 +1,57 @@
 #include "Blocks.h"
 
-
 Blocks::Blocks()
 {
-}
+	Block_O block_O;
+	for (int i = 0; i < vectorSize; i++)
+	{
+		blockVector = block_O.spawn(i, xPos, yPos, blockVector);
+	}
 
+}
 
 Blocks::~Blocks()
 {
 }
 
-void Blocks::spawnBlock()
+void Blocks::moveLeft()
+{
+	for (int i = 0; i < vectorSize; i++)
+	{
+		blockVector[i].move(-20, 0);
+	}
+	xPos--;
+}
+
+void Blocks::moveRight()
+{
+	for (int i = 0; i < vectorSize; i++)
+	{
+		blockVector[i].move(20, 0);
+	}
+	xPos++;
+}
+
+void Blocks::moveDown()
+{
+	for (int i = 0; i < vectorSize; i++)
+	{
+		blockVector[i].move(0, 20);
+	}
+	yPos++;
+}
+
+void Blocks::rotateClockwise()
 {
 
 }
 
-void Blocks::texture(Blocks block)
+void Blocks::rotateCounterClockwise()
 {
-	if (!blockTexture.loadFromFile("..\\Graphics\\Block.png"))
-	{
-		std::cout << "Error loading block texture" << std::endl;
-	}
-	// block.setTexture(blockTexture);
+
+}
+
+std::vector<sf::Sprite> Blocks::getVector()
+{
+	return blockVector;
 }

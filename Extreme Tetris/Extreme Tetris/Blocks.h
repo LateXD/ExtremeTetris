@@ -1,20 +1,23 @@
 #ifndef BLOCKS_H
 #define BLOCKS_H
-#include "Game.h"
-
-
+#include "Block_O.h"
 
 class Blocks
 {
 public:
 	Blocks();
 	~Blocks();
-	void spawnBlock();
-	void texture(Blocks block);
+	void moveLeft();
+	void moveRight();
+	void moveDown();
+	void rotateClockwise();
+	void rotateCounterClockwise();
+	std::vector<sf::Sprite> getVector();
+	Game* game;
 
 private:
-	sf::Texture blockTexture;
-
+	int randomBlock = 0, vectorSize = 4, xPos = 0, yPos = 0;
+	std::vector<sf::Sprite>blockVector;
 };
 
 #endif

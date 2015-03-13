@@ -14,7 +14,11 @@ void StateStart::draw(const float dt)
 
 	//this->game->window.setView(this->view);
 	this->game->window.clear(sf::Color::Black);
-
+	vector = block.getVector();
+	for (int i = 0; i < 4; i++)
+	{
+		game->window.draw(vector[i]);
+	}
 	return;
 }
 
@@ -45,6 +49,22 @@ void StateStart::handleInput()
 				std::cout << "Back to main menu\n";
 				return;
 			}
+			else if (event.key.code == sf::Keyboard::Left)
+			{
+				block.moveLeft();
+			}
+			else if (event.key.code == sf::Keyboard::Right)
+			{
+				block.moveRight();
+			}
+			else if (event.key.code == sf::Keyboard::Down)
+			{
+				block.moveDown();
+			}
+			else if (event.key.code == sf::Keyboard::M)
+			{
+				
+			}
 		default:
 			break;
 		}
@@ -53,7 +73,7 @@ void StateStart::handleInput()
 }
 void StateStart::update(const float dt)
 {
-
+	
 }
 StateStart::~StateStart()
 {

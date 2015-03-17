@@ -85,7 +85,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Blocks.cpp" />
+    <ClCompile Include="Block_I.cpp" />
+    <ClCompile Include="Block_J.cpp" />
+    <ClCompile Include="Block_L.cpp" />
     <ClCompile Include="Block_O.cpp" />
+    <ClCompile Include="Block_S.cpp" />
+    <ClCompile Include="Block_T.cpp" />
+    <ClCompile Include="Block_Z.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -95,7 +101,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blocks.h" />
+    <ClInclude Include="Block_I.h" />
+    <ClInclude Include="Block_J.h" />
+    <ClInclude Include="Block_L.h" />
     <ClInclude Include="Block_O.h" />
+    <ClInclude Include="Block_S.h" />
+    <ClInclude Include="Block_T.h" />
+    <ClInclude Include="Block_Z.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="MainMenu.h" />

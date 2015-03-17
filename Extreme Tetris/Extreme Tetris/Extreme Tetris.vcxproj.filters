@@ -39,6 +39,24 @@
     <ClCompile Include="OptionsState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Block_Z.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_S.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_T.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_I.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_J.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_L.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Block_O.h">
@@ -60,6 +78,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="OptionsState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_Z.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_S.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_T.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_I.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_J.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_L.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

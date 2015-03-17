@@ -10,6 +10,8 @@
 #include <iostream>
 #include <string>
 #include <stack>
+#include <time.h>
+#include <ctime>
 
 
 class GameState;

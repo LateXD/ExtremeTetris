@@ -1,13 +1,19 @@
-﻿Build started 13.3.2015 12:35:41.
+﻿Build started 17.3.2015 9:15:37.
      1>Project "C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Extreme Tetris\Extreme Tetris.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\include" /ZI /nologo /W4 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Block_O.cpp
-         Block_O.cpp
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\block_o.cpp(23): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\block_o.cpp(41): warning C4100: 'rotation' : unreferenced formal parameter
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\include" /ZI /nologo /W4 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt StateStart.cpp
+         StateStart.cpp
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(16): warning C4100: 'dt' : unreferenced formal parameter
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(85): warning C4100: 'dt' : unreferenced formal parameter
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\lib" freetype.lib glew.lib jpeg.lib opengl32.lib "sfml-graphics-s-d.lib" "sfml-window-s-d.lib" "sfml-system-s-d.lib" winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.lib" /MACHINE:X86 Debug\Blocks.obj
+         Debug\Block_I.obj
+         Debug\Block_J.obj
+         Debug\Block_L.obj
          Debug\Block_O.obj
+         Debug\Block_S.obj
+         Debug\Block_T.obj
+         Debug\Block_Z.obj
          Debug\Game.obj
          Debug\GameState.obj
          Debug\Main.obj
@@ -19,4 +25,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.65
+Time Elapsed 00:00:00.79

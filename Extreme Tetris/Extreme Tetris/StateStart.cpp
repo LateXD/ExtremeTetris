@@ -20,7 +20,7 @@ void StateStart::draw(const float dt)
 
 	//this->game->window.setView(this->view);
 	this->game->window.clear(sf::Color::Black);
-	vector = block.getVector();
+	vector = blockPointer->getVector();
 	for (int i = 0; i < 4; i++)
 	{
 		game->window.draw(vector[i]);
@@ -58,17 +58,17 @@ void StateStart::handleInput()
 			}
 			else if (event.key.code == sf::Keyboard::Left && xPos != 0)
 			{
-				block.moveLeft();
+				blockPointer->moveLeft();
 				xPos--;
 			}
 			else if (event.key.code == sf::Keyboard::Right && xPos != 8)
 			{
-				block.moveRight();
+				blockPointer->moveRight();
 				xPos++;
 			}
 			else if (event.key.code == sf::Keyboard::Down && yPos != 16)
 			{
-				block.moveDown();
+				blockPointer->moveDown();
 				yPos++;
 			}
 			else if (event.key.code == sf::Keyboard::M)
@@ -81,15 +81,23 @@ void StateStart::handleInput()
 		}
 	}
 }
+
 void StateStart::update(const float dt)
 {
+	if (yPos == 16)
+	{
+		blockPointer = new Blocks;
+		xPos = 3;
+		yPos = 0;
+	}
 	if (clock.getElapsedTime().asMicroseconds() >= 500000 && yPos != 16)
 	{
 		yPos++;
-		block.moveDown();
+		blockPointer->moveDown();
 		clock.restart();
 	}
 }
+
 StateStart::~StateStart()
 {
 }

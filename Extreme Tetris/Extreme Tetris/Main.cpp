@@ -3,6 +3,7 @@
 
 int main()
 {
+	srand(time(NULL));
 	Game game;
 	game.pushState(new MainMenu(&game));
 	game.gameLoop();							//gameLoop() metodissa pyörii itse peli

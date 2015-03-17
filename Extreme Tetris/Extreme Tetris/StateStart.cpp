@@ -56,12 +56,12 @@ void StateStart::handleInput()
 				std::cout << "Back to main menu\n";
 				return;
 			}
-			else if (event.key.code == sf::Keyboard::Left && xPos != 0)
+			else if (event.key.code == sf::Keyboard::Left && vector[0].getPosition().x -20 > 0)
 			{
 				blockPointer->moveLeft();
 				xPos--;
 			}
-			else if (event.key.code == sf::Keyboard::Right && xPos != 8)
+			else if (event.key.code == sf::Keyboard::Right && vector[0].getPosition().x + 20 < 180)
 			{
 				blockPointer->moveRight();
 				xPos++;

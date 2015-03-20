@@ -3,7 +3,6 @@
 Blocks::Blocks()
 {
 	randomBlock = rand() % 7 + 1;
-	randomBlock = 5;
 	if (randomBlock == 1)
 	{
 		blockVector = block_O.spawn(xPos, yPos, blockVector);
@@ -95,11 +94,11 @@ void Blocks::rotateClockwise()
 	}
 	else if (randomBlock == 5)
 	{
-		blockVector = block_T.rotateBlockCC_T(rotation, blockVector);
+		blockVector = block_T.rotateBlockC_T(rotation, blockVector);
 	}
 	else if (randomBlock == 6)
 	{
-		blockVector = block_J.rotateBlockCC_J(rotation, blockVector);
+		blockVector = block_J.rotateBlockC_J(rotation, blockVector);
 	}
 }
 
@@ -132,7 +131,7 @@ void Blocks::rotateCounterClockwise()
 	}
 	else if (randomBlock == 5)
 	{
-		blockVector = block_T.rotateBlockC_T(rotation, blockVector);
+		blockVector = block_T.rotateBlockCC_T(rotation, blockVector);
 	}
 	else if (randomBlock == 6)
 	{

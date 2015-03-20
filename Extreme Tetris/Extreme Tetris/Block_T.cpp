@@ -43,21 +43,21 @@ std::vector<sf::Sprite> Block_T::rotateBlockC_T(int rotation, std::vector<sf::Sp
 {
 	if (rotation == 0)
 	{
+		vector[0].move(-blockSize, -blockSize);
 		vector[2].move(blockSize, blockSize);
+		vector[3].move(-blockSize, blockSize);
 	}
 	else if (rotation == 1)
 	{
-		vector[0].move(0, -blockSize);
-		vector[2].move(-blockSize, -blockSize * 2);
+		vector[2].move(-blockSize, -blockSize);
 	}
 	else if (rotation == 2)
 	{
-		vector[0].move(-blockSize, blockSize * 2);
-		vector[2].move(0, blockSize);
+		vector[3].move(blockSize, -blockSize);
 	}
 	else if (rotation == 3)
 	{
-		vector[0].move(blockSize, -blockSize);
+		vector[0].move(blockSize, blockSize);
 	}
 	return vector;
 }
@@ -66,21 +66,21 @@ std::vector<sf::Sprite> Block_T::rotateBlockCC_T(int rotation, std::vector<sf::S
 {
 	if (rotation == 0)
 	{
-		vector[0].move(-blockSize, blockSize);
+		vector[2].move(blockSize, blockSize);
 	}
 	else if (rotation == 1)
 	{
-		vector[2].move(-blockSize, -blockSize);
+		vector[3].move(-blockSize, blockSize);
 	}
 	else if (rotation == 2)
 	{
-		vector[0].move(0, blockSize);
-		vector[2].move(blockSize, blockSize * 2);
+		vector[0].move(-blockSize, -blockSize);
 	}
 	else if (rotation == 3)
 	{
-		vector[0].move(blockSize, -blockSize * 2);
-		vector[2].move(0, -blockSize);
+		vector[0].move(blockSize, blockSize);
+		vector[2].move(-blockSize, -blockSize);
+		vector[3].move(blockSize, -blockSize);
 	}
 	return vector;
 }

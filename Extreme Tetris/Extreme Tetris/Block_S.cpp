@@ -45,15 +45,15 @@ std::vector<sf::Sprite> Block_S::spawn(int x, int y, std::vector<sf::Sprite> vec
 
 std::vector<sf::Sprite> Block_S::rotateBlock_S(int rotation, std::vector<sf::Sprite> vector)
 {
-	if (rotation == 1)
-	{
-		vector[3].move(-blockSize * 2, 0);
-		vector[0].move(0, -blockSize * 2);
-	}
-	else if (rotation == 0)
+	if (rotation == 0)
 	{
 		vector[3].move(blockSize * 2, 0);
 		vector[0].move(0, blockSize * 2);
+	}
+	else if (rotation == 1)
+	{
+		vector[3].move(-blockSize * 2, 0);
+		vector[0].move(0, -blockSize * 2);
 	}
 	return vector;
 }

@@ -1,6 +1,4 @@
 #include "StateStart.h"
-#include "GameState.h"
-#include "MainMenu.h"
 
 StateStart::StateStart(Game* game) 
 {
@@ -11,6 +9,20 @@ StateStart::StateStart(Game* game)
 	}
 	frame.setTexture(frameTexture);
 	frame.setColor(sf::Color(100, 255, 100));
+
+	fieldVector = makeField();
+	setField(15);
+	counter = 1;
+	for (int i = 0; i < xSize * ySize; i++)
+	{
+		std::cout << fieldVector[i];
+		if (i == xSize * counter - 1)
+		{
+			std::cout << std::endl;
+			counter++;
+		}
+	}
+	counter = 0;
 }
 
 void StateStart::draw(const float dt)
@@ -71,7 +83,7 @@ void StateStart::handleInput()
 				blockPointer->moveDown();
 				yPos++;
 			}
-			else if (event.key.code == sf::Keyboard::M || event.key.code == sf::Keyboard::N)
+			else if (event.key.code == sf::Keyboard::M)
 			{
 				blockPointer->rotateClockwise();
 			}
@@ -104,4 +116,29 @@ void StateStart::update(const float dt)
 
 StateStart::~StateStart()
 {
+}
+
+std::vector<int> StateStart::makeField()
+{
+	for (int i = 0; i < xSize * ySize; i++)
+	{
+		if (i < xSize || i == xSize * counter || i == xSize * counter - 1 || i >= xSize * ySize - xSize)
+		{
+			fieldVector.push_back(2);
+			if (i == xSize * counter)
+			{
+				counter++;
+			}
+		}
+		else
+		{
+			fieldVector.push_back(0);
+		}
+	}
+	return fieldVector;
+}
+
+void StateStart::setField(int tile)
+{
+	fieldVector[tile] = 1;
 }

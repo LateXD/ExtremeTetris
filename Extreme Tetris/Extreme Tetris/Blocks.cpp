@@ -3,6 +3,7 @@
 Blocks::Blocks()
 {
 	randomBlock = rand() % 7 + 1;
+	randomBlock = 5;
 	if (randomBlock == 1)
 	{
 		blockVector = block_O.spawn(xPos, yPos, blockVector);
@@ -31,6 +32,7 @@ Blocks::Blocks()
 	{
 		blockVector = block_L.spawn(xPos, yPos, blockVector);
 	}
+	rotation = 0;
 }
 
 Blocks::~Blocks()
@@ -66,19 +68,68 @@ void Blocks::rotateClockwise()
 	rotation--;
 	if (rotation < 0)
 	{
-		rotation = 1;
+		if (randomBlock == 1 || randomBlock == 2 || randomBlock == 3 || randomBlock == 4)
+		{
+			rotation = 1;
+		}
+		else if (randomBlock == 5 || randomBlock == 6 || randomBlock == 7)
+		{
+			rotation = 3;
+		}
 	}
-	blockVector = block_I.rotateBlock_I(rotation, blockVector);
+
+	if (randomBlock == 2)
+	{
+		blockVector = block_Z.rotateBlock_Z(rotation, blockVector);
+	}
+	else if (randomBlock == 3)
+	{
+		blockVector = block_S.rotateBlock_S(rotation, blockVector);
+	}
+	else if (randomBlock == 4)
+	{
+		blockVector = block_I.rotateBlock_I(rotation, blockVector);
+	}
+	else if (randomBlock == 5)
+	{
+		blockVector = block_T.rotateBlockC_T(rotation, blockVector);
+	}
 }
 
 void Blocks::rotateCounterClockwise()
 {
 	rotation++;
-	if (rotation > 1)
+	if (randomBlock == 1 || randomBlock == 2 || randomBlock == 3 || randomBlock == 4)
 	{
-		rotation = 0;
+		if (rotation > 1)
+		{
+			rotation = 0;
+		}
 	}
-	blockVector = block_I.rotateBlock_I(rotation, blockVector);
+	else if (randomBlock == 5 || randomBlock == 6 || randomBlock == 7)
+	{
+		if (rotation > 3)
+		{
+			rotation = 0;
+		}
+	}
+
+	if (randomBlock == 2)
+	{
+		blockVector = block_Z.rotateBlock_Z(rotation, blockVector);
+	}
+	else if (randomBlock == 3)
+	{
+		blockVector = block_S.rotateBlock_S(rotation, blockVector);
+	}
+	if (randomBlock == 4)
+	{
+		blockVector = block_I.rotateBlock_I(rotation, blockVector);
+	}
+	else if (randomBlock == 5)
+	{
+		blockVector = block_T.rotateBlockCC_T(rotation, blockVector);
+	}
 }
 
 std::vector<sf::Sprite> Blocks::getVector()

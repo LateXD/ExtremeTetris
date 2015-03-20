@@ -9,7 +9,8 @@ public:
 	Block_T();
 	~Block_T();
 	std::vector<sf::Sprite> spawn(int x, int y, std::vector<sf::Sprite> vector);
-	std::vector<sf::Sprite> rotateBlock_T(int rotation, std::vector<sf::Sprite> vector);
+	std::vector<sf::Sprite> rotateBlockC_T(int rotation, std::vector<sf::Sprite> vector);
+	std::vector<sf::Sprite> rotateBlockCC_T(int rotation, std::vector<sf::Sprite> vector);
 
 private:
 	int blockSize = 20, vectorSize = 4;

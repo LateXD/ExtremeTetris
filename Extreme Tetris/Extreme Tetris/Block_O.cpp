@@ -1,6 +1,5 @@
 #include "Block_O.h"
 
-
 Block_O::Block_O()
 {
 	if (!blockTexture.loadFromFile("..\\Graphics\\Block.png"))
@@ -40,25 +39,4 @@ std::vector<sf::Sprite> Block_O::spawn(int x, int y, std::vector<sf::Sprite> vec
 
 void Block_O::rotateBlock_O(int rotation)
 {
-	/*
-	if (rotation < 0)
-	{
-		rotation = 1;
-	}
-	else if (rotation > 1)
-	{
-		rotation = 0;
-	}
-
-	if (rotation == 0)
-	{
-		block_O[2].move(0, -blockSize * 2);
-		block_O[3].move(-blockSize * 2, 0);
-	}
-	else if (rotation == 1)
-	{
-		block_O[2].move(0, blockSize * 2);
-		block_O[3].move(blockSize * 2, 0);
-	}
-	*/
 }

@@ -38,3 +38,9 @@ std::vector<sf::Sprite> Block_T::spawn(int x, int y, std::vector<sf::Sprite> vec
 	}
 	return vector;
 }
+
+std::vector<sf::Sprite> Block_T::rotateBlock_T(int rotation, std::vector<sf::Sprite> vector)
+{
+
+	return vector;
+}

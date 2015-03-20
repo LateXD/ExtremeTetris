@@ -17,11 +17,11 @@ Blocks::Blocks()
 	}
 	else if (randomBlock == 4)
 	{
-		blockVector = block_T.spawn(xPos, yPos, blockVector);
+		blockVector = block_I.spawn(xPos, yPos, blockVector);
 	}
 	else if (randomBlock == 5)
 	{
-		blockVector = block_I.spawn(xPos, yPos, blockVector);
+		blockVector = block_T.spawn(xPos, yPos, blockVector);
 	}
 	else if (randomBlock == 6)
 	{
@@ -63,12 +63,22 @@ void Blocks::moveDown()
 
 void Blocks::rotateClockwise()
 {
-
+	rotation--;
+	if (rotation < 0)
+	{
+		rotation = 1;
+	}
+	blockVector = block_I.rotateBlock_I(rotation, blockVector);
 }
 
 void Blocks::rotateCounterClockwise()
 {
-
+	rotation++;
+	if (rotation > 1)
+	{
+		rotation = 0;
+	}
+	blockVector = block_I.rotateBlock_I(rotation, blockVector);
 }
 
 std::vector<sf::Sprite> Blocks::getVector()

@@ -56,12 +56,12 @@ void StateStart::handleInput()
 				std::cout << "Back to main menu\n";
 				return;
 			}
-			else if (event.key.code == sf::Keyboard::Left && vector[0].getPosition().x -20 > 0)
+			else if (event.key.code == sf::Keyboard::Left && vector[0].getPosition().x - 20 > 0)
 			{
 				blockPointer->moveLeft();
 				xPos--;
 			}
-			else if (event.key.code == sf::Keyboard::Right && vector[0].getPosition().x + 20 < 180)
+			else if (event.key.code == sf::Keyboard::Right && vector[0].getPosition().x + 20 < 180) 
 			{
 				blockPointer->moveRight();
 				xPos++;
@@ -71,9 +71,13 @@ void StateStart::handleInput()
 				blockPointer->moveDown();
 				yPos++;
 			}
-			else if (event.key.code == sf::Keyboard::M)
+			else if (event.key.code == sf::Keyboard::M || event.key.code == sf::Keyboard::N)
 			{
-				
+				blockPointer->rotateClockwise();
+			}
+			else if (event.key.code == sf::Keyboard::N)
+			{
+				blockPointer->rotateCounterClockwise();
 			}
 		default:
 			break;

@@ -37,3 +37,18 @@ std::vector<sf::Sprite> Block_Z::spawn(int x, int y, std::vector<sf::Sprite> vec
 	}
 	return vector;
 }
+
+std::vector<sf::Sprite> Block_Z::rotateBlock_Z(int rotation, std::vector<sf::Sprite> vector)
+{
+	if (rotation == 1)
+	{
+	vector[2].move(0, -blockSize * 2);
+	vector[3].move(-blockSize * 2, 0);
+	}
+	else if (rotation == 0)
+	{
+	vector[2].move(0, blockSize * 2);
+	vector[3].move(blockSize * 2, 0);
+	}
+	return vector;
+}

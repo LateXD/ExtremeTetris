@@ -18,7 +18,6 @@ private:
 	//sf::View view;
 	int xPos = 3, yPos = 0;
 	Blocks block;
-	Blocks *blockPointer = &block;
 	sf::Clock clock;
 	sf::Sprite frame;
 	sf::Texture frameTexture;

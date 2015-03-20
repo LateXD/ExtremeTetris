@@ -22,7 +22,7 @@ public:
 	Game* game;
 
 private:
-	int randomBlock, vectorSize = 4, xPos = 0, yPos = 0;
+	int randomBlock, vectorSize = 4, xPos = 0, yPos = 0, rotation = 0;
 	std::vector<sf::Sprite>blockVector;
 	Block_O block_O;
 	Block_Z block_Z;

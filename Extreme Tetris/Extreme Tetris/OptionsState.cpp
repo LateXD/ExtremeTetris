@@ -1,6 +1,7 @@
 #include "OptionsState.h"
 #include "MainMenu.h"
 
+#include "InputState.h"
 
 OptionsState::OptionsState(Game* game)
 {
@@ -97,6 +98,7 @@ void OptionsState::handleInput()
 				switch (GetPressedItem())
 				{
 				case 1:
+					this->game->pushState(new InputState(this->game));
 					std::cout << "Inputs" << std::endl;
 					break;
 				case 2:

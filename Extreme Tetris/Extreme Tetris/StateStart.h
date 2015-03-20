@@ -22,6 +22,7 @@ private:
 	sf::Sprite frame;
 	sf::Texture frameTexture;
 	std::vector<sf::Sprite> vector;
+	Blocks *blockPointer = &block;
 };
 #endif;
 

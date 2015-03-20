@@ -65,39 +65,6 @@ void Blocks::moveDown()
 
 void Blocks::rotateClockwise()
 {
-	rotation--;
-	if (rotation < 0)
-	{
-		if (randomBlock == 1 || randomBlock == 2 || randomBlock == 3 || randomBlock == 4)
-		{
-			rotation = 1;
-		}
-		else if (randomBlock == 5 || randomBlock == 6 || randomBlock == 7)
-		{
-			rotation = 3;
-		}
-	}
-
-	if (randomBlock == 2)
-	{
-		blockVector = block_Z.rotateBlock_Z(rotation, blockVector);
-	}
-	else if (randomBlock == 3)
-	{
-		blockVector = block_S.rotateBlock_S(rotation, blockVector);
-	}
-	else if (randomBlock == 4)
-	{
-		blockVector = block_I.rotateBlock_I(rotation, blockVector);
-	}
-	else if (randomBlock == 5)
-	{
-		blockVector = block_T.rotateBlockC_T(rotation, blockVector);
-	}
-}
-
-void Blocks::rotateCounterClockwise()
-{
 	rotation++;
 	if (randomBlock == 1 || randomBlock == 2 || randomBlock == 3 || randomBlock == 4)
 	{
@@ -129,6 +96,47 @@ void Blocks::rotateCounterClockwise()
 	else if (randomBlock == 5)
 	{
 		blockVector = block_T.rotateBlockCC_T(rotation, blockVector);
+	}
+	else if (randomBlock == 6)
+	{
+		blockVector = block_J.rotateBlockCC_J(rotation, blockVector);
+	}
+}
+
+void Blocks::rotateCounterClockwise()
+{
+	rotation--;
+	if (rotation < 0)
+	{
+		if (randomBlock == 1 || randomBlock == 2 || randomBlock == 3 || randomBlock == 4)
+		{
+			rotation = 1;
+		}
+		else if (randomBlock == 5 || randomBlock == 6 || randomBlock == 7)
+		{
+			rotation = 3;
+		}
+	}
+
+	if (randomBlock == 2)
+	{
+		blockVector = block_Z.rotateBlock_Z(rotation, blockVector);
+	}
+	else if (randomBlock == 3)
+	{
+		blockVector = block_S.rotateBlock_S(rotation, blockVector);
+	}
+	else if (randomBlock == 4)
+	{
+		blockVector = block_I.rotateBlock_I(rotation, blockVector);
+	}
+	else if (randomBlock == 5)
+	{
+		blockVector = block_T.rotateBlockC_T(rotation, blockVector);
+	}
+	else if (randomBlock == 6)
+	{
+		blockVector = block_J.rotateBlockCC_J(rotation, blockVector);
 	}
 }
 

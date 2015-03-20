@@ -147,7 +147,7 @@ void Blocks::rotateCounterClockwise()
 	}
 }
 
-std::vector<sf::Sprite> Blocks::getVector()
+std::vector<sf::Sprite>Blocks::getVector()
 {
 	return blockVector;
 }

@@ -100,6 +100,10 @@ void Blocks::rotateClockwise()
 	{
 		blockVector = block_J.rotateBlockC_J(rotation, blockVector);
 	}
+	else if (randomBlock == 7)
+	{
+		blockVector = block_L.rotateBlockC_L(rotation, blockVector);
+	}
 }
 
 void Blocks::rotateCounterClockwise()
@@ -136,6 +140,10 @@ void Blocks::rotateCounterClockwise()
 	else if (randomBlock == 6)
 	{
 		blockVector = block_J.rotateBlockCC_J(rotation, blockVector);
+	}
+	else if (randomBlock == 7)
+	{
+		blockVector = block_L.rotateBlockCC_L(rotation, blockVector);
 	}
 }
 

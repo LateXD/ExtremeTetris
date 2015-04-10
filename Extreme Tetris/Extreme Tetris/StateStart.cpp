@@ -63,13 +63,7 @@ void StateStart::handleInput()
 		{
 
 		}*/
-		case sf::Event::KeyReleased:
-		{
-			if (event.key.code == sf::Keyboard::Down)
-			{
-				pointsCounter = 0;
-			}
-		}
+
 		case sf::Event::KeyPressed:
 		{
 			if (event.key.code == sf::Keyboard::Escape)
@@ -141,21 +135,34 @@ void StateStart::handleInput()
 		default:
 			break;
 		}
+
+		case sf::Event::KeyReleased:
+		{
+			if (event.key.code == sf::Keyboard::Down)
+			{
+				pointsCounter = 0;
+			}
+		}
+
 		}
 
 	}
+
 }
 
 void StateStart::update(const float dt)
 {
 	for (int i = 0; i < vectorSize; i++)
 	{
-		if (spriteVector.size() != 0 && spriteVector[i].getPosition().y + 20 == 19 * blockSize)
+		if (spriteVector.size() != 0 && spriteVector[i].getPosition().y + 20 > 18 * blockSize)
 		{
 			blockVector.push_back(new Blocks);
 			points += pointsCounter;
 			pointsCounter = 0;
 			locationNumber++;
+			ss.clear();
+			ss.str("");
+			ss << "Points: " << points;
 			pointsText.setString(ss.str());
 			break;
 		}
@@ -165,8 +172,6 @@ void StateStart::update(const float dt)
 		blockVector[locationNumber]->moveDown();
 		clock.restart();
 	}
-	ss << points;
-	std::cout << points << " ";
 }
 
 StateStart::~StateStart()

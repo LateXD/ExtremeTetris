@@ -69,6 +69,9 @@
     <ClCompile Include="Block_T.cpp">
       <Filter>Source Files\Block Types</Filter>
     </ClCompile>
+    <ClCompile Include="MultiplayerState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blocks.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="Block_Z.h">
       <Filter>Header Files\Block Types</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiplayerState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

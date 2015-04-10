@@ -1,6 +1,7 @@
 #include "MainMenu.h"
 #include "StateStart.h"
 #include "OptionsState.h"
+#include "MultiplayerState.h"
 
 
 MainMenu::MainMenu(Game* game)
@@ -31,6 +32,7 @@ void MainMenu::onInitialize()
 	menu[1].setFont(font);
 	menu[2].setFont(font);
 	menu[3].setFont(font);
+	menu[4].setFont(font);
 
 	menu[0].setString("Main Menu");
 	menu[0].setColor(sf::Color::Green);
@@ -42,15 +44,20 @@ void MainMenu::onInitialize()
 	menu[1].setCharacterSize(40);
 	menu[1].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 1) * 2));
 
-	menu[2].setString("Options");
+	menu[2].setString("Multiplayer");
 	menu[2].setColor(sf::Color::White);
 	menu[2].setCharacterSize(40);
 	menu[2].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 1) * 3));
 
-	menu[3].setString("Quit");
+	menu[3].setString("Options");
 	menu[3].setColor(sf::Color::White);
 	menu[3].setCharacterSize(40);
 	menu[3].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 1) * 4));
+
+	menu[4].setString("Quit");
+	menu[4].setColor(sf::Color::White);
+	menu[4].setCharacterSize(40);
+	menu[4].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 1) * 5));
 
 }
 
@@ -116,10 +123,14 @@ void MainMenu::handleInput()
 					std::cout << "Single player" << std::endl;
 					return;
 				case 2:
+					this->game->pushState(new MultiplayerState(this->game));
+					std::cout << "Multiplayer" << std::endl;
+					return;
+				case 3:
 					this->game->pushState(new OptionsState(this->game));
 					std::cout << "Options menu" << std::endl;
 					break;
-				case 3:
+				case 4:
 					std::cout << "Quit game" << std::endl;
 					this->game->window.close();
 					break;

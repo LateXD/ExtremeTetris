@@ -98,6 +98,7 @@
     <ClCompile Include="InputState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="MultiplayerState.cpp" />
     <ClCompile Include="OptionsState.cpp" />
     <ClCompile Include="StateStart.cpp" />
   </ItemGroup>
@@ -115,6 +116,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InputState.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="MultiplayerState.h" />
     <ClInclude Include="OptionsState.h" />
     <ClInclude Include="StateStart.h" />
   </ItemGroup>

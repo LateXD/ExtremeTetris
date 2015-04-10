@@ -10,6 +10,19 @@ StateStart::StateStart(Game* game)
 	frame.setTexture(frameTexture);
 	frame.setColor(sf::Color(100, 255, 100));
 	blockVector.push_back(new Blocks);
+
+	if (!font.loadFromFile("..\\Graphics\\8bitOperatorPlus8-Regular.ttf"))
+	{
+		//error
+		std::cout << "" << std::endl;
+	}
+
+	pointsText.setFont(font);
+	pointsText.setColor(sf::Color::Green);
+	pointsText.setCharacterSize(30);
+	pointsText.setPosition(sf::Vector2f(blockSize * 13, blockSize * 2));
+	ss << "Points: " << points;
+	pointsText.setString(ss.str());
 }
 
 void StateStart::draw(const float dt)
@@ -21,13 +34,14 @@ void StateStart::draw(const float dt)
 	this->game->window.clear(sf::Color::Black);
 	for (int i = 0; i < blockVector.size(); i++)
 	{
-		vector = blockVector[i]->getVector();
+		spriteVector = blockVector[i]->getVector();
 		for (int i = 0; i < 4; i++)
 		{
-			game->window.draw(vector[i]);
+			game->window.draw(spriteVector[i]);
 		}
 	}
 	game->window.draw(frame);
+	game->window.draw(pointsText);
 }
 
 
@@ -49,6 +63,13 @@ void StateStart::handleInput()
 		{
 
 		}*/
+		case sf::Event::KeyReleased:
+		{
+			if (event.key.code == sf::Keyboard::Down)
+			{
+				pointsCounter = 0;
+			}
+		}
 		case sf::Event::KeyPressed:
 		{
 			if (event.key.code == sf::Keyboard::Escape)
@@ -57,63 +78,71 @@ void StateStart::handleInput()
 				std::cout << "Back to main menu\n";
 				return;
 			}
+
 			else if (event.key.code == sf::Keyboard::Left)
 			{
 				for (int i = 0; i < vectorSize; i++)
 				{
-					if (vector[i].getPosition().x - 20 > 0)
+					if (spriteVector[i].getPosition().x - 20 > 0)
 					{
 						positionCounter++;
 					}
 				}
-				if (positionCounter == 4)
+				if (positionCounter == vectorSize)
 				{
-					blockVector[number]->moveLeft();
+					blockVector[locationNumber]->moveLeft();
 				}
 				positionCounter = 0;
 			}
+
 			else if (event.key.code == sf::Keyboard::Right) 
 			{
 				for (int i = 0; i < vectorSize; i++)
 				{
-					if (vector[i].getPosition().x + 20 < 11 * blockSize)
+					if (spriteVector[i].getPosition().x + 20 < 11 * blockSize)
 					{
 						positionCounter++;
 					}
 				}
-				if (positionCounter == 4)
+				if (positionCounter == vectorSize)
 				{
-					blockVector[number]->moveRight();
+					blockVector[locationNumber]->moveRight();
 				}
 				positionCounter = 0;
 			}
+
 			else if (event.key.code == sf::Keyboard::Down)
 			{
 				for (int i = 0; i < vectorSize; i++)
 				{
-					if (vector[i].getPosition().y + 20 < 19 * blockSize)
+					if (spriteVector[i].getPosition().y + 20 < 19 * blockSize)
 					{
 						positionCounter++;
 					}
 				}
-				if (positionCounter == 4)
+				if (positionCounter == vectorSize)
 				{
-					blockVector[number]->moveDown();
+					blockVector[locationNumber]->moveDown();
+					pointsCounter++;
 				}
 				positionCounter = 0;
 			}
+
 			else if (event.key.code == sf::Keyboard::M)
 			{
-				blockVector[number]->rotateClockwise();
+				blockVector[locationNumber]->rotateClockwise();
 			}
+
 			else if (event.key.code == sf::Keyboard::N)
 			{
-				blockVector[number]->rotateCounterClockwise();
+				blockVector[locationNumber]->rotateCounterClockwise();
 			}
+
 		default:
 			break;
 		}
 		}
+
 	}
 }
 
@@ -121,18 +150,23 @@ void StateStart::update(const float dt)
 {
 	for (int i = 0; i < vectorSize; i++)
 	{
-		if (vector.size() != 0 && vector[i].getPosition().y + 20 == 19 * blockSize)
+		if (spriteVector.size() != 0 && spriteVector[i].getPosition().y + 20 == 19 * blockSize)
 		{
 			blockVector.push_back(new Blocks);
-			number++;
+			points += pointsCounter;
+			pointsCounter = 0;
+			locationNumber++;
+			pointsText.setString(ss.str());
 			break;
 		}
 	}
 	if (clock.getElapsedTime().asMicroseconds() >= 500000)
 	{
-		blockVector[number]->moveDown();
+		blockVector[locationNumber]->moveDown();
 		clock.restart();
 	}
+	ss << points;
+	std::cout << points << " ";
 }
 
 StateStart::~StateStart()

@@ -14,13 +14,10 @@ public:
 	void draw(const float dt);
 	void update(const float dt);
 	void handleInput();
-	void makeField();
-	void printField();
 	
 private:
 	//sf::View view;
-	int xPos = 3, yPos = 0, number = 0, xSize = 12, ySize = 20, counter = 0;
-	Blocks block;
+	int blockSize = 20, number = 0, positionCounter = 0, vectorSize = 4;
 	sf::Clock clock;
 	sf::Sprite frame;
 	sf::Texture frameTexture;

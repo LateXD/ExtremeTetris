@@ -9,9 +9,7 @@ StateStart::StateStart(Game* game)
 	}
 	frame.setTexture(frameTexture);
 	frame.setColor(sf::Color(100, 255, 100));
-	makeField();
 	blockVector.push_back(new Blocks);
-	printField();
 }
 
 void StateStart::draw(const float dt)
@@ -21,7 +19,6 @@ void StateStart::draw(const float dt)
 
 	//this->game->window.setView(this->view);
 	this->game->window.clear(sf::Color::Black);
-	game->window.draw(frame);
 	for (int i = 0; i < blockVector.size(); i++)
 	{
 		vector = blockVector[i]->getVector();
@@ -30,6 +27,7 @@ void StateStart::draw(const float dt)
 			game->window.draw(vector[i]);
 		}
 	}
+	game->window.draw(frame);
 }
 
 
@@ -59,21 +57,50 @@ void StateStart::handleInput()
 				std::cout << "Back to main menu\n";
 				return;
 			}
-			else if (event.key.code == sf::Keyboard::Left && vector[0].getPosition().x - 20 > 0)
+			else if (event.key.code == sf::Keyboard::Left)
 			{
-
-				blockVector[number]->moveLeft();
-				xPos--;
+				for (int i = 0; i < vectorSize; i++)
+				{
+					if (vector[i].getPosition().x - 20 > 0)
+					{
+						positionCounter++;
+					}
+				}
+				if (positionCounter == 4)
+				{
+					blockVector[number]->moveLeft();
+				}
+				positionCounter = 0;
 			}
-			else if (event.key.code == sf::Keyboard::Right && vector[0].getPosition().x + 20 < 180) 
+			else if (event.key.code == sf::Keyboard::Right) 
 			{
-				blockVector[number]->moveRight();
-				xPos++;
+				for (int i = 0; i < vectorSize; i++)
+				{
+					if (vector[i].getPosition().x + 20 < 11 * blockSize)
+					{
+						positionCounter++;
+					}
+				}
+				if (positionCounter == 4)
+				{
+					blockVector[number]->moveRight();
+				}
+				positionCounter = 0;
 			}
-			else if (event.key.code == sf::Keyboard::Down && yPos != 15)
+			else if (event.key.code == sf::Keyboard::Down)
 			{
-				blockVector[number]->moveDown();
-				yPos++;
+				for (int i = 0; i < vectorSize; i++)
+				{
+					if (vector[i].getPosition().y + 20 < 19 * blockSize)
+					{
+						positionCounter++;
+					}
+				}
+				if (positionCounter == 4)
+				{
+					blockVector[number]->moveDown();
+				}
+				positionCounter = 0;
 			}
 			else if (event.key.code == sf::Keyboard::M)
 			{
@@ -90,51 +117,19 @@ void StateStart::handleInput()
 	}
 }
 
-void StateStart::makeField()
-{
-	for (int i = 0; i < xSize * ySize; i++)
-	{
-		if (i < xSize || i == xSize * counter || i == xSize * counter - 1 || i >= xSize * ySize - xSize)
-		{
-			fieldVector.push_back(2);
-			if (i == xSize * counter)
-			{
-				counter++;
-			}
-		}
-		else
-		{
-			fieldVector.push_back(0);
-		}
-	}
-}
-
-void StateStart::printField()
-{
-	counter = 1;
-	for (int i = 0; i < xSize * ySize; i++)
-	{
-		std::cout << fieldVector[i];
-		if (i == xSize * counter - 1)
-		{
-			std::cout << std::endl;
-			counter++;
-		}
-	}
-}
-
 void StateStart::update(const float dt)
 {
-	if (yPos == 15)
+	for (int i = 0; i < vectorSize; i++)
 	{
-		blockVector.push_back(new Blocks);
-		number++;
-		xPos = 3;
-		yPos = 0;
+		if (vector.size() != 0 && vector[i].getPosition().y + 20 == 19 * blockSize)
+		{
+			blockVector.push_back(new Blocks);
+			number++;
+			break;
+		}
 	}
-	if (clock.getElapsedTime().asMicroseconds() >= 500000 && yPos != 15)
+	if (clock.getElapsedTime().asMicroseconds() >= 500000)
 	{
-		yPos++;
 		blockVector[number]->moveDown();
 		clock.restart();
 	}

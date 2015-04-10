@@ -13,12 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Block Types">
+      <UniqueIdentifier>{b7d58418-381c-4622-b6f8-1c9736dc68fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Block Types">
+      <UniqueIdentifier>{166a6166-a77e-4ad1-a310-e44c6b64735c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_O.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Blocks.cpp">
@@ -39,38 +42,35 @@
     <ClCompile Include="OptionsState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Block_Z.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_S.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_T.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_I.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_J.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_L.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InputState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayField.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Block_Z.cpp">
+      <Filter>Source Files\Block Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_I.cpp">
+      <Filter>Source Files\Block Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_J.cpp">
+      <Filter>Source Files\Block Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_L.cpp">
+      <Filter>Source Files\Block Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_O.cpp">
+      <Filter>Source Files\Block Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_S.cpp">
+      <Filter>Source Files\Block Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_T.cpp">
+      <Filter>Source Files\Block Types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Block_O.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Blocks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -89,32 +89,32 @@
     <ClInclude Include="OptionsState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Block_Z.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Block_S.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Block_T.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Block_I.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Block_J.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Block_L.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PlayField.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Block_I.h">
+      <Filter>Header Files\Block Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_J.h">
+      <Filter>Header Files\Block Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_L.h">
+      <Filter>Header Files\Block Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_O.h">
+      <Filter>Header Files\Block Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_S.h">
+      <Filter>Header Files\Block Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_T.h">
+      <Filter>Header Files\Block Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Block_Z.h">
+      <Filter>Header Files\Block Types</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

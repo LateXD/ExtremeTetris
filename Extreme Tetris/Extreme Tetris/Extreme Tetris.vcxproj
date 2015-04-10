@@ -99,7 +99,6 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="OptionsState.cpp" />
-    <ClCompile Include="PlayField.cpp" />
     <ClCompile Include="StateStart.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -117,7 +116,6 @@
     <ClInclude Include="InputState.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="OptionsState.h" />
-    <ClInclude Include="PlayField.h" />
     <ClInclude Include="StateStart.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

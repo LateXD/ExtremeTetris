@@ -9,7 +9,9 @@ StateStart::StateStart(Game* game)
 	}
 	frame.setTexture(frameTexture);
 	frame.setColor(sf::Color(100, 255, 100));
+	makeField();
 	blockVector.push_back(new Blocks);
+	printField();
 }
 
 void StateStart::draw(const float dt)
@@ -59,6 +61,7 @@ void StateStart::handleInput()
 			}
 			else if (event.key.code == sf::Keyboard::Left && vector[0].getPosition().x - 20 > 0)
 			{
+
 				blockVector[number]->moveLeft();
 				xPos--;
 			}
@@ -83,6 +86,39 @@ void StateStart::handleInput()
 		default:
 			break;
 		}
+		}
+	}
+}
+
+void StateStart::makeField()
+{
+	for (int i = 0; i < xSize * ySize; i++)
+	{
+		if (i < xSize || i == xSize * counter || i == xSize * counter - 1 || i >= xSize * ySize - xSize)
+		{
+			fieldVector.push_back(2);
+			if (i == xSize * counter)
+			{
+				counter++;
+			}
+		}
+		else
+		{
+			fieldVector.push_back(0);
+		}
+	}
+}
+
+void StateStart::printField()
+{
+	counter = 1;
+	for (int i = 0; i < xSize * ySize; i++)
+	{
+		std::cout << fieldVector[i];
+		if (i == xSize * counter - 1)
+		{
+			std::cout << std::endl;
+			counter++;
 		}
 	}
 }

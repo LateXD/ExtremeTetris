@@ -11,18 +11,19 @@
 class Blocks
 {
 public:
-	Blocks();
+	Blocks(int rb);
 	~Blocks();
 	void moveLeft();
 	void moveRight();
 	void moveDown();
-	void rotateClockwise();
-	void rotateCounterClockwise();
+	void rotateClockwise(int rb);
+	void rotateCounterClockwise(int rb);
+	void nextBlock(bool direction);
 	std::vector<sf::Sprite> getVector();
 	Game* game;
 
 private:
-	int randomBlock, vectorSize = 4, xPos = 0, yPos = 0, rotation = 0;
+	int vectorSize = 4, xPos = 0, yPos = 0, rotation = 0, blockSize = 20;
 	std::vector<sf::Sprite>blockVector;
 	Block_O block_O;
 	Block_Z block_Z;

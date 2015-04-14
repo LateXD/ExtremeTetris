@@ -7,9 +7,22 @@ StateStart::StateStart(Game* game)
 	{
 		std::cout << "Can't load texture!";
 	}
+	if (!pointsFrameTexture.loadFromFile("..\\Graphics\\Frame2.png"))
+	{
+		std::cout << "Can't load texture!";
+	}
 	frame.setTexture(frameTexture);
 	frame.setColor(sf::Color(100, 255, 100));
-	blockVector.push_back(new Blocks);
+	pointsFrame.setTexture(pointsFrameTexture);
+	pointsFrame.setColor(sf::Color(100, 255, 100));
+	pointsFrame.setPosition(blockSize * 12, 0);
+
+	randomBlock2 = randomBlock;
+	blockVector.push_back(new Blocks(randomBlock));
+	randomBlock = rand() % 7 + 1;
+	block = new Blocks(randomBlock);
+	block->nextBlock(direction);
+	direction = false;
 
 	if (!font.loadFromFile("..\\Graphics\\8bitOperatorPlus8-Regular.ttf"))
 	{
@@ -19,9 +32,9 @@ StateStart::StateStart(Game* game)
 
 	pointsText.setFont(font);
 	pointsText.setColor(sf::Color::Green);
-	pointsText.setCharacterSize(30);
-	pointsText.setPosition(sf::Vector2f(blockSize * 13, blockSize * 2));
-	ss << "Points: " << points;
+	pointsText.setCharacterSize(20);
+	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.75));
+	ss << points;
 	pointsText.setString(ss.str());
 }
 
@@ -34,6 +47,14 @@ void StateStart::draw(const float dt)
 	this->game->window.clear(sf::Color::Black);
 	for (int i = 0; i < blockVector.size(); i++)
 	{
+		spriteVector = block->getVector();
+		for (int i = 0; i < 4; i++)
+		{
+			game->window.draw(spriteVector[i]);
+		}
+	}
+	for (int i = 0; i < blockVector.size(); i++)
+	{
 		spriteVector = blockVector[i]->getVector();
 		for (int i = 0; i < 4; i++)
 		{
@@ -41,6 +62,7 @@ void StateStart::draw(const float dt)
 		}
 	}
 	game->window.draw(frame);
+	game->window.draw(pointsFrame);
 	game->window.draw(pointsText);
 }
 
@@ -124,12 +146,12 @@ void StateStart::handleInput()
 
 				else if (event.key.code == sf::Keyboard::M)
 				{
-					blockVector[locationNumber]->rotateClockwise();
+					blockVector[locationNumber]->rotateClockwise(randomBlock2);
 				}
 
 				else if (event.key.code == sf::Keyboard::N)
 				{
-					blockVector[locationNumber]->rotateCounterClockwise();
+					blockVector[locationNumber]->rotateCounterClockwise(randomBlock2);
 				}
 
 			default:
@@ -154,14 +176,25 @@ void StateStart::update(const float dt)
 	{
 		if (spriteVector.size() != 0 && spriteVector[i].getPosition().y + 20 > 18 * blockSize)
 		{
-			blockVector.push_back(new Blocks);
+			randomBlock2 = randomBlock;
+			blockVector.push_back(block);
+			block->nextBlock(direction);
+			direction = true;
 			randomBlock = rand() % 7 + 1;
+			block = new Blocks(randomBlock);
+			block->nextBlock(direction);
+			direction = false;
 			points += pointsCounter;
 			pointsCounter = 0;
 			locationNumber++;
 			ss.clear();
 			ss.str("");
-			ss << "Points: " << points;
+			if (points >= pointsMover)
+			{
+				pointsText.move(-10, 0);
+				pointsMover = pointsMover * 10;
+			}
+			ss << points;
 			pointsText.setString(ss.str());
 			break;
 		}

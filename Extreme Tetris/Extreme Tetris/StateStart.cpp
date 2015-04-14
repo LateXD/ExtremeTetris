@@ -127,7 +127,7 @@ void StateStart::handleInput()
 					positionCounter = 0;
 				}
 
-				else if (event.key.code == sf::Keyboard::Down)
+				else if (event.key.code == sf::Keyboard::Down && clock.getElapsedTime().asMicroseconds() < 500000)
 				{
 					for (int i = 0; i < vectorSize; i++)
 					{

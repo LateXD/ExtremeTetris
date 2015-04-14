@@ -176,6 +176,7 @@ void StateStart::update(const float dt)
 	{
 		if (spriteVector.size() != 0 && spriteVector[i].getPosition().y + 20 > 18 * blockSize)
 		{
+			clock.restart();
 			randomBlock2 = randomBlock;
 			blockVector.push_back(block);
 			block->nextBlock(direction);

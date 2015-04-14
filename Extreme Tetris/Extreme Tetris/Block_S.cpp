@@ -3,10 +3,6 @@
 
 Block_S::Block_S()
 {
-	if (!blockTexture.loadFromFile("..\\Graphics\\Block.png"))
-	{
-		std::cout << "Can't load texture!";
-	}
 }
 
 
@@ -14,30 +10,29 @@ Block_S::~Block_S()
 {
 }
 
-std::vector<sf::Sprite> Block_S::spawn(int x, int y, std::vector<sf::Sprite> vector)
+std::vector<sf::Sprite> Block_S::spawn(std::vector<sf::Sprite> vector)
 {
+	if (!blockTexture.loadFromFile("..\\Graphics\\Block.png"))
+	{
+		std::cout << "Can't load texture!";
+	}
 	for (int i = 0; i < vectorSize; i++)
 	{
-		if (i == 0)
-		{
-			y++;
-		}
 		block.setTexture(blockTexture);
 		block.setColor(sf::Color(0, 255, 0));
-		block.setPosition(blockSize * 4 + x * blockSize, blockSize * 2 + y * blockSize);
-
+		block.setPosition(blockSize * 4 + xPos * blockSize, blockSize * 2 + yPos * blockSize);
 		vector.push_back(block);
 		if (i == 0)
 		{
-			x++;
+			xPos++;
 		}
 		else if (i == 1)
 		{
-			y--;
+			yPos--;
 		}
 		else if (i == 2)
 		{
-			x++;
+			xPos++;
 		}
 	}
 	return vector;

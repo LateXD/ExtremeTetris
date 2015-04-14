@@ -18,7 +18,7 @@ public:
 	
 private:
 	//sf::View view;
-	int blockSize = 20, locationNumber = 0, positionCounter = 0, vectorSize = 4, pointsCounter = 0, points = 0;
+	int blockSize = 20, locationNumber = 0, positionCounter = 0, vectorSize = 4, pointsCounter = 0, points = 0, randomBlock = rand() % 7 + 1;
 	sf::Clock clock;
 	sf::Sprite frame;
 	sf::Text pointsText;

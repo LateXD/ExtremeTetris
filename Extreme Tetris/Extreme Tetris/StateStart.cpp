@@ -52,102 +52,100 @@ void StateStart::handleInput()
 	{
 		switch (event.type)
 		{
-		case sf::Event::Closed:
-		{
-			game->window.close();
-			break;
-		}
-			//TODO:: IF YOU WANT TO RESIZE THE WINDOW
-
-		/*case sf::Event::Resized:
-		{
-
-		}*/
-
-		case sf::Event::KeyPressed:
-		{
-			if (event.key.code == sf::Keyboard::Escape)
+			case sf::Event::Closed:
 			{
-				this->game->pushState(new MainMenu(this->game));
-				std::cout << "Back to main menu\n";
-				return;
+				game->window.close();
+				break;
 			}
+				//TODO:: IF YOU WANT TO RESIZE THE WINDOW
 
-			else if (event.key.code == sf::Keyboard::Left)
+			/*case sf::Event::Resized:
 			{
-				for (int i = 0; i < vectorSize; i++)
+
+			}*/
+
+			case sf::Event::KeyPressed:
+			{
+				if (event.key.code == sf::Keyboard::Escape)
 				{
-					if (spriteVector[i].getPosition().x - 20 > 0)
+					this->game->pushState(new MainMenu(this->game));
+					std::cout << "Back to main menu\n";
+					return;
+				}
+
+				else if (event.key.code == sf::Keyboard::Left)
+				{
+					for (int i = 0; i < vectorSize; i++)
 					{
-						positionCounter++;
+						if (spriteVector[i].getPosition().x - 20 > 0)
+						{
+							positionCounter++;
+						}
 					}
-				}
-				if (positionCounter == vectorSize)
-				{
-					blockVector[locationNumber]->moveLeft();
-				}
-				positionCounter = 0;
-			}
-
-			else if (event.key.code == sf::Keyboard::Right) 
-			{
-				for (int i = 0; i < vectorSize; i++)
-				{
-					if (spriteVector[i].getPosition().x + 20 < 11 * blockSize)
+					if (positionCounter == vectorSize)
 					{
-						positionCounter++;
+						blockVector[locationNumber]->moveLeft();
 					}
+					positionCounter = 0;
 				}
-				if (positionCounter == vectorSize)
-				{
-					blockVector[locationNumber]->moveRight();
-				}
-				positionCounter = 0;
-			}
 
-			else if (event.key.code == sf::Keyboard::Down)
-			{
-				for (int i = 0; i < vectorSize; i++)
+				else if (event.key.code == sf::Keyboard::Right) 
 				{
-					if (spriteVector[i].getPosition().y + 20 < 19 * blockSize)
+					for (int i = 0; i < vectorSize; i++)
 					{
-						positionCounter++;
+						if (spriteVector[i].getPosition().x + 20 < 11 * blockSize)
+						{
+							positionCounter++;
+						}
 					}
+					if (positionCounter == vectorSize)
+					{
+						blockVector[locationNumber]->moveRight();
+					}
+					positionCounter = 0;
 				}
-				if (positionCounter == vectorSize)
+
+				else if (event.key.code == sf::Keyboard::Down)
 				{
-					blockVector[locationNumber]->moveDown();
-					pointsCounter++;
+					for (int i = 0; i < vectorSize; i++)
+					{
+						if (spriteVector[i].getPosition().y + 20 < 19 * blockSize)
+						{
+							positionCounter++;
+						}
+					}
+					if (positionCounter == vectorSize)
+					{
+						blockVector[locationNumber]->moveDown();
+						pointsCounter++;
+					}
+					positionCounter = 0;
 				}
-				positionCounter = 0;
+
+				else if (event.key.code == sf::Keyboard::M)
+				{
+					blockVector[locationNumber]->rotateClockwise();
+				}
+
+				else if (event.key.code == sf::Keyboard::N)
+				{
+					blockVector[locationNumber]->rotateCounterClockwise();
+				}
+
+			default:
+				break;
 			}
 
-			else if (event.key.code == sf::Keyboard::M)
+			case sf::Event::KeyReleased:
 			{
-				blockVector[locationNumber]->rotateClockwise();
+				if (event.key.code == sf::Keyboard::Down)
+				{
+					pointsCounter = 0;
+				}
 			}
-
-			else if (event.key.code == sf::Keyboard::N)
-			{
-				blockVector[locationNumber]->rotateCounterClockwise();
-			}
-
-		default:
-			break;
-		}
-
-		case sf::Event::KeyReleased:
-		{
-			if (event.key.code == sf::Keyboard::Down)
-			{
-				pointsCounter = 0;
-			}
-		}
 
 		}
-
 	}
-
 }
 
 void StateStart::update(const float dt)
@@ -157,6 +155,7 @@ void StateStart::update(const float dt)
 		if (spriteVector.size() != 0 && spriteVector[i].getPosition().y + 20 > 18 * blockSize)
 		{
 			blockVector.push_back(new Blocks);
+			randomBlock = rand() % 7 + 1;
 			points += pointsCounter;
 			pointsCounter = 0;
 			locationNumber++;

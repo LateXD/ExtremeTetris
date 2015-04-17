@@ -179,13 +179,19 @@ void StateStart::handleInput()
 				if (positionCounter == vectorSize)
 					for (int i = 0; i < vectorSize; i++)
 					{
-					for (int j = 0; j < allSprites.size() - vectorSize; j++)
-					{
-						if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
+						for (int j = 0; j < allSprites.size() - vectorSize; j++)
 						{
-							collision = true;
+							if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
+							{
+								collision = true;
+							}
+							else if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+							{
+								this->game->pushState(new MainMenu(this->game));
+								std::cout << "Back to main menu\n";
+								return;
+							}
 						}
-					}
 					}
 				if (collision == false)
 				{
@@ -284,6 +290,12 @@ void StateStart::update(const float dt)
 				if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
 				{
 					collision = true;
+				}
+				else if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+				{
+					this->game->pushState(new MainMenu(this->game));
+					std::cout << "Back to main menu\n";
+					return;
 				}
 			}
 		}

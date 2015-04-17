@@ -1,6 +1,6 @@
 #include "StateStart.h"
 
-StateStart::StateStart(Game* game) 
+StateStart::StateStart(Game* game)
 {
 	this->game = game;
 	if (!frameTexture.loadFromFile("..\\Graphics\\Frame.png"))
@@ -36,6 +36,11 @@ StateStart::StateStart(Game* game)
 	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.75));
 	ss << points;
 	pointsText.setString(ss.str());
+
+	for (int i = 0; i < blockVector.size(); i++)
+	{
+		spriteVector = blockVector[i]->getVector();
+	}
 }
 
 void StateStart::draw(const float dt)
@@ -48,19 +53,21 @@ void StateStart::draw(const float dt)
 	for (int i = 0; i < blockVector.size(); i++)
 	{
 		spriteVector = block->getVector();
-		for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 4; j++)
 		{
-			game->window.draw(spriteVector[i]);
+			game->window.draw(spriteVector[j]);
 		}
 	}
+
 	for (int i = 0; i < blockVector.size(); i++)
 	{
 		spriteVector = blockVector[i]->getVector();
-		for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 4; j++)
 		{
-			game->window.draw(spriteVector[i]);
+			game->window.draw(spriteVector[j]);
 		}
 	}
+
 	game->window.draw(frame);
 	game->window.draw(pointsFrame);
 	game->window.draw(pointsText);
@@ -74,97 +81,137 @@ void StateStart::handleInput()
 	{
 		switch (event.type)
 		{
-			case sf::Event::Closed:
-			{
-				game->window.close();
-				break;
-			}
-				//TODO:: IF YOU WANT TO RESIZE THE WINDOW
+		case sf::Event::Closed:
+		{
+			game->window.close();
+			break;
+		}
+			//TODO:: IF YOU WANT TO RESIZE THE WINDOW
 
 			/*case sf::Event::Resized:
 			{
 
 			}*/
 
-			case sf::Event::KeyPressed:
+		case sf::Event::KeyPressed:
+		{
+			if (event.key.code == sf::Keyboard::Escape)
 			{
-				if (event.key.code == sf::Keyboard::Escape)
-				{
-					this->game->pushState(new MainMenu(this->game));
-					std::cout << "Back to main menu\n";
-					return;
-				}
+				this->game->pushState(new MainMenu(this->game));
+				std::cout << "Back to main menu\n";
+				return;
+			}
 
-				else if (event.key.code == sf::Keyboard::Left)
+			else if (event.key.code == sf::Keyboard::Left)
+			{
+				for (int i = 0; i < vectorSize; i++)
+				{
+					if (spriteVector[i].getPosition().x - 20 > 0)
+					{
+						positionCounter++;
+					}
+				}
+				if (positionCounter == vectorSize)
 				{
 					for (int i = 0; i < vectorSize; i++)
 					{
-						if (spriteVector[i].getPosition().x - 20 > 0)
+						for (int j = 0; j < allSprites.size() - vectorSize; j++)
 						{
-							positionCounter++;
+							if (spriteVector[i].getPosition().x - blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+							{
+								collision = true;
+							}
 						}
 					}
-					if (positionCounter == vectorSize)
+					if (collision == false)
 					{
 						blockVector[locationNumber]->moveLeft();
 					}
-					positionCounter = 0;
+					collision = false;
 				}
+				positionCounter = 0;
+			}
 
-				else if (event.key.code == sf::Keyboard::Right) 
+			else if (event.key.code == sf::Keyboard::Right)
+			{
+				for (int i = 0; i < vectorSize; i++)
+				{
+					if (spriteVector[i].getPosition().x + 20 < 11 * blockSize)
+					{
+						positionCounter++;
+					}
+				}
+				if (positionCounter == vectorSize)
 				{
 					for (int i = 0; i < vectorSize; i++)
 					{
-						if (spriteVector[i].getPosition().x + 20 < 11 * blockSize)
+						for (int j = 0; j < allSprites.size() - vectorSize; j++)
 						{
-							positionCounter++;
+							if (spriteVector[i].getPosition().x + blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+							{
+								collision = true;
+							}
 						}
 					}
-					if (positionCounter == vectorSize)
+					if (collision == false)
 					{
 						blockVector[locationNumber]->moveRight();
 					}
-					positionCounter = 0;
+					collision = false;
 				}
+				positionCounter = 0;
+			}
 
-				else if (event.key.code == sf::Keyboard::Down && clock.getElapsedTime().asMicroseconds() < 500000)
+			else if (event.key.code == sf::Keyboard::Down && clock.getElapsedTime().asMicroseconds() < 500000)
+			{
+				for (int i = 0; i < vectorSize; i++)
 				{
+					if (spriteVector[i].getPosition().y + 20 < 19 * blockSize)
+					{
+						positionCounter++;
+					}
+				}
+				if (positionCounter == vectorSize)
 					for (int i = 0; i < vectorSize; i++)
 					{
-						if (spriteVector[i].getPosition().y + 20 < 19 * blockSize)
+					for (int j = 0; j < allSprites.size() - vectorSize; j++)
+					{
+						if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
 						{
-							positionCounter++;
+							collision = true;
 						}
 					}
-					if (positionCounter == vectorSize)
-					{
-						blockVector[locationNumber]->moveDown();
-						pointsCounter++;
 					}
-					positionCounter = 0;
-				}
-
-				else if (event.key.code == sf::Keyboard::M)
+				if (collision == false)
 				{
-					blockVector[locationNumber]->rotateClockwise(randomBlock2);
+					blockVector[locationNumber]->moveDown();
+					pointsCounter++;
 				}
-
-				else if (event.key.code == sf::Keyboard::N)
-				{
-					blockVector[locationNumber]->rotateCounterClockwise(randomBlock2);
-				}
-
-			default:
-				break;
+				collision = false;
+				positionCounter = 0;
 			}
 
-			case sf::Event::KeyReleased:
+			else if (event.key.code == sf::Keyboard::M)
 			{
-				if (event.key.code == sf::Keyboard::Down)
-				{
-					pointsCounter = 0;
-				}
+				blockVector[locationNumber]->rotateClockwise(randomBlock2);
 			}
+
+			else if (event.key.code == sf::Keyboard::N)
+			{
+				blockVector[locationNumber]->rotateCounterClockwise(randomBlock2);
+			}
+
+		default:
+			break;
+		}
+
+		case sf::Event::KeyReleased:
+		{
+			if (event.key.code == sf::Keyboard::Down)
+			{
+				pointsCounter = 0;
+			}
+		}
 
 		}
 	}
@@ -172,6 +219,23 @@ void StateStart::handleInput()
 
 void StateStart::update(const float dt)
 {
+	if (newBlock == true)
+	{
+		for (int i = 0; i < vectorSize; i++)
+		{
+			allSprites.push_back(spriteVector[i]);
+			newBlock = false;
+		}
+	}
+	else if (newBlock == false)
+	{
+		for (int i = 0; i < vectorSize; i++)
+		{
+			allSprites.erase(allSprites.end() - 1 - i);
+			allSprites.push_back(spriteVector[i]);
+		}
+	}
+
 	for (int i = 0; i < vectorSize; i++)
 	{
 		if (spriteVector.size() != 0 && spriteVector[i].getPosition().y + 20 > 18 * blockSize)
@@ -197,13 +261,28 @@ void StateStart::update(const float dt)
 			}
 			ss << points;
 			pointsText.setString(ss.str());
+			newBlock = true;
 			break;
 		}
 	}
 	if (clock.getElapsedTime().asMicroseconds() >= 500000)
 	{
-		blockVector[locationNumber]->moveDown();
-		clock.restart();
+		for (int i = 0; i < vectorSize; i++)
+		{
+			for (int j = 0; j < allSprites.size() - vectorSize; j++)
+			{
+				if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
+				{
+					collision = true;
+				}
+			}
+		}
+		if (collision == false)
+		{
+			blockVector[locationNumber]->moveDown();
+			clock.restart();
+		}
+		collision = false;
 	}
 }
 

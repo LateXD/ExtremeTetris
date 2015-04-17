@@ -1,23 +1,35 @@
-﻿Build started 17.4.2015 12:06:59.
-     1>Project "C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Extreme Tetris\Extreme Tetris.vcxproj" on node 2 (Build target(s)).
+﻿Build started 17.4.2015 12:27:29.
+     1>Project "C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Extreme Tetris\Extreme Tetris.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\include" /ZI /nologo /W4 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt StateStart.cpp
-         StateStart.cpp
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(24): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(36): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(36): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(40): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(53): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(62): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(67): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(46): warning C4100: 'dt' : unreferenced formal parameter
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(119): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(149): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(182): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(282): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(224): warning C4100: 'dt' : unreferenced formal parameter
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\include" /ZI /nologo /W4 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Block_I.cpp Block_J.cpp Block_L.cpp Block_O.cpp Block_S.cpp Block_T.cpp Block_Z.cpp Blocks.cpp GameState.cpp InputManager.cpp MultiplayerState.cpp
+         MultiplayerState.cpp
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(33): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(37): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(37): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(52): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(57): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(61): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(61): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(84): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(92): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(106): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(114): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(74): warning C4100: 'dt' : unreferenced formal parameter
+     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(220): warning C4100: 'dt' : unreferenced formal parameter
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         InputManager.cpp
+         GameState.cpp
+         Blocks.cpp
+         Block_Z.cpp
+         Block_T.cpp
+         Block_S.cpp
+         Block_O.cpp
+         Block_L.cpp
+         Block_J.cpp
+         Block_I.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\lib" freetype.lib glew.lib jpeg.lib opengl32.lib "sfml-graphics-s-d.lib" "sfml-window-s-d.lib" "sfml-system-s-d.lib" winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.lib" /MACHINE:X86 Debug\Blocks.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\lib" freetype.lib glew.lib jpeg.lib opengl32.lib "sfml-graphics-s-d.lib" "sfml-window-s-d.lib" "sfml-system-s-d.lib" winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.lib" /MACHINE:X86 Debug\Blocks.obj
          Debug\Block_I.obj
          Debug\Block_J.obj
          Debug\Block_L.obj
@@ -34,9 +46,9 @@
          Debug\MultiplayerState.obj
          Debug\OptionsState.obj
          Debug\StateStart.obj
-         Extreme Tetris.vcxproj -> C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.exe
-     1>Done Building Project "C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Extreme Tetris\Extreme Tetris.vcxproj" (Build target(s)).
+         Extreme Tetris.vcxproj -> C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.exe
+     1>Done Building Project "C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Extreme Tetris\Extreme Tetris.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.85
+Time Elapsed 00:00:00.75

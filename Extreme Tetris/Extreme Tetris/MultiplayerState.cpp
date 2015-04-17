@@ -60,6 +60,14 @@ MultiplayerState::MultiplayerState(Game* game)
 	pointsText2.setCharacterSize(20);
 	pointsText2.setPosition(sf::Vector2f(blockSize * 26, blockSize * 8.75));
 	pointsText2.setString(ss.str());
+
+	// Player 2 blocks
+	randomBlock2 = randomBlock;
+	blockVector2.push_back(new Blocks(randomBlock));
+	randomBlock = rand() % 7 + 1;
+	block = new Blocks(randomBlock);
+	block->nextBlock(direction);
+	direction = false;
 	
 }
 
@@ -67,7 +75,7 @@ void MultiplayerState::draw(const float dt)
 {
 	this->game->window.clear(sf::Color::Black);
 
-	// Draw frame 1, next block and points
+	// Draw frame 1, block and points
 	game->window.draw(frame);
 	game->window.draw(pointsFrame);
 	game->window.draw(pointsText);
@@ -90,9 +98,27 @@ void MultiplayerState::draw(const float dt)
 		}
 	}
 
+
 	game->window.draw(frame2);
 	game->window.draw(pointsFrame2);
 	game->window.draw(pointsText2);
+
+	for (int i = 0; i < blockVector2.size(); i++)
+	{
+		spriteVector2 = block->getVector();
+		for (int i = 0; i < 4; i++)
+		{
+			game->window.draw(spriteVector2[i]);
+		}
+	}
+	for (int i = 0; i < blockVector2.size(); i++)
+	{
+		spriteVector2 = blockVector2[i]->getVector();
+		for (int i = 0; i < 4; i++)
+		{
+			game->window.draw(spriteVector2[i]);
+		}
+	}
 
 	
 }
@@ -221,9 +247,45 @@ void MultiplayerState::update(const float dt)
 			break;
 		}
 	}
+
 	if (clock.getElapsedTime().asMicroseconds() >= 500000)
 	{
 		blockVector[locationNumber]->moveDown();
+		clock.restart();
+	}
+
+	for (int i = 0; i < vectorSize; i++)
+	{
+		if (spriteVector2.size() != 0 && spriteVector2[i].getPosition().y + 20 > 18 * blockSize)
+		{
+			clock.restart();
+			randomBlock2 = randomBlock;
+			blockVector2.push_back(block);
+			block->nextBlock(direction);
+			direction = true;
+			randomBlock = rand() % 7 + 1;
+			block = new Blocks(randomBlock);
+			block->nextBlock(direction);
+			direction = false;
+			points += pointsCounter;
+			pointsCounter = 0;
+			locationNumber++;
+			ss.clear();
+			ss.str("");
+			if (points >= pointsMover)
+			{
+				pointsText.move(-10, 0);
+				pointsMover = pointsMover * 10;
+			}
+			ss << points;
+			pointsText2.setString(ss.str());
+			break;
+		}
+	}
+
+	if (clock.getElapsedTime().asMicroseconds() >= 500000)
+	{
+		blockVector2[locationNumber]->moveDown();
 		clock.restart();
 	}
 }

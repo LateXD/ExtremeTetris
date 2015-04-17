@@ -27,7 +27,7 @@ private:
 	sf::Font font;
 	std::stringstream ss;
 	sf::Texture frameTexture, pointsFrameTexture;
-	std::vector<sf::Sprite> spriteVector;
-	std::vector<Blocks*>blockVector;
+	std::vector<sf::Sprite> spriteVector, spriteVector2;
+	std::vector<Blocks*>blockVector, blockVector2;
 };
 #endif;

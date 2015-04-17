@@ -19,7 +19,7 @@ public:
 private:
 	//sf::View view;
 	bool direction = true, newBlock = true, collision;
-	int blockSize = 20, locationNumber = 0, positionCounter = 0, vectorSize = 4, pointsCounter = 0, points = 0, randomBlock = rand() % 7 + 1, randomBlock2, pointsMover = 10;
+	int blockSize = 20, locationNumber = 0, positionCounter = 0, vectorSize = 4, pointsCounter = 0, points = 0, randomBlock = rand() % 7 + 1, randomBlock2, pointsMover = 10, rowNumber = 1, rowCounter = 0;
 	Blocks* block;
 	sf::Clock clock;
 	sf::Sprite frame, pointsFrame;

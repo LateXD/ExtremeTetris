@@ -1,49 +1,35 @@
-<<<<<<< HEAD
-﻿Build started 17.4.2015 10:58:39.
-     1>Project "C:\Users\ttv14sNikoK\Documents\GitHub\ExtremeTetris\Extreme Tetris\Extreme Tetris\Extreme Tetris.vcxproj" on node 2 (Build target(s)).
-=======
-﻿Build started 17.4.2015 10:50:23.
+﻿Build started 17.4.2015 11:55:27.
      1>Project "C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Extreme Tetris\Extreme Tetris.vcxproj" on node 2 (Build target(s)).
->>>>>>> origin/master
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\include" /ZI /nologo /W4 /WX- /Od /Oy- /D SFML_STATIC /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Block_I.cpp Block_J.cpp Block_L.cpp Block_O.cpp Block_S.cpp Block_T.cpp Block_Z.cpp Blocks.cpp Game.cpp GameState.cpp InputManager.cpp InputState.cpp Main.cpp MainMenu.cpp MultiplayerState.cpp OptionsState.cpp StateStart.cpp
          StateStart.cpp
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(18): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(24): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(36): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(36): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(40): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(53): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(62): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(67): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(46): warning C4100: 'dt' : unreferenced formal parameter
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(118): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(148): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(177): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(272): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(119): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(149): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(178): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(274): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\statestart.cpp(220): warning C4100: 'dt' : unreferenced formal parameter
          OptionsState.cpp
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\optionsstate.cpp(11): warning C4100: 'dt' : unreferenced formal parameter
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\optionsstate.cpp(118): warning C4100: 'dt' : unreferenced formal parameter
          MultiplayerState.cpp
-<<<<<<< HEAD
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(33): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(37): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(37): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(52): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(57): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(61): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(77): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(85): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(67): warning C4100: 'dt' : unreferenced formal parameter
-     1>c:\users\ttv14snikok\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(195): warning C4100: 'dt' : unreferenced formal parameter
-     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
-=======
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(27): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(32): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(36): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(36): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(41): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(45): warning C4100: 'dt' : unreferenced formal parameter
-     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(88): warning C4100: 'dt' : unreferenced formal parameter
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(33): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(37): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(37): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(52): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(57): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(61): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(77): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(85): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(67): warning C4100: 'dt' : unreferenced formal parameter
+     1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\multiplayerstate.cpp(195): warning C4100: 'dt' : unreferenced formal parameter
          MainMenu.cpp
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\mainmenu.cpp(12): warning C4100: 'dt' : unreferenced formal parameter
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\mainmenu.cpp(93): warning C4100: 'dt' : unreferenced formal parameter
@@ -151,7 +137,6 @@
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\block_i.cpp(52): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
      1>c:\users\ttv14slaurih\documents\github\extremetetris\extreme tetris\extreme tetris\block_i.cpp(53): warning C4244: 'argument' : conversion from 'int' to 'float', possible loss of data
          Generating Code...
->>>>>>> origin/master
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\lib" freetype.lib glew.lib jpeg.lib opengl32.lib "sfml-graphics-s-d.lib" "sfml-window-s-d.lib" "sfml-system-s-d.lib" winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\ttv14slaurih\Documents\GitHub\ExtremeTetris\Extreme Tetris\Debug\Extreme Tetris.lib" /MACHINE:X86 Debug\Blocks.obj
          Debug\Block_I.obj
@@ -222,8 +207,4 @@
 
 Build succeeded.
 
-<<<<<<< HEAD
-Time Elapsed 00:00:00.85
-=======
-Time Elapsed 00:00:08.11
->>>>>>> origin/master
+Time Elapsed 00:00:06.91

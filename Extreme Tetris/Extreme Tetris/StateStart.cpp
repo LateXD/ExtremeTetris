@@ -11,6 +11,12 @@ StateStart::StateStart(Game* game)
 	{
 		std::cout << "Can't load texture!";
 	}
+	if (!font.loadFromFile("..\\Graphics\\8bitOperatorPlus8-Regular.ttf"))
+	{
+		//error
+		std::cout << "" << std::endl;
+	}
+
 	frame.setTexture(frameTexture);
 	frame.setColor(sf::Color(100, 255, 100));
 	pointsFrame.setTexture(pointsFrameTexture);
@@ -23,12 +29,6 @@ StateStart::StateStart(Game* game)
 	block = new Blocks(randomBlock);
 	block->nextBlock(direction);
 	direction = false;
-
-	if (!font.loadFromFile("..\\Graphics\\8bitOperatorPlus8-Regular.ttf"))
-	{
-		//error
-		std::cout << "" << std::endl;
-	}
 
 	pointsText.setFont(font);
 	pointsText.setColor(sf::Color::Green);
@@ -62,10 +62,11 @@ void StateStart::draw(const float dt)
 	for (int i = 0; i < blockVector.size(); i++)
 	{
 		spriteVector = blockVector[i]->getVector();
-		for (int j = 0; j < 4; j++)
-		{
-			game->window.draw(spriteVector[j]);
-		}
+	}
+
+	for (int i = 0; i < allSprites.size(); i++)
+	{
+		game->window.draw(allSprites[i]);
 	}
 
 	game->window.draw(frame);
@@ -187,7 +188,6 @@ void StateStart::handleInput()
 					blockVector[locationNumber]->moveDown();
 					pointsCounter++;
 				}
-				collision = false;
 				positionCounter = 0;
 			}
 
@@ -238,9 +238,10 @@ void StateStart::update(const float dt)
 
 	for (int i = 0; i < vectorSize; i++)
 	{
-		if (spriteVector.size() != 0 && spriteVector[i].getPosition().y + 20 > 18 * blockSize)
+		if (spriteVector.size() != 0 && spriteVector[i].getPosition().y + 20 > 18 * blockSize || collision == true)
 		{
 			clock.restart();
+			collision = false;
 			randomBlock2 = randomBlock;
 			blockVector.push_back(block);
 			block->nextBlock(direction);
@@ -262,6 +263,7 @@ void StateStart::update(const float dt)
 			ss << points;
 			pointsText.setString(ss.str());
 			newBlock = true;
+
 			break;
 		}
 	}
@@ -282,7 +284,6 @@ void StateStart::update(const float dt)
 			blockVector[locationNumber]->moveDown();
 			clock.restart();
 		}
-		collision = false;
 	}
 }
 

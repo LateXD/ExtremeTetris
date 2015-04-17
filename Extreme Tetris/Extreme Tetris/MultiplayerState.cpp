@@ -58,7 +58,8 @@ MultiplayerState::MultiplayerState(Game* game)
 	pointsText2.setFont(font);
 	pointsText2.setColor(sf::Color::Red);
 	pointsText2.setCharacterSize(20);
-	pointsText2.setPosition(sf::Vector2f(blockSize * 26, blockSize * 8.75));
+	pointsText2.setPosition(sf::Vector2f(blockSize * 25.5, blockSize * 8.75));
+	ss << points;
 	pointsText2.setString(ss.str());
 	
 }

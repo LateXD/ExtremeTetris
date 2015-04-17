@@ -167,7 +167,11 @@ void StateStart::handleInput()
 			{
 				for (int i = 0; i < vectorSize; i++)
 				{
-					if (spriteVector[i].getPosition().y + 20 < 19 * blockSize)
+					if (spriteVector[i].getPosition().y + 20 > 18 * blockSize)
+					{
+						collision = true;
+					}
+					else
 					{
 						positionCounter++;
 					}
@@ -238,7 +242,7 @@ void StateStart::update(const float dt)
 
 	for (int i = 0; i < vectorSize; i++)
 	{
-		if (spriteVector.size() != 0 && spriteVector[i].getPosition().y + 20 > 18 * blockSize || collision == true)
+		if (collision == true)
 		{
 			clock.restart();
 			collision = false;
@@ -271,6 +275,10 @@ void StateStart::update(const float dt)
 	{
 		for (int i = 0; i < vectorSize; i++)
 		{
+			if (spriteVector[i].getPosition().y + 20 > 18 * blockSize)
+			{
+				collision = true;
+			}
 			for (int j = 0; j < allSprites.size() - vectorSize; j++)
 			{
 				if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)

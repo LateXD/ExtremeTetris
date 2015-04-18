@@ -46,6 +46,11 @@ MultiplayerState::MultiplayerState(Game* game)
 	block->nextBlock(direction);
 	direction = false;
 
+	for (int i = 0; i < blockVector.size(); i++)
+	{
+		spriteVector = blockVector[i]->getVector();
+	}
+
 	// Frame 2
 	frame2.setTexture(frameTexture);
 	frame2.setColor(sf::Color(255, 100, 100));
@@ -68,12 +73,17 @@ MultiplayerState::MultiplayerState(Game* game)
 	block = new Blocks(randomBlock);
 	block->nextBlock(direction);
 	direction = false;
+
+	for (int i = 0; i < blockVector2.size(); i++)
+	{
+		spriteVector2 = blockVector2[i]->getVector();
+	}
 	
 }
 
 void MultiplayerState::draw(const float dt)
 {
-	this->game->window.clear(sf::Color::Black);
+	this->game->window.clear(sf::Color::White);
 
 	// Draw frame 1, block and points
 	game->window.draw(frame);
@@ -84,18 +94,20 @@ void MultiplayerState::draw(const float dt)
 	for (int i = 0; i < blockVector.size(); i++)
 	{
 		spriteVector = block->getVector();
-		for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 4; j++)
 		{
-			game->window.draw(spriteVector[i]);
+			game->window.draw(spriteVector[j]);
 		}
 	}
+
 	for (int i = 0; i < blockVector.size(); i++)
 	{
 		spriteVector = blockVector[i]->getVector();
-		for (int i = 0; i < 4; i++)
-		{
-			game->window.draw(spriteVector[i]);
-		}
+	}
+
+	for (int i = 0; i < allSprites.size(); i++)
+	{
+		game->window.draw(allSprites[i]);
 	}
 
 
@@ -106,18 +118,20 @@ void MultiplayerState::draw(const float dt)
 	for (int i = 0; i < blockVector2.size(); i++)
 	{
 		spriteVector2 = block->getVector();
-		for (int i = 0; i < 4; i++)
+		for (int j = 0; j < 4; j++)
 		{
-			game->window.draw(spriteVector2[i]);
+			game->window.draw(spriteVector2[j]);
 		}
 	}
+
 	for (int i = 0; i < blockVector2.size(); i++)
 	{
 		spriteVector2 = blockVector2[i]->getVector();
-		for (int i = 0; i < 4; i++)
-		{
-			game->window.draw(spriteVector2[i]);
-		}
+	}
+
+	for (int i = 0; i < allSprites.size(); i++)
+	{
+		game->window.draw(allSprites[i]);
 	}
 
 	
@@ -135,6 +149,13 @@ void MultiplayerState::handleInput()
 			game->window.close();
 			break;
 		}
+			//TODO:: IF YOU WANT TO RESIZE THE WINDOW
+
+			/*case sf::Event::Resized:
+			{
+
+			}*/
+
 		case sf::Event::KeyPressed:
 		{
 			if (event.key.code == sf::Keyboard::Escape)
@@ -143,6 +164,7 @@ void MultiplayerState::handleInput()
 				std::cout << "Back to main menu\n";
 				return;
 			}
+
 			else if (event.key.code == sf::Keyboard::Left)
 			{
 				for (int i = 0; i < vectorSize; i++)
@@ -154,7 +176,21 @@ void MultiplayerState::handleInput()
 				}
 				if (positionCounter == vectorSize)
 				{
-					blockVector[locationNumber]->moveLeft();
+					for (int i = 0; i < vectorSize; i++)
+					{
+						for (int j = 0; j < allSprites.size() - vectorSize; j++)
+						{
+							if (spriteVector[i].getPosition().x - blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+							{
+								collision = true;
+							}
+						}
+					}
+					if (collision == false)
+					{
+						blockVector[locationNumber]->moveLeft();
+					}
+					collision = false;
 				}
 				positionCounter = 0;
 			}
@@ -170,7 +206,21 @@ void MultiplayerState::handleInput()
 				}
 				if (positionCounter == vectorSize)
 				{
-					blockVector[locationNumber]->moveRight();
+					for (int i = 0; i < vectorSize; i++)
+					{
+						for (int j = 0; j < allSprites.size() - vectorSize; j++)
+						{
+							if (spriteVector[i].getPosition().x + blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+							{
+								collision = true;
+							}
+						}
+					}
+					if (collision == false)
+					{
+						blockVector[locationNumber]->moveRight();
+					}
+					collision = false;
 				}
 				positionCounter = 0;
 			}
@@ -179,12 +229,33 @@ void MultiplayerState::handleInput()
 			{
 				for (int i = 0; i < vectorSize; i++)
 				{
-					if (spriteVector[i].getPosition().y + 20 < 19 * blockSize)
+					if (spriteVector[i].getPosition().y + 20 > 18 * blockSize)
+					{
+						collision = true;
+					}
+					else
 					{
 						positionCounter++;
 					}
 				}
 				if (positionCounter == vectorSize)
+					for (int i = 0; i < vectorSize; i++)
+					{
+					for (int j = 0; j < allSprites.size() - vectorSize; j++)
+					{
+						if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
+						{
+							collision = true;
+						}
+						else if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+						{
+							this->game->pushState(new MainMenu(this->game));
+							std::cout << "Back to main menu\n";
+							return;
+						}
+					}
+					}
+				if (collision == false)
 				{
 					blockVector[locationNumber]->moveDown();
 					pointsCounter++;
@@ -213,17 +284,36 @@ void MultiplayerState::handleInput()
 				pointsCounter = 0;
 			}
 		}
+
 		}
 	}
 }
 
 void MultiplayerState::update(const float dt)
 {
+	if (newBlock == true)
+	{
+		for (int i = 0; i < vectorSize; i++)
+		{
+			allSprites.push_back(spriteVector[i]);
+			newBlock = false;
+		}
+	}
+	else if (newBlock == false)
+	{
+		for (int i = 0; i < vectorSize; i++)
+		{
+			allSprites.erase(allSprites.end() - 1 - i);
+			allSprites.push_back(spriteVector[i]);
+		}
+	}
+
 	for (int i = 0; i < vectorSize; i++)
 	{
-		if (spriteVector.size() != 0 && spriteVector[i].getPosition().y + 20 > 18 * blockSize)
+		if (collision == true)
 		{
 			clock.restart();
+			collision = false;
 			randomBlock2 = randomBlock;
 			blockVector.push_back(block);
 			block->nextBlock(direction);
@@ -244,7 +334,37 @@ void MultiplayerState::update(const float dt)
 			}
 			ss << points;
 			pointsText.setString(ss.str());
+			newBlock = true;
+
 			break;
+		}
+	}
+	if (clock.getElapsedTime().asMicroseconds() >= 500000)
+	{
+		for (int i = 0; i < vectorSize; i++)
+		{
+			if (spriteVector[i].getPosition().y + 20 > 18 * blockSize)
+			{
+				collision = true;
+			}
+			for (int j = 0; j < allSprites.size() - vectorSize; j++)
+			{
+				if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
+				{
+					collision = true;
+				}
+				else if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+				{
+					this->game->pushState(new MainMenu(this->game));
+					std::cout << "Back to main menu\n";
+					return;
+				}
+			}
+		}
+		if (collision == false)
+		{
+			blockVector[locationNumber]->moveDown();
+			clock.restart();
 		}
 	}
 
@@ -254,11 +374,29 @@ void MultiplayerState::update(const float dt)
 		clock.restart();
 	}
 
+	if (newBlock == true)
+	{
+		for (int i = 0; i < vectorSize; i++)
+		{
+			allSprites.push_back(spriteVector2[i]);
+			newBlock = false;
+		}
+	}
+	else if (newBlock == false)
+	{
+		for (int i = 0; i < vectorSize; i++)
+		{
+			allSprites.erase(allSprites.end() - 1 - i);
+			allSprites.push_back(spriteVector2[i]);
+		}
+	}
+
 	for (int i = 0; i < vectorSize; i++)
 	{
-		if (spriteVector2.size() != 0 && spriteVector2[i].getPosition().y + 20 > 18 * blockSize)
+		if (collision = true)
 		{
 			clock.restart();
+			collision = false;
 			randomBlock2 = randomBlock;
 			blockVector2.push_back(block);
 			block->nextBlock(direction);
@@ -279,14 +417,38 @@ void MultiplayerState::update(const float dt)
 			}
 			ss << points;
 			pointsText2.setString(ss.str());
+			newBlock = true;
 			break;
 		}
 	}
 
 	if (clock.getElapsedTime().asMicroseconds() >= 500000)
 	{
-		blockVector2[locationNumber]->moveDown();
-		clock.restart();
+		for (int i = 0; i < vectorSize; i++)
+		{
+			if (spriteVector2[i].getPosition().y + 20 > 18 * blockSize)
+			{
+				collision = true;
+			}
+			for (int j = 0; j < allSprites.size() - vectorSize; j++)
+			{
+				if (spriteVector2[i].getPosition().x == allSprites[j].getPosition().x && spriteVector2[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
+				{
+					collision = true;
+				}
+				else if (spriteVector2[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+				{
+					this->game->pushState(new MainMenu(this->game));
+					std::cout << "Back to main menu\n";
+					return;
+				}
+			}
+		}
+		if (collision == false)
+		{
+			blockVector2[locationNumber]->moveDown();
+			clock.restart();
+		}
 	}
 }
 

@@ -236,6 +236,40 @@ void StateStart::update(const float dt)
 			allSprites.push_back(spriteVector[i]);
 			newBlock = false;
 		}
+		for (int i = 0; i < blockSize * 20; i += blockSize)
+		{
+			for (int j = 0; j < allSprites.size(); j++)
+			{
+				if (clearRow == true && allSprites[j].getPosition().y < rowNumber)
+				{
+					allSprites[j].move(0, blockSize);
+				}
+				else if (clearRow == true && allSprites[j].getPosition().y == rowNumber)
+				{
+					allSprites[j].move(0, blockSize * blockSize);
+				}
+				else if (clearRow == true && allSprites[j].getPosition().y > rowNumber)
+				{
+					if (j == allSprites.size() - 1)
+					{
+						clearRow = false;
+						rowCounter = 0;
+					}
+				}
+				if (clearRow == false && allSprites[j].getPosition().y == i)
+				{
+					rowCounter++;
+				}
+				if (clearRow == false && rowCounter == 10)
+				{
+					rowNumber = i;
+					clearRow = true;
+					rowCounter = 0;
+					break;
+				}
+			}
+			rowCounter = 0;
+		}
 	}
 	else if (newBlock == false)
 	{
@@ -273,7 +307,6 @@ void StateStart::update(const float dt)
 			ss << points;
 			pointsText.setString(ss.str());
 			newBlock = true;
-
 			break;
 		}
 	}

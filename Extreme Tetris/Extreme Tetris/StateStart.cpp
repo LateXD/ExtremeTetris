@@ -3,6 +3,7 @@
 StateStart::StateStart(Game* game)
 {
 	this->game = game;
+
 	if (!frameTexture.loadFromFile("..\\Graphics\\Frame.png"))
 	{
 		std::cout << "Can't load texture!";
@@ -13,43 +14,43 @@ StateStart::StateStart(Game* game)
 	}
 	if (!font.loadFromFile("..\\Graphics\\8bitOperatorPlus8-Regular.ttf"))
 	{
-		//error
 		std::cout << "" << std::endl;
 	}
 
+	// Setting up frames for blocks and other information
 	frame.setTexture(frameTexture);
 	frame.setColor(sf::Color(100, 255, 100));
 	pointsFrame.setTexture(pointsFrameTexture);
 	pointsFrame.setColor(sf::Color(100, 255, 100));
 	pointsFrame.setPosition(blockSize * 12, 0);
 
+	// Making of the first block and inserting it into a vector
 	randomBlock2 = randomBlock;
 	blockVector.push_back(new Blocks(randomBlock));
 	randomBlock = rand() % 7 + 1;
 	block = new Blocks(randomBlock);
 	block->nextBlock(direction);
 	direction = false;
+	for (int i = 0; i < blockVector.size(); i++)
+	{
+		spriteVector = blockVector[i]->getVector();
+	}
 
+	// Setting up text for points
 	pointsText.setFont(font);
 	pointsText.setColor(sf::Color::Green);
 	pointsText.setCharacterSize(20);
 	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.75));
 	ss << points;
 	pointsText.setString(ss.str());
-
-	for (int i = 0; i < blockVector.size(); i++)
-	{
-		spriteVector = blockVector[i]->getVector();
-	}
 }
 
 void StateStart::draw(const float dt)
 {
-	// Jos halutaan käyttää toista näkymää (View), tulee
-	// vanha ensiksi ottaa talteen, jotta siihen voidaan palata.
+	// Clears screen and draws everything in order: next block, all the other blocks, frames and text
 
-	//this->game->window.setView(this->view);
 	this->game->window.clear(sf::Color::Black);
+
 	for (int i = 0; i < blockVector.size(); i++)
 	{
 		spriteVector = block->getVector();
@@ -82,193 +83,157 @@ void StateStart::handleInput()
 	{
 		switch (event.type)
 		{
-		case sf::Event::Closed:
-		{
-			game->window.close();
-			break;
-		}
-			//TODO:: IF YOU WANT TO RESIZE THE WINDOW
-
-			/*case sf::Event::Resized:
+			case sf::Event::Closed:
 			{
-
-			}*/
-
-		case sf::Event::KeyPressed:
-		{
-			if (event.key.code == sf::Keyboard::Escape)
-			{
-				this->game->pushState(new MainMenu(this->game));
-				std::cout << "Back to main menu\n";
-				return;
+				game->window.close();
+				break;
 			}
-
-			else if (event.key.code == sf::Keyboard::Left)
+			// Checks if escape, an arrow key or rotate button is pressed
+			case sf::Event::KeyPressed:
 			{
-				for (int i = 0; i < vectorSize; i++)
+				if (event.key.code == sf::Keyboard::Escape)
 				{
-					if (spriteVector[i].getPosition().x - 20 > 0)
-					{
-						positionCounter++;
-					}
+					this->game->pushState(new MainMenu(this->game));
+					std::cout << "Back to main menu\n";
+					return;
 				}
-				if (positionCounter == vectorSize)
+				else if (event.key.code == sf::Keyboard::Left)
 				{
+					// Moves your current block left while checking if it collides to another block or wall
 					for (int i = 0; i < vectorSize; i++)
 					{
-						for (int j = 0; j < allSprites.size() - vectorSize; j++)
+						if (spriteVector[i].getPosition().x - 20 > 0)
 						{
-							if (spriteVector[i].getPosition().x - blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
-							{
-								collision = true;
-							}
+							positionCounter++;
 						}
 					}
+					if (positionCounter == vectorSize)
+					{
+						for (int i = 0; i < vectorSize; i++)
+						{
+							for (int j = 0; j < allSprites.size() - vectorSize; j++)
+							{
+								if (spriteVector[i].getPosition().x - blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+								{
+									collision = true;
+								}
+							}
+						}
+						if (collision == false)
+						{
+							blockVector[locationNumber]->moveLeft();
+						}
+						collision = false;
+					}
+					positionCounter = 0;
+				}
+
+				else if (event.key.code == sf::Keyboard::Right)
+				{
+					// Moves your current block right while checking if it collides to another block or wall
+					for (int i = 0; i < vectorSize; i++)
+					{
+						if (spriteVector[i].getPosition().x + 20 < 11 * blockSize)
+						{
+							positionCounter++;
+						}
+					}
+					if (positionCounter == vectorSize)
+					{
+						for (int i = 0; i < vectorSize; i++)
+						{
+							for (int j = 0; j < allSprites.size() - vectorSize; j++)
+							{
+								if (spriteVector[i].getPosition().x + blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+								{
+									collision = true;
+								}
+							}
+						}
+						if (collision == false)
+						{
+							blockVector[locationNumber]->moveRight();
+						}
+						collision = false;
+					}
+					positionCounter = 0;
+				}
+
+				else if (event.key.code == sf::Keyboard::Down && clock.getElapsedTime().asMicroseconds() < 500000)
+				{
+					// Moves your current block down while checking if it collides to another block or floor
+					// If the block hits floor collision turns to true and another block is made in update section
+					// If the block doesn't collide pointsCounter goes up providing you better points if you drop blocks at your own will
+					for (int i = 0; i < vectorSize; i++)
+					{
+						if (spriteVector[i].getPosition().y + 20 > 18 * blockSize)
+						{
+							collision = true;
+						}
+						else
+						{
+							positionCounter++;
+						}
+					}
+					if (positionCounter == vectorSize)
+						for (int i = 0; i < vectorSize; i++)
+						{
+							for (int j = 0; j < allSprites.size() - vectorSize; j++)
+							{
+								if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
+								{
+									collision = true;
+								}
+								else if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+								{
+									this->game->pushState(new MainMenu(this->game));
+									std::cout << "Back to main menu\n";
+									return;
+								}
+							}
+						}
 					if (collision == false)
 					{
-						blockVector[locationNumber]->moveLeft();
+						blockVector[locationNumber]->moveDown();
+						pointsCounter++;
 					}
-					collision = false;
+					positionCounter = 0;
 				}
-				positionCounter = 0;
-			}
 
-			else if (event.key.code == sf::Keyboard::Right)
-			{
-				for (int i = 0; i < vectorSize; i++)
+				else if (event.key.code == sf::Keyboard::M)
 				{
-					if (spriteVector[i].getPosition().x + 20 < 11 * blockSize)
-					{
-						positionCounter++;
-					}
+					blockVector[locationNumber]->rotateClockwise(randomBlock2);
 				}
-				if (positionCounter == vectorSize)
+
+				else if (event.key.code == sf::Keyboard::N)
 				{
-					for (int i = 0; i < vectorSize; i++)
-					{
-						for (int j = 0; j < allSprites.size() - vectorSize; j++)
-						{
-							if (spriteVector[i].getPosition().x + blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
-							{
-								collision = true;
-							}
-						}
-					}
-					if (collision == false)
-					{
-						blockVector[locationNumber]->moveRight();
-					}
-					collision = false;
+					blockVector[locationNumber]->rotateCounterClockwise(randomBlock2);
 				}
-				positionCounter = 0;
-			}
 
-			else if (event.key.code == sf::Keyboard::Down && clock.getElapsedTime().asMicroseconds() < 500000)
+			default:
+				break;
+			}
+			case sf::Event::KeyReleased:
 			{
-				for (int i = 0; i < vectorSize; i++)
+				// Checks if you stopped pressing down and drops pointsCounter to zero
+				if (event.key.code == sf::Keyboard::Down)
 				{
-					if (spriteVector[i].getPosition().y + 20 > 18 * blockSize)
-					{
-						collision = true;
-					}
-					else
-					{
-						positionCounter++;
-					}
+					pointsCounter = 0;
 				}
-				if (positionCounter == vectorSize)
-					for (int i = 0; i < vectorSize; i++)
-					{
-						for (int j = 0; j < allSprites.size() - vectorSize; j++)
-						{
-							if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
-							{
-								collision = true;
-							}
-							else if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
-							{
-								this->game->pushState(new MainMenu(this->game));
-								std::cout << "Back to main menu\n";
-								return;
-							}
-						}
-					}
-				if (collision == false)
-				{
-					blockVector[locationNumber]->moveDown();
-					pointsCounter++;
-				}
-				positionCounter = 0;
 			}
-
-			else if (event.key.code == sf::Keyboard::M)
-			{
-				blockVector[locationNumber]->rotateClockwise(randomBlock2);
-			}
-
-			else if (event.key.code == sf::Keyboard::N)
-			{
-				blockVector[locationNumber]->rotateCounterClockwise(randomBlock2);
-			}
-
-		default:
-			break;
-		}
-
-		case sf::Event::KeyReleased:
-		{
-			if (event.key.code == sf::Keyboard::Down)
-			{
-				pointsCounter = 0;
-			}
-		}
-
 		}
 	}
 }
 
 void StateStart::update(const float dt)
 {
+	// Inserts the next block in the vector or replaces the old one
 	if (newBlock == true)
 	{
 		for (int i = 0; i < vectorSize; i++)
 		{
 			allSprites.push_back(spriteVector[i]);
 			newBlock = false;
-		}
-		for (int i = 0; i < blockSize * 20; i += blockSize)
-		{
-			for (int j = 0; j < allSprites.size(); j++)
-			{
-				if (clearRow == true && allSprites[j].getPosition().y < rowNumber)
-				{
-					allSprites[j].move(0, blockSize);
-				}
-				else if (clearRow == true && allSprites[j].getPosition().y == rowNumber)
-				{
-					allSprites[j].move(0, blockSize * blockSize);
-				}
-				else if (clearRow == true && allSprites[j].getPosition().y > rowNumber)
-				{
-					if (j == allSprites.size() - 1)
-					{
-						clearRow = false;
-						rowCounter = 0;
-					}
-				}
-				if (clearRow == false && allSprites[j].getPosition().y == i)
-				{
-					rowCounter++;
-				}
-				if (clearRow == false && rowCounter == 10)
-				{
-					rowNumber = i;
-					clearRow = true;
-					rowCounter = 0;
-					break;
-				}
-			}
-			rowCounter = 0;
 		}
 	}
 	else if (newBlock == false)
@@ -280,6 +245,7 @@ void StateStart::update(const float dt)
 		}
 	}
 
+	// Makes a new block and updates points
 	for (int i = 0; i < vectorSize; i++)
 	{
 		if (collision == true)
@@ -290,11 +256,13 @@ void StateStart::update(const float dt)
 			blockVector.push_back(block);
 			block->nextBlock(direction);
 			direction = true;
+			rowClearing();
 			randomBlock = rand() % 7 + 1;
 			block = new Blocks(randomBlock);
 			block->nextBlock(direction);
 			direction = false;
-			points += pointsCounter;
+			points += pointsCounter + rowPoints;
+			rowPoints = 0;
 			pointsCounter = 0;
 			locationNumber++;
 			ss.clear();
@@ -310,6 +278,8 @@ void StateStart::update(const float dt)
 			break;
 		}
 	}
+
+	// Drops your current block according to your current level and quits the game if you reach the top or you somehow end up dropping a block on top of another block
 	if (clock.getElapsedTime().asMicroseconds() >= 500000)
 	{
 		for (int i = 0; i < vectorSize; i++)
@@ -338,6 +308,61 @@ void StateStart::update(const float dt)
 			clock.restart();
 		}
 	}
+}
+
+void StateStart::rowClearing()
+{
+	// Goes through allSprites vector finding blocks that should be removed or dropped down and gives you points according to how many rows you cleared at the same time
+	for (int i = 0; i < blockSize * 20; i += blockSize)
+	{
+		for (int j = 0; j < allSprites.size(); j++)
+		{
+			if (clearRow == true && allSprites[j].getPosition().y == rowNumber)
+			{
+				allSprites[j].move(0, blockSize * blockSize);
+				rowCounter++;
+			}
+			else if (clearRow == true && allSprites[j].getPosition().y < rowNumber)
+			{
+				allSprites[j].move(0, blockSize);
+			}
+			if (clearRow == false && allSprites[j].getPosition().y == i)
+			{
+				rowCounter++;
+			}
+			if (clearRow == false && rowCounter == 10)
+			{
+				rowNumber = i;
+				clearRow = true;
+				rowCounter = 0;
+			}
+			else if (clearRow == true && rowCounter == 10)
+			{
+				rowNumber = 0;
+				rowCounter = 0;
+				clearRow = false;
+				j = -1;
+				if (rowPoints == 0)
+				{
+					rowPoints = 40 * (level + 1);
+				}
+				else if (rowPoints == 40)
+				{
+					rowPoints = 100 * (level + 1);
+				}
+				else if (rowPoints == 100)
+				{
+					rowPoints = 300 * (level + 1);
+				}
+				else if (rowPoints == 300)
+				{
+					rowPoints = 1200 * (level + 1);
+				}
+			}
+		}
+		rowCounter = 0;
+	}
+	clearRow = false;
 }
 
 StateStart::~StateStart()

@@ -12,6 +12,10 @@ StateStart::StateStart(Game* game)
 	{
 		std::cout << "Can't load texture!";
 	}
+	if (!bgTexture.loadFromFile("..\\Graphics\\Background.png"))
+	{
+		std::cout << "Can't load texture!" << std::endl;
+	}
 	if (!font.loadFromFile("..\\Graphics\\8bitOperatorPlus8-Regular.ttf"))
 	{
 		std::cout << "" << std::endl;
@@ -20,6 +24,8 @@ StateStart::StateStart(Game* game)
 	// Setting up frames for blocks and other information
 	frame.setTexture(frameTexture);
 	frame.setColor(sf::Color(100, 255, 100));
+	bg.setTexture(bgTexture);
+	bg.setPosition(blockSize, blockSize);
 	pointsFrame.setTexture(pointsFrameTexture);
 	pointsFrame.setColor(sf::Color(100, 255, 100));
 	pointsFrame.setPosition(blockSize * 12, 0);
@@ -47,9 +53,14 @@ StateStart::StateStart(Game* game)
 
 void StateStart::draw(const float dt)
 {
-	// Clears screen and draws everything in order: next block, all the other blocks, frames and text
+	// Clears screen and draws everything in order: background, frames, text, next block, all the other blocks
 
 	this->game->window.clear(sf::Color::Black);
+
+	game->window.draw(bg);
+	game->window.draw(frame);
+	game->window.draw(pointsFrame);
+	game->window.draw(pointsText);
 
 	for (int i = 0; i < blockVector.size(); i++)
 	{
@@ -69,10 +80,6 @@ void StateStart::draw(const float dt)
 	{
 		game->window.draw(allSprites[i]);
 	}
-
-	game->window.draw(frame);
-	game->window.draw(pointsFrame);
-	game->window.draw(pointsText);
 }
 
 

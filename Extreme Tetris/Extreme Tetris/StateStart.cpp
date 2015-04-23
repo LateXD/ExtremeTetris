@@ -82,7 +82,6 @@ void StateStart::draw(const float dt)
 	}
 }
 
-
 void StateStart::handleInput()
 {
 	sf::Event event;
@@ -370,6 +369,14 @@ void StateStart::rowClearing()
 		rowCounter = 0;
 	}
 	clearRow = false;
+
+	for (int i = 0; i < allSprites.size(); i += vectorSize)
+	{
+		if (allSprites[i].getPosition().y > blockSize * blockSize && allSprites[i + 1].getPosition().y > blockSize * blockSize && allSprites[i + 2].getPosition().y > blockSize * blockSize && allSprites[i + 3].getPosition().y > blockSize * blockSize)
+		{
+			delete blockVector[i / vectorSize];
+		}
+	}
 }
 
 StateStart::~StateStart()

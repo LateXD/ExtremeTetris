@@ -286,7 +286,7 @@ void StateStart::update(const float dt)
 	}
 
 	// Drops your current block according to your current level and quits the game if you reach the top or you somehow end up dropping a block on top of another block
-	if (clock.getElapsedTime().asMicroseconds() >= 500000)
+	if (clock.getElapsedTime().asMicroseconds() >= 500000 / (level + 1))
 	{
 		for (int i = 0; i < vectorSize; i++)
 		{
@@ -344,6 +344,11 @@ void StateStart::rowClearing()
 			}
 			else if (clearRow == true && rowCounter == 10)
 			{
+				rowsCleared++;
+				if (rowsCleared % 10 == true)
+				{
+					level++;
+				}
 				rowNumber = 0;
 				rowCounter = 0;
 				clearRow = false;
@@ -370,13 +375,17 @@ void StateStart::rowClearing()
 	}
 	clearRow = false;
 
+	/*
 	for (int i = 0; i < allSprites.size(); i += vectorSize)
 	{
 		if (allSprites[i].getPosition().y > blockSize * blockSize && allSprites[i + 1].getPosition().y > blockSize * blockSize && allSprites[i + 2].getPosition().y > blockSize * blockSize && allSprites[i + 3].getPosition().y > blockSize * blockSize)
 		{
 			delete blockVector[i / vectorSize];
+			blockVector.erase(blockVector.begin() + i / vectorSize);
+			allSprites.erase(allSprites.begin() + i / vectorSize, allSprites.begin() + i / vectorSize + 3);
 		}
 	}
+	*/
 }
 
 StateStart::~StateStart()

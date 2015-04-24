@@ -25,12 +25,11 @@ private:
 	Blocks* block;
 	sf::Clock clock;
 	sf::Sprite frame, pointsFrame, bg;
-	sf::Text pointsText;
+	sf::Text pointsText, levelText;
 	sf::Font font;
 	std::stringstream ss;
 	sf::Texture frameTexture, pointsFrameTexture, bgTexture;
 	std::vector<sf::Sprite> spriteVector, allSprites;
 	std::vector<Blocks*>blockVector;
-	std::list <sf::Sprite> a;
 };
 #endif;

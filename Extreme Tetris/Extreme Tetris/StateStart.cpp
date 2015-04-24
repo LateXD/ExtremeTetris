@@ -47,8 +47,16 @@ StateStart::StateStart(Game* game)
 	pointsText.setColor(sf::Color::Green);
 	pointsText.setCharacterSize(20);
 	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.75));
+	levelText.setFont(font);
+	levelText.setColor(sf::Color::Green);
+	levelText.setCharacterSize(20);
+	levelText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 11.75));
 	ss << points;
 	pointsText.setString(ss.str());
+	ss.clear();
+	ss.str("");
+	ss << level;
+	levelText.setString(ss.str());
 }
 
 void StateStart::draw(const float dt)
@@ -61,6 +69,7 @@ void StateStart::draw(const float dt)
 	game->window.draw(frame);
 	game->window.draw(pointsFrame);
 	game->window.draw(pointsText);
+	game->window.draw(levelText);
 
 	for (int i = 0; i < blockVector.size(); i++)
 	{
@@ -345,9 +354,13 @@ void StateStart::rowClearing()
 			else if (clearRow == true && rowCounter == 10)
 			{
 				rowsCleared++;
-				if (rowsCleared % 10 == true)
+				if (rowsCleared % 10 == true && rowsCleared != 1)
 				{
 					level++;
+					ss.clear();
+					ss.str("");
+					ss << level;
+					levelText.setString(ss.str());
 				}
 				rowNumber = 0;
 				rowCounter = 0;

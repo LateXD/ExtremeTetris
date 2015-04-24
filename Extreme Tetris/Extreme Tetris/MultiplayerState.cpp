@@ -67,9 +67,13 @@ MultiplayerState::MultiplayerState(Game* game)
 	pointsText2.setString(ss.str());
 
 	// Player 2 blocks
-	randomBlock2 = randomBlock;
+	randomBlock4 = randomBlock3;
 	blockVector2.push_back(new Blocks(randomBlock));
 	randomBlock = rand() % 7 + 1;
+	for (int i = 0; i < 28; i++)
+	{
+		blockVector2[locationNumber]->moveRight();
+	}
 	block = new Blocks(randomBlock);
 	block->nextBlock(direction);
 	direction = false;
@@ -89,7 +93,7 @@ void MultiplayerState::draw(const float dt)
 	game->window.draw(frame);
 	game->window.draw(pointsFrame);
 	game->window.draw(pointsText);
-
+	game->window.draw(levelText);
 
 	for (int i = 0; i < blockVector.size(); i++)
 	{
@@ -114,6 +118,7 @@ void MultiplayerState::draw(const float dt)
 	game->window.draw(frame2);
 	game->window.draw(pointsFrame2);
 	game->window.draw(pointsText2);
+	game->window.draw(levelText2);
 
 	for (int i = 0; i < blockVector2.size(); i++)
 	{
@@ -129,9 +134,9 @@ void MultiplayerState::draw(const float dt)
 		spriteVector2 = blockVector2[i]->getVector();
 	}
 
-	for (int i = 0; i < allSprites.size(); i++)
+	for (int i = 0; i < allSprites2.size(); i++)
 	{
-		game->window.draw(allSprites[i]);
+		game->window.draw(allSprites2[i]);
 	}
 
 	
@@ -291,6 +296,8 @@ void MultiplayerState::handleInput()
 
 void MultiplayerState::update(const float dt)
 {
+	// Player 1
+
 	if (newBlock == true)
 	{
 		for (int i = 0; i < vectorSize; i++)
@@ -373,6 +380,8 @@ void MultiplayerState::update(const float dt)
 		blockVector[locationNumber]->moveDown();
 		clock.restart();
 	}
+	// -----------------------------------------------------------------------------------
+	// Player 2
 
 	if (newBlock == true)
 	{
@@ -397,15 +406,18 @@ void MultiplayerState::update(const float dt)
 		{
 			clock.restart();
 			collision = false;
-			randomBlock2 = randomBlock;
+			randomBlock4 = randomBlock3;
 			blockVector2.push_back(block);
 			block->nextBlock(direction);
 			direction = true;
-			randomBlock = rand() % 7 + 1;
+			randomBlock3 = rand() % 7 + 1;
+			for (int i = 0; i < 28; i++)
+			{
+				blockVector2[locationNumber]->moveRight();
+			}
 			block = new Blocks(randomBlock);
 			block->nextBlock(direction);
 			direction = false;
-			points += pointsCounter;
 			pointsCounter = 0;
 			locationNumber++;
 			ss.clear();

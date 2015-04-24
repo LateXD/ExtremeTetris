@@ -19,15 +19,15 @@ public:
 private:
 
 	bool direction = true, newBlock = true, collision = false;
-	int blockSize = 20, locationNumber = 0, positionCounter = 0, vectorSize = 4, pointsCounter = 0, points = 0, randomBlock = rand() % 7 + 1, randomBlock2, pointsMover = 10, rowNumber = 1, rowCounter = 0;
+	int blockSize = 20, locationNumber = 0, positionCounter = 0, vectorSize = 4, pointsCounter = 0, points = 0, randomBlock = rand() % 7 + 1, randomBlock2, randomBlock3 = rand() % 7 + 1, randomBlock4, pointsMover = 10, rowNumber = 1, rowCounter = 0;
 	Blocks* block;
 	sf::Clock clock;
 	sf::Sprite frame, frame2, pointsFrame, pointsFrame2;
-	sf::Text pointsText, pointsText2;
+	sf::Text pointsText, pointsText2, levelText, levelText2;
 	sf::Font font;
 	std::stringstream ss;
 	sf::Texture frameTexture, pointsFrameTexture;
-	std::vector<sf::Sprite> spriteVector, spriteVector2, allSprites;
+	std::vector<sf::Sprite> spriteVector, spriteVector2, allSprites, allSprites2;
 	std::vector<Blocks*>blockVector, blockVector2;
 };
 #endif;

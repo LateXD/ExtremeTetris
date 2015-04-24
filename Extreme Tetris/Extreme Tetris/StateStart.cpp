@@ -34,6 +34,7 @@ StateStart::StateStart(Game* game)
 	randomBlock2 = randomBlock;
 	blockVector.push_back(new Blocks(randomBlock));
 	randomBlock = rand() % 7 + 1;
+	randomBlock = 4;
 	block = new Blocks(randomBlock);
 	block->nextBlock(direction);
 	direction = false;
@@ -45,11 +46,11 @@ StateStart::StateStart(Game* game)
 	// Setting up text for points
 	pointsText.setFont(font);
 	pointsText.setColor(sf::Color::Green);
-	pointsText.setCharacterSize(20);
+	pointsText.setCharacterSize(blockSize);
 	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.75));
 	levelText.setFont(font);
 	levelText.setColor(sf::Color::Green);
-	levelText.setCharacterSize(20);
+	levelText.setCharacterSize(blockSize);
 	levelText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 11.75));
 	ss << points;
 	pointsText.setString(ss.str());
@@ -117,7 +118,7 @@ void StateStart::handleInput()
 					// Moves your current block left while checking if it collides to another block or wall
 					for (int i = 0; i < vectorSize; i++)
 					{
-						if (spriteVector[i].getPosition().x - 20 > 0)
+						if (spriteVector[i].getPosition().x - blockSize > 0)
 						{
 							positionCounter++;
 						}
@@ -148,7 +149,7 @@ void StateStart::handleInput()
 					// Moves your current block right while checking if it collides to another block or wall
 					for (int i = 0; i < vectorSize; i++)
 					{
-						if (spriteVector[i].getPosition().x + 20 < 11 * blockSize)
+						if (spriteVector[i].getPosition().x + blockSize < 11 * blockSize)
 						{
 							positionCounter++;
 						}
@@ -174,14 +175,14 @@ void StateStart::handleInput()
 					positionCounter = 0;
 				}
 
-				else if (event.key.code == sf::Keyboard::Down && clock.getElapsedTime().asMicroseconds() < 500000)
+				else if (event.key.code == sf::Keyboard::Down && clock.getElapsedTime().asMicroseconds() < 500000 / (level + 1))
 				{
 					// Moves your current block down while checking if it collides to another block or floor
 					// If the block hits floor collision turns to true and another block is made in update section
 					// If the block doesn't collide pointsCounter goes up providing you better points if you drop blocks at your own will
 					for (int i = 0; i < vectorSize; i++)
 					{
-						if (spriteVector[i].getPosition().y + 20 > 18 * blockSize)
+						if (spriteVector[i].getPosition().y + blockSize > 18 * blockSize)
 						{
 							collision = true;
 						}
@@ -299,7 +300,7 @@ void StateStart::update(const float dt)
 	{
 		for (int i = 0; i < vectorSize; i++)
 		{
-			if (spriteVector[i].getPosition().y + 20 > 18 * blockSize)
+			if (spriteVector[i].getPosition().y + blockSize > 18 * blockSize)
 			{
 				collision = true;
 			}
@@ -328,7 +329,7 @@ void StateStart::update(const float dt)
 void StateStart::rowClearing()
 {
 	// Goes through allSprites vector finding blocks that should be removed or dropped down and gives you points according to how many rows you cleared at the same time
-	for (int i = 0; i < blockSize * 20; i += blockSize)
+	for (int i = 0; i < blockSize * blockSize; i += blockSize)
 	{
 		for (int j = 0; j < allSprites.size(); j++)
 		{

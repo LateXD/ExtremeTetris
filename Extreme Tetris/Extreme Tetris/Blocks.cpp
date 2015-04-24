@@ -88,7 +88,7 @@ void Blocks::rotateClockwise(int rb)
 	{
 		blockVector = block_S.rotateBlock_S(rotation, blockVector);
 	}
-	if (rb == 4)
+	else if (rb == 4)
 	{
 		blockVector = block_I.rotateBlock_I(rotation, blockVector);
 	}

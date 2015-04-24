@@ -18,12 +18,13 @@ public:
 	void moveDown();
 	void rotateClockwise(int rb);
 	void rotateCounterClockwise(int rb);
+	void rotateCheck();
 	void nextBlock(bool direction);
 	std::vector<sf::Sprite> getVector();
 	Game* game;
 
 private:
-	int vectorSize = 4, xPos = 0, yPos = 0, rotation = 0, blockSize = 20;
+	int vectorSize = 4, xPos = 0, yPos = 0, rotation = 0, blockSize = 20, counter = 0;
 	std::vector<sf::Sprite>blockVector;
 	Block_O block_O;
 	Block_Z block_Z;

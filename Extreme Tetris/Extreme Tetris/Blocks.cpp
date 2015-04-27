@@ -62,7 +62,7 @@ void Blocks::moveDown()
 	}
 }
 
-void Blocks::rotateClockwise(int rb)
+void Blocks::rotateClockwise(int rb, std::vector<sf::Sprite> spritesVector)
 {
 	rotation++;
 	if (rb == 1 || rb == 2 || rb == 3 || rb == 4)
@@ -104,9 +104,26 @@ void Blocks::rotateClockwise(int rb)
 	{
 		blockVector = block_L.rotateBlockC_L(rotation, blockVector);
 	}
+
+	for (int i = 0; i < vectorSize; i++)
+	{
+		if (blockVector[i].getPosition().x <= 0 || blockVector[i].getPosition().x >= blockSize * 11 || blockVector[i].getPosition().y >= blockSize * 19)
+		{
+			rotateCounterClockwise(rb, spritesVector);
+			break;
+		}
+		for (int j = 0; j < spritesVector.size() - vectorSize; j++)
+		{
+			if (blockVector[i].getPosition().x == spritesVector[j].getPosition().x && blockVector[i].getPosition().y == spritesVector[j].getPosition().y)
+			{
+				rotateCounterClockwise(rb, spritesVector);
+				break;
+			}
+		}
+	}
 }
 
-void Blocks::rotateCounterClockwise(int rb)
+void Blocks::rotateCounterClockwise(int rb, std::vector<sf::Sprite> spritesVector)
 {
 	rotation--;
 	if (rotation < 0)
@@ -144,6 +161,23 @@ void Blocks::rotateCounterClockwise(int rb)
 	else if (rb == 7)
 	{
 		blockVector = block_L.rotateBlockCC_L(rotation, blockVector);
+	}
+
+	for (int i = 0; i < vectorSize; i++)
+	{
+		if (blockVector[i].getPosition().x <= 0 || blockVector[i].getPosition().x >= blockSize * 11 || blockVector[i].getPosition().y >= blockSize * 19)
+		{
+			rotateClockwise(rb, spritesVector);
+			break;
+		}
+		for (int j = 0; j < spritesVector.size() - vectorSize; j++)
+		{
+			if (blockVector[i].getPosition().x == spritesVector[j].getPosition().x && blockVector[i].getPosition().y == spritesVector[j].getPosition().y)
+			{
+				rotateClockwise(rb, spritesVector);
+				break;
+			}
+		}
 	}
 }
 

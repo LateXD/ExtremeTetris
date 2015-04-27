@@ -270,12 +270,12 @@ void MultiplayerState::handleInput()
 
 			else if (event.key.code == sf::Keyboard::M)
 			{
-				blockVector[locationNumber]->rotateClockwise(randomBlock2);
+				blockVector[locationNumber]->rotateClockwise(randomBlock2, allSprites);
 			}
 
 			else if (event.key.code == sf::Keyboard::N)
 			{
-				blockVector[locationNumber]->rotateCounterClockwise(randomBlock2);
+				blockVector[locationNumber]->rotateCounterClockwise(randomBlock2, allSprites);
 			}
 
 		default:

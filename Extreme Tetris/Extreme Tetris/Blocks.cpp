@@ -64,6 +64,8 @@ void Blocks::moveDown()
 
 void Blocks::rotateClockwise(int rb, std::vector<sf::Sprite> spritesVector)
 {
+	// Rotation decides how the block should be rotated, for example if rb (randomBlock) = 4 (I block) and rotation = 1 it adds one to rotation which makes it 2 but as I block has only 2 poses it will go back to 0
+	// Then it checks which block type you have at the moment, rotate it and if there's something wrong (it's inside a wall or another block), it rotates it back
 	rotation++;
 	if (rb == 1 || rb == 2 || rb == 3 || rb == 4)
 	{
@@ -125,6 +127,7 @@ void Blocks::rotateClockwise(int rb, std::vector<sf::Sprite> spritesVector)
 
 void Blocks::rotateCounterClockwise(int rb, std::vector<sf::Sprite> spritesVector)
 {
+	// Pretty much the same as before but rotation happens counterclockwise
 	rotation--;
 	if (rotation < 0)
 	{
@@ -183,6 +186,7 @@ void Blocks::rotateCounterClockwise(int rb, std::vector<sf::Sprite> spritesVecto
 
 void Blocks::nextBlock(bool direction)
 {
+	// Moves the block you have coming next from its place to the playing field and vise versa
 	if (direction == true)
 	{
 		for (int i = 0; i < vectorSize; i++)

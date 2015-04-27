@@ -174,7 +174,7 @@ void StateStart::handleInput()
 					positionCounter = 0;
 				}
 
-				else if (event.key.code == sf::Keyboard::Down && clock.getElapsedTime().asMicroseconds() < 500000 / (level + 1))
+				else if (event.key.code == sf::Keyboard::Down && clock.getElapsedTime().asMicroseconds() < 600000 / (level + 1))
 				{
 					// Moves your current block down while checking if it collides to another block or floor
 					// If the block hits floor collision turns to true and another block is made in update section
@@ -295,7 +295,7 @@ void StateStart::update(const float dt)
 	}
 
 	// Drops your current block according to your current level and quits the game if you reach the top or you somehow end up dropping a block on top of another block
-	if (clock.getElapsedTime().asMicroseconds() >= 500000 / (level + 1))
+	if (clock.getElapsedTime().asMicroseconds() >= 600000 / (level + 1))
 	{
 		for (int i = 0; i < vectorSize; i++)
 		{
@@ -333,7 +333,7 @@ void StateStart::rowClearing()
 		for (int j = 0; j < allSprites.size(); j++)
 		{
 			if (clearRow == true && allSprites[j].getPosition().y == rowNumber)
-			{
+			{			
 				allSprites[j].move(0, blockSize * blockSize);
 				rowCounter++;
 			}
@@ -354,7 +354,7 @@ void StateStart::rowClearing()
 			else if (clearRow == true && rowCounter == 10)
 			{
 				rowsCleared++;
-				if (rowsCleared % 10 == true && rowsCleared != 1)
+				if (rowsCleared % 10 == true && rowsCleared != 1 && level < 9)
 				{
 					level++;
 					ss.clear();
@@ -388,17 +388,14 @@ void StateStart::rowClearing()
 	}
 	clearRow = false;
 
-	/*
 	for (int i = 0; i < allSprites.size(); i += vectorSize)
 	{
 		if (allSprites[i].getPosition().y > blockSize * blockSize && allSprites[i + 1].getPosition().y > blockSize * blockSize && allSprites[i + 2].getPosition().y > blockSize * blockSize && allSprites[i + 3].getPosition().y > blockSize * blockSize)
 		{
-			delete blockVector[i / vectorSize];
-			blockVector.erase(blockVector.begin() + i / vectorSize);
-			allSprites.erase(allSprites.begin() + i / vectorSize, allSprites.begin() + i / vectorSize + 3);
+			allSprites.erase(allSprites.begin() + i, allSprites.begin() + i + 3);
+			std::cout << "!";
 		}
 	}
-	*/
 }
 
 StateStart::~StateStart()

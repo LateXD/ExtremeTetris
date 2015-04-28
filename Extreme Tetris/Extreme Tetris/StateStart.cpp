@@ -31,7 +31,7 @@ StateStart::StateStart(Game* game)
 	pointsFrame.setPosition(blockSize * 12, 0);
 
 	// Making of the first block and inserting it into a vector
-	randomBlock2 = randomBlock;
+	currentRandomBlock = randomBlock;
 	blockVector.push_back(new Blocks(randomBlock));
 	randomBlock = rand() % 7 + 1;
 	block = new Blocks(randomBlock);
@@ -217,12 +217,12 @@ void StateStart::handleInput()
 
 				else if (event.key.code == sf::Keyboard::M)
 				{
-					blockVector[locationNumber]->rotateClockwise(randomBlock2, allSprites);
+					blockVector[locationNumber]->rotateClockwise(currentRandomBlock, allSprites);
 				}
 
 				else if (event.key.code == sf::Keyboard::N)
 				{
-					blockVector[locationNumber]->rotateCounterClockwise(randomBlock2, allSprites);
+					blockVector[locationNumber]->rotateCounterClockwise(currentRandomBlock, allSprites);
 				}
 
 			default:
@@ -267,7 +267,7 @@ void StateStart::update(const float dt)
 		{
 			clock.restart();
 			collision = false;
-			randomBlock2 = randomBlock;
+			currentRandomBlock = randomBlock;
 			blockVector.push_back(block);
 			block->nextBlock(direction);
 			direction = true;
@@ -388,12 +388,15 @@ void StateStart::rowClearing()
 	}
 	clearRow = false;
 
-	for (int i = 0; i < allSprites.size(); i += vectorSize)
+	for (int i = 0; i < allSprites.size() - vectorSize; i += vectorSize)
 	{
 		if (allSprites[i].getPosition().y > blockSize * blockSize && allSprites[i + 1].getPosition().y > blockSize * blockSize && allSprites[i + 2].getPosition().y > blockSize * blockSize && allSprites[i + 3].getPosition().y > blockSize * blockSize)
 		{
-			allSprites.erase(allSprites.begin() + i, allSprites.begin() + i + 3);
-			std::cout << "!";
+			delete blockVector[i / vectorSize];
+			blockVector.erase(blockVector.begin() + i / vectorSize);
+			allSprites.erase(allSprites.begin() + i, allSprites.begin() + i + 4);
+			locationNumber--;
+			i = -vectorSize;
 		}
 	}
 }

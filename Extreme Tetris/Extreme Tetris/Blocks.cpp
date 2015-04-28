@@ -35,7 +35,6 @@ Blocks::Blocks(int rb)
 
 Blocks::~Blocks()
 {
-	std::cout << "Block removed.";
 }
 
 void Blocks::moveLeft()

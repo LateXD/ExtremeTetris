@@ -334,7 +334,7 @@ void StateStart::rowClearing()
 		{
 			if (clearRow == true && allSprites[j].getPosition().y == rowNumber)
 			{			
-				allSprites[j].move(0, blockSize * blockSize);
+				allSprites[j].move(0, blockSize * 30);
 				rowCounter++;
 			}
 			else if (clearRow == true && allSprites[j].getPosition().y < rowNumber)
@@ -390,7 +390,7 @@ void StateStart::rowClearing()
 
 	for (int i = 0; i < allSprites.size() - vectorSize; i += vectorSize)
 	{
-		if (allSprites[i].getPosition().y > blockSize * blockSize && allSprites[i + 1].getPosition().y > blockSize * blockSize && allSprites[i + 2].getPosition().y > blockSize * blockSize && allSprites[i + 3].getPosition().y > blockSize * blockSize)
+		if (allSprites[i].getPosition().y > blockSize * 30 && allSprites[i + 1].getPosition().y > blockSize * 30 && allSprites[i + 2].getPosition().y > blockSize * 30 && allSprites[i + 3].getPosition().y > blockSize * 30)
 		{
 			delete blockVector[i / vectorSize];
 			blockVector.erase(blockVector.begin() + i / vectorSize);

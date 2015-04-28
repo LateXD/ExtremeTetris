@@ -13,7 +13,6 @@
 #include <time.h>
 #include <ctime>
 
-
 class GameState;
 
 class Game

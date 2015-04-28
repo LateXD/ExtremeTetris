@@ -4,11 +4,11 @@ StateStart::StateStart(Game* game)
 {
 	this->game = game;
 
-	if (!frameTexture.loadFromFile("..\\Graphics\\Frame.png"))
+	if (!fieldTexture.loadFromFile("..\\Graphics\\Frame.png"))
 	{
 		std::cout << "Can't load texture!";
 	}
-	if (!pointsFrameTexture.loadFromFile("..\\Graphics\\Frame2.png"))
+	if (!pointsFieldTexture.loadFromFile("..\\Graphics\\Frame2.png"))
 	{
 		std::cout << "Can't load texture!";
 	}
@@ -18,17 +18,17 @@ StateStart::StateStart(Game* game)
 	}
 	if (!font.loadFromFile("..\\Graphics\\8bitOperatorPlus8-Regular.ttf"))
 	{
-		std::cout << "" << std::endl;
+		std::cout << "Can't load textfile!" << std::endl;
 	}
 
 	// Setting up frames for blocks and other information
-	frame.setTexture(frameTexture);
-	frame.setColor(sf::Color(100, 255, 100));
+	field.setTexture(fieldTexture);
+	field.setColor(sf::Color(red, blue, green));
 	bg.setTexture(bgTexture);
 	bg.setPosition(blockSize, blockSize);
-	pointsFrame.setTexture(pointsFrameTexture);
-	pointsFrame.setColor(sf::Color(100, 255, 100));
-	pointsFrame.setPosition(blockSize * 12, 0);
+	pointsField.setTexture(pointsFieldTexture);
+	pointsField.setColor(sf::Color(red, blue, green));
+	pointsField.setPosition(blockSize * 12, 0);
 
 	// Making of the first block and inserting it into a vector
 	currentRandomBlock = randomBlock;
@@ -44,19 +44,24 @@ StateStart::StateStart(Game* game)
 
 	// Setting up text for points
 	pointsText.setFont(font);
-	pointsText.setColor(sf::Color::Green);
-	pointsText.setCharacterSize(blockSize);
-	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.75));
+	pointsText.setColor(sf::Color::Black);
+	pointsText.setCharacterSize(25);
+	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.60));
 	levelText.setFont(font);
-	levelText.setColor(sf::Color::Green);
-	levelText.setCharacterSize(blockSize);
-	levelText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 11.75));
+	levelText.setColor(sf::Color::Black);
+	levelText.setCharacterSize(25);
+	levelText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 11.60));
 	ss << points;
 	pointsText.setString(ss.str());
 	ss.clear();
 	ss.str("");
 	ss << level;
 	levelText.setString(ss.str());
+	if (red < 150 && blue < 150 && green < 150)
+	{
+		pointsText.setColor(sf::Color::White);
+		levelText.setColor(sf::Color::White);
+	}
 }
 
 void StateStart::draw(const float dt)
@@ -66,8 +71,8 @@ void StateStart::draw(const float dt)
 	this->game->window.clear(sf::Color::Black);
 
 	game->window.draw(bg);
-	game->window.draw(frame);
-	game->window.draw(pointsFrame);
+	game->window.draw(field);
+	game->window.draw(pointsField);
 	game->window.draw(pointsText);
 	game->window.draw(levelText);
 
@@ -230,7 +235,6 @@ void StateStart::handleInput()
 			}
 			case sf::Event::KeyReleased:
 			{
-				// Checks if you stopped pressing down and drops pointsCounter to zero
 				if (event.key.code == sf::Keyboard::Down)
 				{
 					pointsCounter = 0;

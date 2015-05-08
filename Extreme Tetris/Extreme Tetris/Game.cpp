@@ -58,7 +58,10 @@ void Game::gameLoop()
 		peekState()->update(dt);
 		this->window.clear(sf::Color::Black);
 		peekState()->draw(dt);
-		this->window.display();	
+		if (multiplayerBool == false)
+		{
+			this->window.display();
+		}
 	}
 }
 
@@ -85,6 +88,10 @@ Game::Game()
 	//}
 }
 
+void Game::multiplayerStart(bool multiplayer)
+{
+	multiplayerBool = multiplayer;
+}
 
 float Game::getWindowWidth()
 {

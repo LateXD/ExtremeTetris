@@ -17,9 +17,6 @@ class GameState;
 
 class Game
 {
-
-private:
-	float windowWidth, windowHeight;
 public:
 
 	std::stack<GameState*> states;
@@ -35,8 +32,14 @@ public:
 	float getWindowHeight();
 
 	void gameLoop();
+	void multiplayerStart(bool multiplayer);
 
 	Game();
 	~Game();
+
+private:
+	bool multiplayerBool = false;
+	float windowWidth, windowHeight;
+
 };
 #endif;

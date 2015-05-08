@@ -1,8 +1,7 @@
 #include "MainMenu.h"
 #include "StateStart.h"
 #include "OptionsState.h"
-#include "MultiplayerState.h"
-
+#include "PlayerState.h"
 
 MainMenu::MainMenu(Game* game)
 {
@@ -123,7 +122,7 @@ void MainMenu::handleInput()
 					std::cout << "Single player" << std::endl;
 					return;
 				case 2:
-					this->game->pushState(new MultiplayerState(this->game));
+					this->game->pushState(new PlayerState(this->game));
 					std::cout << "Multiplayer" << std::endl;
 					return;
 				case 3:

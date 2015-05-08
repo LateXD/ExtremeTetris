@@ -67,9 +67,6 @@ StateStart::StateStart(Game* game)
 void StateStart::draw(const float dt)
 {
 	// Clears screen and draws everything in order: background, frames, text, next block, all the other blocks
-
-	this->game->window.clear(sf::Color::Black);
-
 	game->window.draw(bg);
 	game->window.draw(field);
 	game->window.draw(pointsField);
@@ -113,6 +110,7 @@ void StateStart::handleInput()
 			{
 				if (event.key.code == sf::Keyboard::Escape)
 				{
+					game->multiplayerStart(false);
 					this->game->pushState(new MainMenu(this->game));
 					std::cout << "Back to main menu\n";
 					return;
@@ -206,6 +204,7 @@ void StateStart::handleInput()
 								}
 								else if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
 								{
+									game->multiplayerStart(false);
 									this->game->pushState(new MainMenu(this->game));
 									std::cout << "Back to main menu\n";
 									return;

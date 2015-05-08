@@ -100,6 +100,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MultiplayerState.cpp" />
     <ClCompile Include="OptionsState.cpp" />
+    <ClCompile Include="PlayerState.cpp" />
     <ClCompile Include="StateStart.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +119,7 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="MultiplayerState.h" />
     <ClInclude Include="OptionsState.h" />
+    <ClInclude Include="PlayerState.h" />
     <ClInclude Include="StateStart.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -72,6 +72,9 @@
     <ClCompile Include="MultiplayerState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Blocks.h">
@@ -120,6 +123,9 @@
       <Filter>Header Files\Block Types</Filter>
     </ClInclude>
     <ClInclude Include="MultiplayerState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

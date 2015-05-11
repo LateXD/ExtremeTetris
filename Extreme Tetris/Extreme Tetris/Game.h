@@ -40,6 +40,7 @@ public:
 private:
 	bool multiplayerBool = false;
 	float windowWidth, windowHeight;
+	sf::Event event;
 
 };
 #endif;

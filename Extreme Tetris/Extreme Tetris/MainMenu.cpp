@@ -95,51 +95,37 @@ void MainMenu::update(const float dt)
 }
 void MainMenu::handleInput()
 {
-	sf::Event event;
-	system("cls");
-	while (this->game->window.pollEvent(event))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		switch (event.type)
+		MoveUp();
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		MoveDown();
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+	{
+		switch (GetPressedItem())
 		{
-		case sf::Event::KeyReleased:
-		{
-			switch (event.key.code)
-			{
-			case sf::Keyboard::Up:
-				MoveUp();
-				break;
 
-			case sf::Keyboard::Down:
-				MoveDown();
-				break;
-
-			case sf::Keyboard::Return:
-				switch (GetPressedItem())
-				{
-
-				case 1:
-					this->game->pushState(new StateStart(this->game));
-					std::cout << "Single player" << std::endl;
-					return;
-				case 2:
-					this->game->pushState(new PlayerState(this->game));
-					std::cout << "Multiplayer" << std::endl;
-					return;
-				case 3:
-					this->game->pushState(new OptionsState(this->game));
-					std::cout << "Options menu" << std::endl;
-					break;
-				case 4:
-					std::cout << "Quit game" << std::endl;
-					this->game->window.close();
-					break;
-				default:
-					break;
-				}
-			default:
-				break;
-			}
-		}
+		case 1:
+			this->game->pushState(new StateStart(this->game));
+			std::cout << "Single player" << std::endl;
+			return;
+		case 2:
+			this->game->pushState(new PlayerState(this->game));
+			std::cout << "Multiplayer" << std::endl;
+			return;
+		case 3:
+			this->game->pushState(new OptionsState(this->game));
+			std::cout << "Options menu" << std::endl;
+			break;
+		case 4:
+			std::cout << "Quit game" << std::endl;
+			this->game->window.close();
+			break;
+		default:
+			break;
 		}
 	}
 }

@@ -75,42 +75,32 @@ int OptionsState::GetPressedItem()
 
 void OptionsState::handleInput()
 {
-	sf::Event event;
-	while (this->game->window.pollEvent(event))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
-		switch (event.type)
+		this->game->pushState(new MainMenu(this->game));
+		return;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	{
+		MoveUp();
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		MoveDown();
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+	{
+		switch (GetPressedItem())
 		{
-		case sf::Event::KeyReleased:
-		{
-			switch (event.key.code)
-			{
-			case sf::Keyboard::Escape:
-				this->game->pushState(new MainMenu(this->game));
-				return;
-			case sf::Keyboard::Up:
-				MoveUp();
-				break;
-			case sf::Keyboard::Down:
-				MoveDown();
-				break;
-
-			case sf::Keyboard::Return:
-				switch (GetPressedItem())
-				{
-				case 1:
-					this->game->pushState(new InputState(this->game));
-					std::cout << "Inputs" << std::endl;
-					break;
-				case 2:
-					std::cout << "Volume" << std::endl;
-					break;
-				default:
-					break;
-				}
-			default:
-				break;
-			}
-		}
+		case 1:
+			this->game->pushState(new InputState(this->game));
+			std::cout << "Inputs" << std::endl;
+			break;
+		case 2:
+			std::cout << "Volume" << std::endl;
+			break;
+		default:
+			break;
 		}
 	}
 }

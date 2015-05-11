@@ -45,7 +45,7 @@ void Game::gameLoop()
 {
 	sf::Clock clock;
 
-	while (this->window.isOpen())
+	while (window.isOpen())
 	{
 		sf::Time elapsed = clock.restart();
 		float dt = elapsed.asSeconds();
@@ -54,7 +54,16 @@ void Game::gameLoop()
 		{
 			continue;	
 		}
-		peekState()->handleInput();
+		while (window.pollEvent(event))
+		{
+			switch (event.type)
+			{
+			case sf::Event::KeyPressed:
+			{
+				peekState()->handleInput();
+			}
+			}
+		}
 		peekState()->update(dt);
 		this->window.clear(sf::Color::Black);
 		peekState()->draw(dt);

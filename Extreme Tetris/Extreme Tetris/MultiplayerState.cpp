@@ -104,151 +104,118 @@ void MultiplayerState::draw(const float dt)
 
 void MultiplayerState::handleInput()
 {
-	sf::Event event;
-	while (this->game->window.pollEvent(event))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		switch (event.type)
+		// Moves your current block left while checking if it collides to another block or wall
+		for (int i = 0; i < vectorSize; i++)
 		{
-		case sf::Event::Closed:
-		{
-			game->window.close();
-			break;
+			if (spriteVector[i].getPosition().x - blockSize > 0)
+			{
+				positionCounter++;
+			}
 		}
-			// Checks if escape, an arrow key or rotate button is pressed
-		case sf::Event::KeyPressed:
+		if (positionCounter == vectorSize)
 		{
-			if (event.key.code == sf::Keyboard::Escape)
+			for (int i = 0; i < vectorSize; i++)
 			{
-				game->multiplayerStart(false);
-				this->game->pushState(new MainMenu(this->game));
-				std::cout << "Back to main menu\n";
-				return;
-			}
-			else if (event.key.code == sf::Keyboard::A)
-			{
-				// Moves your current block left while checking if it collides to another block or wall
-				for (int i = 0; i < vectorSize; i++)
+				for (int j = 0; j < allSprites.size() - vectorSize; j++)
 				{
-					if (spriteVector[i].getPosition().x - blockSize > 0)
-					{
-						positionCounter++;
-					}
-				}
-				if (positionCounter == vectorSize)
-				{
-					for (int i = 0; i < vectorSize; i++)
-					{
-						for (int j = 0; j < allSprites.size() - vectorSize; j++)
-						{
-							if (spriteVector[i].getPosition().x - blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
-							{
-								collision = true;
-							}
-						}
-					}
-					if (collision == false)
-					{
-						blockVector[locationNumber]->moveLeft();
-					}
-					collision = false;
-				}
-				positionCounter = 0;
-			}
-
-			else if (event.key.code == sf::Keyboard::D)
-			{
-				// Moves your current block right while checking if it collides to another block or wall
-				for (int i = 0; i < vectorSize; i++)
-				{
-					if (spriteVector[i].getPosition().x + blockSize < 11 * blockSize)
-					{
-						positionCounter++;
-					}
-				}
-				if (positionCounter == vectorSize)
-				{
-					for (int i = 0; i < vectorSize; i++)
-					{
-						for (int j = 0; j < allSprites.size() - vectorSize; j++)
-						{
-							if (spriteVector[i].getPosition().x + blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
-							{
-								collision = true;
-							}
-						}
-					}
-					if (collision == false)
-					{
-						blockVector[locationNumber]->moveRight();
-					}
-					collision = false;
-				}
-				positionCounter = 0;
-			}
-
-			else if (event.key.code == sf::Keyboard::S && clock.getElapsedTime().asMicroseconds() < 600000 / (level + 1))
-			{
-				// Moves your current block down while checking if it collides to another block or floor
-				// If the block hits floor collision turns to true and another block is made in update section
-				// If the block doesn't collide pointsCounter goes up providing you better points if you drop blocks at your own will
-				for (int i = 0; i < vectorSize; i++)
-				{
-					if (spriteVector[i].getPosition().y + blockSize > 18 * blockSize)
+					if (spriteVector[i].getPosition().x - blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
 					{
 						collision = true;
 					}
-					else
-					{
-						positionCounter++;
-					}
 				}
-				if (positionCounter == vectorSize)
-					for (int i = 0; i < vectorSize; i++)
-					{
-					for (int j = 0; j < allSprites.size() - vectorSize; j++)
-					{
-						if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
-						{
-							collision = true;
-						}
-						else if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
-						{
-							game->multiplayerStart(false);
-							this->game->pushState(new MainMenu(this->game));
-							std::cout << "Back to main menu\n";
-							return;
-						}
-					}
-					}
-				if (collision == false)
-				{
-					blockVector[locationNumber]->moveDown();
-					pointsCounter++;
-				}
-				positionCounter = 0;
 			}
-
-			else if (event.key.code == sf::Keyboard::G)
+			if (collision == false)
 			{
-				blockVector[locationNumber]->rotateClockwise(currentRandomBlock, allSprites);
+				blockVector[locationNumber]->moveLeft();
 			}
-
-			else if (event.key.code == sf::Keyboard::H)
-			{
-				blockVector[locationNumber]->rotateCounterClockwise(currentRandomBlock, allSprites);
-			}
-
-		default:
-			break;
+			collision = false;
 		}
-		case sf::Event::KeyReleased:
+		positionCounter = 0;
+	}
+
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		// Moves your current block right while checking if it collides to another block or wall
+		for (int i = 0; i < vectorSize; i++)
 		{
-			if (event.key.code == sf::Keyboard::S)
+			if (spriteVector[i].getPosition().x + blockSize < 11 * blockSize)
 			{
-				pointsCounter = 0;
+				positionCounter++;
 			}
 		}
+		if (positionCounter == vectorSize)
+		{
+			for (int i = 0; i < vectorSize; i++)
+			{
+				for (int j = 0; j < allSprites.size() - vectorSize; j++)
+				{
+					if (spriteVector[i].getPosition().x + blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+					{
+						collision = true;
+					}
+				}
+			}
+			if (collision == false)
+			{
+				blockVector[locationNumber]->moveRight();
+			}
+			collision = false;
 		}
+		positionCounter = 0;
+	}
+
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && clock.getElapsedTime().asMicroseconds() < 600000 / (level + 1))
+	{
+		// Moves your current block down while checking if it collides to another block or floor
+		// If the block hits floor collision turns to true and another block is made in update section
+		// If the block doesn't collide pointsCounter goes up providing you better points if you drop blocks at your own will
+		for (int i = 0; i < vectorSize; i++)
+		{
+			if (spriteVector[i].getPosition().y + blockSize > 18 * blockSize)
+			{
+				collision = true;
+			}
+			else
+			{
+				positionCounter++;
+			}
+		}
+		if (positionCounter == vectorSize)
+			for (int i = 0; i < vectorSize; i++)
+			{
+				for (int j = 0; j < allSprites.size() - vectorSize; j++)
+				{
+					if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y + blockSize == allSprites[j].getPosition().y)
+					{
+						collision = true;
+					}
+					else if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
+					{
+						game->multiplayerStart(false);
+						this->game->pushState(new MainMenu(this->game));
+						std::cout << "Back to main menu\n";
+						return;
+					}
+				}
+			}
+		if (collision == false)
+		{
+			blockVector[locationNumber]->moveDown();
+			pointsCounter++;
+		}
+		positionCounter = 0;
+	}
+
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::H))
+	{
+		blockVector[locationNumber]->rotateClockwise(currentRandomBlock, allSprites);
+	}
+
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::G))
+	{
+		blockVector[locationNumber]->rotateCounterClockwise(currentRandomBlock, allSprites);
 	}
 }
 

@@ -109,7 +109,7 @@ void MultiplayerState::handleInput()
 		// Moves your current block left while checking if it collides to another block or wall
 		for (int i = 0; i < vectorSize; i++)
 		{
-			if (spriteVector[i].getPosition().x - blockSize > 0)
+			if (spriteVector[i].getPosition().x - blockSize > blockSize * 28)
 			{
 				positionCounter++;
 			}
@@ -140,7 +140,7 @@ void MultiplayerState::handleInput()
 		// Moves your current block right while checking if it collides to another block or wall
 		for (int i = 0; i < vectorSize; i++)
 		{
-			if (spriteVector[i].getPosition().x + blockSize < 11 * blockSize)
+			if (spriteVector[i].getPosition().x + blockSize < blockSize * 39)
 			{
 				positionCounter++;
 			}
@@ -193,7 +193,6 @@ void MultiplayerState::handleInput()
 					}
 					else if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
 					{
-						game->multiplayerStart(false);
 						this->game->pushState(new MainMenu(this->game));
 						std::cout << "Back to main menu\n";
 						return;

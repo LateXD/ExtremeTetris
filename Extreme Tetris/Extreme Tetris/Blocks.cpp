@@ -108,7 +108,7 @@ void Blocks::rotateClockwise(int rb, std::vector<sf::Sprite> spritesVector)
 
 	for (int i = 0; i < vectorSize; i++)
 	{
-		if (blockVector[i].getPosition().x <= 0 || blockVector[i].getPosition().x >= blockSize * 11 || blockVector[i].getPosition().y >= blockSize * 19)
+		if (blockVector[i].getPosition().x == 0 || blockVector[i].getPosition().x == blockSize * 11 || blockVector[i].getPosition().x == blockSize * 28 || blockVector[i].getPosition().x == blockSize * 39 || blockVector[i].getPosition().y == blockSize * 19)
 		{
 			rotateCounterClockwise(rb, spritesVector);
 			break;
@@ -167,7 +167,7 @@ void Blocks::rotateCounterClockwise(int rb, std::vector<sf::Sprite> spritesVecto
 
 	for (int i = 0; i < vectorSize; i++)
 	{
-		if (blockVector[i].getPosition().x <= 0 || blockVector[i].getPosition().x >= blockSize * 11 || blockVector[i].getPosition().y >= blockSize * 19)
+		if (blockVector[i].getPosition().x == 0 || blockVector[i].getPosition().x == blockSize * 11 || blockVector[i].getPosition().x == blockSize * 28 || blockVector[i].getPosition().x == blockSize * 39 || blockVector[i].getPosition().y == blockSize * 19)
 		{
 			rotateClockwise(rb, spritesVector);
 			break;

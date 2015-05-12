@@ -2,6 +2,7 @@
 #include "StateStart.h"
 #include "OptionsState.h"
 #include "PlayerState.h"
+#include "InverseState.h"
 
 MainMenu::MainMenu(Game* game)
 {
@@ -28,11 +29,12 @@ void MainMenu::onInitialize()
 	menu[2].setFont(font);
 	menu[3].setFont(font);
 	menu[4].setFont(font);
+	menu[5].setFont(font);
 
 	menu[0].setString("Main Menu");
 	menu[0].setColor(sf::Color::Green);
 	menu[0].setCharacterSize(50);
-	menu[0].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 2) * 1));
+	menu[0].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 1) * 0.7));
 
 	menu[1].setString("Single Player");
 	menu[1].setColor(sf::Color::Red);
@@ -44,15 +46,20 @@ void MainMenu::onInitialize()
 	menu[2].setCharacterSize(40);
 	menu[2].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 1) * 3));
 
-	menu[3].setString("Options");
+	menu[3].setString("Inverse Tetris");
 	menu[3].setColor(sf::Color::White);
 	menu[3].setCharacterSize(40);
 	menu[3].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 1) * 4));
 
-	menu[4].setString("Quit");
+	menu[4].setString("Options");
 	menu[4].setColor(sf::Color::White);
 	menu[4].setCharacterSize(40);
 	menu[4].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 1) * 5));
+
+	menu[5].setString("Quit");
+	menu[5].setColor(sf::Color::White);
+	menu[5].setCharacterSize(40);
+	menu[5].setPosition(sf::Vector2f(width / 3, height / (MAX_NUMBER_OF_ITEMS + 1) * 6));
 
 }
 
@@ -113,10 +120,14 @@ void MainMenu::handleInput()
 			std::cout << "Multiplayer" << std::endl;
 			return;
 		case 3:
+			this->game->pushState(new InverseState(this->game));
+			std::cout << "Inverse Tetris" << std::endl;
+			break;
+		case 4:
 			this->game->pushState(new OptionsState(this->game));
 			std::cout << "Options menu" << std::endl;
 			break;
-		case 4:
+		case 5:
 			std::cout << "Quit game" << std::endl;
 			this->game->window.close();
 			break;

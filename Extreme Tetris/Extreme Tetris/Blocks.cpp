@@ -202,6 +202,21 @@ void Blocks::nextBlock(bool direction)
 	}
 }
 
+void Blocks::seperateBlocks()
+{
+	for (int i = 0; i < blockVector.size(); i++)
+	{
+		if (blockVector[i].getPosition().x < blockSize)
+		{
+			blockVector[i].move(blockSize * 10, 0);
+		}
+		else if (blockVector[i].getPosition().x > blockSize * 10)
+		{
+			blockVector[i].move(-blockSize * 10, 0);
+		}
+	}
+}
+
 std::vector<sf::Sprite>Blocks::getVector()
 {
 	return blockVector;

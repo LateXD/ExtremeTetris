@@ -26,6 +26,7 @@ private:
 	sf::RectangleShape gameOverRectangle;
 	sf::Sprite field, pointsField, bg;
 	sf::Text pointsText, levelText, gameOverText;
+	float animationTime;
 	sf::Font font;
 	std::stringstream ss;
 	sf::Texture fieldTexture, pointsFieldTexture, bgTexture;

@@ -20,6 +20,7 @@ public:
 	void rotateCounterClockwise(int rb, std::vector<sf::Sprite> spritesVector);
 	void rotateCheck();
 	void nextBlock(bool direction);
+	void seperateBlocks();
 	std::vector<sf::Sprite> getVector();
 	Game* game;
 

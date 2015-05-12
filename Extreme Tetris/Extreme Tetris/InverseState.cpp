@@ -1,12 +1,14 @@
-#include "StateStart.h"
+#include "InverseState.h"
 
-StateStart::StateStart(Game* game)
+
+InverseState::InverseState(Game* game)
 {
 	this->game = game;
-	
+
 	fieldTexture = game->setTexture(fieldTexture, "..\\Graphics\\Frame.png");
 	pointsFieldTexture = game->setTexture(pointsFieldTexture, "..\\Graphics\\Frame2.png");
 	bgTexture = game->setTexture(bgTexture, "..\\Graphics\\Background.png");
+	flameTexture = game->setTexture(flameTexture, "..\\Graphics\\Flames.png");
 	font = game->setFont(font, "..\\Graphics\\8bitOperatorPlus8-Regular.ttf");
 
 	// Setting up frames for blocks and other information
@@ -63,10 +65,14 @@ StateStart::StateStart(Game* game)
 	gameOverText.setPosition(blockSize * 3, blockSize * 6);
 }
 
-void StateStart::draw(const float dt)
+void InverseState::draw(const float dt)
 {
 	// Clears screen and draws everything in order: background, frames, text, next block, all the other blocks
 	game->window.draw(bg);
+	for (int i = flames.size() - 1; i >= 0; i--)
+	{
+		game->window.draw(flames[i]);
+	}
 	game->window.draw(field);
 	game->window.draw(pointsField);
 	game->window.draw(pointsText);
@@ -101,7 +107,7 @@ void StateStart::draw(const float dt)
 	}
 }
 
-void StateStart::handleInput()
+void InverseState::handleInput()
 {
 	if (gameOver == true)
 	{
@@ -131,30 +137,22 @@ void StateStart::handleInput()
 			// Moves your current block left while checking if it collides to another block or wall
 			for (int i = 0; i < vectorSize; i++)
 			{
-				if (spriteVector[i].getPosition().x - blockSize > 0)
+				for (int j = 0; j < allSprites.size() - vectorSize; j++)
 				{
-					positionCounter++;
-				}
-			}
-			if (positionCounter == vectorSize)
-			{
-				for (int i = 0; i < vectorSize; i++)
-				{
-					for (int j = 0; j < allSprites.size() - vectorSize; j++)
+					if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x - blockSize && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
 					{
-						if (spriteVector[i].getPosition().x - blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
-						{
-							collision = true;
-						}
+						collision = true;
 					}
 				}
-				if (collision == false)
-				{
-					blockVector[locationNumber]->moveLeft();
-				}
-				collision = false;
 			}
-			positionCounter = 0;
+			if (collision == false)
+			{
+				for (int i = 0; i < blockVector.size() - 1; i++)
+				{
+					blockVector[i]->moveLeft();
+				}
+			}
+			collision = false;
 		}
 
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -162,30 +160,22 @@ void StateStart::handleInput()
 			// Moves your current block right while checking if it collides to another block or wall
 			for (int i = 0; i < vectorSize; i++)
 			{
-				if (spriteVector[i].getPosition().x + blockSize < 11 * blockSize)
+				for (int j = 0; j < allSprites.size() - vectorSize; j++)
 				{
-					positionCounter++;
-				}
-			}
-			if (positionCounter == vectorSize)
-			{
-				for (int i = 0; i < vectorSize; i++)
-				{
-					for (int j = 0; j < allSprites.size() - vectorSize; j++)
+					if (spriteVector[i].getPosition().x == allSprites[j].getPosition().x + blockSize  && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
 					{
-						if (spriteVector[i].getPosition().x + blockSize == allSprites[j].getPosition().x && spriteVector[i].getPosition().y == allSprites[j].getPosition().y)
-						{
-							collision = true;
-						}
+						collision = true;
 					}
 				}
-				if (collision == false)
-				{
-					blockVector[locationNumber]->moveRight();
-				}
-				collision = false;
 			}
-			positionCounter = 0;
+			if (collision == false)
+			{
+				for (int i = 0; i < blockVector.size() - 1; i++)
+				{
+					blockVector[i]->moveRight();
+				}
+			}
+			collision = false;
 		}
 
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && clock.getElapsedTime().asMicroseconds() < 600000 / (level + 1))
@@ -239,7 +229,7 @@ void StateStart::handleInput()
 	}
 }
 
-void StateStart::update(const float dt)
+void InverseState::update(const float dt)
 {
 	// Inserts the next block in the vector or replaces the old one
 	if (newBlock == true)
@@ -252,10 +242,15 @@ void StateStart::update(const float dt)
 	}
 	else if (newBlock == false)
 	{
-		for (int i = 0; i < vectorSize; i++)
+		allSprites.erase(allSprites.begin(), allSprites.end());
+		for (int i = 0; i < blockVector.size(); i++)
 		{
-			allSprites.erase(allSprites.end() - 1 - i);
-			allSprites.push_back(spriteVector[i]);
+			blockVector[i]->seperateBlocks();
+			spriteVector = blockVector[i]->getVector();
+			for (int j = 0; j < vectorSize; j++)
+			{
+				allSprites.push_back(spriteVector[j]);
+			}
 		}
 	}
 
@@ -293,6 +288,18 @@ void StateStart::update(const float dt)
 		}
 	}
 
+	for (int i = 0; i < flames.size(); i++)
+	{
+		if (clock.getElapsedTime().asMicroseconds() >= 200000)
+		{
+			if (currentFrame >= frameCount)
+			{
+				currentFrame = 0;
+			}
+			flames[i].setTextureRect(sf::IntRect(0, flameTexture.getSize().y / frameCount * currentFrame++, flameTexture.getSize().x, flameTexture.getSize().y / frameCount));
+		}
+	}
+
 	// Drops your current block according to your current level and quits the game if you reach the top or you somehow end up dropping a block on top of another block
 	if (clock.getElapsedTime().asMicroseconds() >= 600000 / (level + 1) && gameOver == false)
 	{
@@ -322,7 +329,7 @@ void StateStart::update(const float dt)
 	}
 }
 
-void StateStart::rowClearing()
+void InverseState::rowClearing()
 {
 	// Goes through allSprites vector finding blocks that should be removed or dropped down and gives you points according to how many rows you cleared at the same time
 	for (int i = 0; i < blockSize * blockSize; i += blockSize)
@@ -330,7 +337,7 @@ void StateStart::rowClearing()
 		for (int j = 0; j < allSprites.size(); j++)
 		{
 			if (clearRow == true && allSprites[j].getPosition().y == rowNumber)
-			{			
+			{
 				allSprites[j].move(0, blockSize * 30);
 				rowCounter++;
 			}
@@ -396,8 +403,16 @@ void StateStart::rowClearing()
 			i = -vectorSize;
 		}
 	}
+
+	if (level != 0)
+	{
+		flames[level - 1].setTexture(flameTexture);
+		flames[level - 1].setTextureRect(sf::IntRect(0, 0, flameTexture.getSize().x, flameTexture.getSize().y / frameCount));
+		flames[level - 1].setPosition(blockSize, blockSize * 18 - level * 2 * blockSize);
+	}
 }
 
-StateStart::~StateStart()
+
+InverseState::~InverseState()
 {
 }

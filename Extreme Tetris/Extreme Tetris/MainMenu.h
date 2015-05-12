@@ -1,7 +1,7 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
-#define MAX_NUMBER_OF_ITEMS 5
+#define MAX_NUMBER_OF_ITEMS 6
 
 #include "GameState.h"
 

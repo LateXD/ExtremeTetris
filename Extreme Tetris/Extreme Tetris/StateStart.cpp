@@ -351,7 +351,7 @@ void StateStart::rowClearing()
 			else if (clearRow == true && rowCounter == 10)
 			{
 				rowsCleared++;
-				if (rowsCleared % 2 == true && rowsCleared != 1 && level < 9)
+				if (rowsCleared % 10 == true && rowsCleared != 1 && level < 9)
 				{
 					level++;
 					ss.clear();

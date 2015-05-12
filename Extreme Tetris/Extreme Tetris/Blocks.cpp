@@ -217,6 +217,27 @@ void Blocks::seperateBlocks()
 	}
 }
 
+int Blocks::clearBlocks(bool cr, int rn, int rc, int loopI)
+{
+	for (int i = 0; i < blockVector.size(); i++)
+	{
+		if (cr == true && blockVector[i].getPosition().y == rn)
+		{
+			blockVector[i].move(0, blockSize * 30);
+			rc++;
+		}
+		else if (cr == true && blockVector[i].getPosition().y < rn)
+		{
+			blockVector[i].move(0, blockSize);
+		}
+		if (cr == false && blockVector[i].getPosition().y == loopI)
+		{
+			rc++;
+		}
+	}
+	return rc;
+}
+
 std::vector<sf::Sprite>Blocks::getVector()
 {
 	return blockVector;

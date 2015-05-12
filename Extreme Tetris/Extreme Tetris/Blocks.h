@@ -21,6 +21,7 @@ public:
 	void rotateCheck();
 	void nextBlock(bool direction);
 	void seperateBlocks();
+	int clearBlocks(bool cr, int rn, int rc, int loopI);
 	std::vector<sf::Sprite> getVector();
 	Game* game;
 

@@ -8,7 +8,6 @@ InverseState::InverseState(Game* game)
 	fieldTexture = game->setTexture(fieldTexture, "..\\Graphics\\Frame.png");
 	pointsFieldTexture = game->setTexture(pointsFieldTexture, "..\\Graphics\\Frame2.png");
 	bgTexture = game->setTexture(bgTexture, "..\\Graphics\\Background.png");
-	flameTexture = game->setTexture(flameTexture, "..\\Graphics\\Flames.png");
 	font = game->setFont(font, "..\\Graphics\\8bitOperatorPlus8-Regular.ttf");
 
 	// Setting up frames for blocks and other information
@@ -69,10 +68,6 @@ void InverseState::draw(const float dt)
 {
 	// Clears screen and draws everything in order: background, frames, text, next block, all the other blocks
 	game->window.draw(bg);
-	for (int i = flames.size() - 1; i >= 0; i--)
-	{
-		game->window.draw(flames[i]);
-	}
 	game->window.draw(field);
 	game->window.draw(pointsField);
 	game->window.draw(pointsText);
@@ -232,25 +227,15 @@ void InverseState::handleInput()
 void InverseState::update(const float dt)
 {
 	// Inserts the next block in the vector or replaces the old one
-	if (newBlock == true)
+
+	allSprites.erase(allSprites.begin(), allSprites.end());
+	for (int i = 0; i < blockVector.size(); i++)
 	{
-		for (int i = 0; i < vectorSize; i++)
+		blockVector[i]->seperateBlocks();
+		spriteVector = blockVector[i]->getVector();
+		for (int j = 0; j < vectorSize; j++)
 		{
-			allSprites.push_back(spriteVector[i]);
-			newBlock = false;
-		}
-	}
-	else if (newBlock == false)
-	{
-		allSprites.erase(allSprites.begin(), allSprites.end());
-		for (int i = 0; i < blockVector.size(); i++)
-		{
-			blockVector[i]->seperateBlocks();
-			spriteVector = blockVector[i]->getVector();
-			for (int j = 0; j < vectorSize; j++)
-			{
-				allSprites.push_back(spriteVector[j]);
-			}
+			allSprites.push_back(spriteVector[j]);
 		}
 	}
 
@@ -283,20 +268,7 @@ void InverseState::update(const float dt)
 			}
 			ss << points;
 			pointsText.setString(ss.str());
-			newBlock = true;
 			break;
-		}
-	}
-
-	for (int i = 0; i < flames.size(); i++)
-	{
-		if (clock.getElapsedTime().asMicroseconds() >= 200000)
-		{
-			if (currentFrame >= frameCount)
-			{
-				currentFrame = 0;
-			}
-			flames[i].setTextureRect(sf::IntRect(0, flameTexture.getSize().y / frameCount * currentFrame++, flameTexture.getSize().x, flameTexture.getSize().y / frameCount));
 		}
 	}
 
@@ -334,21 +306,9 @@ void InverseState::rowClearing()
 	// Goes through allSprites vector finding blocks that should be removed or dropped down and gives you points according to how many rows you cleared at the same time
 	for (int i = 0; i < blockSize * blockSize; i += blockSize)
 	{
-		for (int j = 0; j < allSprites.size(); j++)
+		for (int j = 0; j < blockVector.size(); j++)
 		{
-			if (clearRow == true && allSprites[j].getPosition().y == rowNumber)
-			{
-				allSprites[j].move(0, blockSize * 30);
-				rowCounter++;
-			}
-			else if (clearRow == true && allSprites[j].getPosition().y < rowNumber)
-			{
-				allSprites[j].move(0, blockSize);
-			}
-			if (clearRow == false && allSprites[j].getPosition().y == i)
-			{
-				rowCounter++;
-			}
+			rowCounter = blockVector[j]->clearBlocks(clearRow, rowNumber, rowCounter, i);
 			if (clearRow == false && rowCounter == 10)
 			{
 				rowNumber = i;
@@ -358,7 +318,7 @@ void InverseState::rowClearing()
 			else if (clearRow == true && rowCounter == 10)
 			{
 				rowsCleared++;
-				if (rowsCleared % 2 == true && rowsCleared != 1 && level < 9)
+				if (rowsCleared % 10 == true && rowsCleared != 1 && level < 9)
 				{
 					level++;
 					ss.clear();
@@ -392,23 +352,16 @@ void InverseState::rowClearing()
 	}
 	clearRow = false;
 
-	for (int i = 0; i < allSprites.size() - vectorSize; i += vectorSize)
+	for (int i = 0; i < blockVector.size(); i++)
 	{
-		if (allSprites[i].getPosition().y > blockSize * 30 && allSprites[i + 1].getPosition().y > blockSize * 30 && allSprites[i + 2].getPosition().y > blockSize * 30 && allSprites[i + 3].getPosition().y > blockSize * 30)
+		spriteVector = blockVector[i]->getVector();
+		if (spriteVector[0].getPosition().y > blockSize * 30 && spriteVector[1].getPosition().y > blockSize * 30 && spriteVector[2].getPosition().y > blockSize * 30 && spriteVector[3].getPosition().y > blockSize * 30)
 		{
-			delete blockVector[i / vectorSize];
-			blockVector.erase(blockVector.begin() + i / vectorSize);
-			allSprites.erase(allSprites.begin() + i, allSprites.begin() + i + 4);
+			delete blockVector[i];
+			blockVector.erase(blockVector.begin() + i);
 			locationNumber--;
 			i = -vectorSize;
 		}
-	}
-
-	if (level != 0)
-	{
-		flames[level - 1].setTexture(flameTexture);
-		flames[level - 1].setTextureRect(sf::IntRect(0, 0, flameTexture.getSize().x, flameTexture.getSize().y / frameCount));
-		flames[level - 1].setPosition(blockSize, blockSize * 18 - level * 2 * blockSize);
 	}
 }
 

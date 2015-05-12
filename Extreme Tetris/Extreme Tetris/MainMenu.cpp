@@ -18,11 +18,7 @@ void MainMenu::draw(const float dt)
 
 void MainMenu::onInitialize()
 {
-	if (!font.loadFromFile("..\\Graphics\\8bitOperatorPlus8-Regular.ttf"))
-	{
-		//error
-		std::cout << "" << std::endl;
-	}
+	font = game->setFont(font, "..\\Graphics\\8bitOperatorPlus8-Regular.ttf");
 
 	float width = game->getWindowWidth();
 	float height = game->getWindowHeight();

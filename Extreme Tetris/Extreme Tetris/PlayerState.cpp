@@ -16,6 +16,16 @@ PlayerState::~PlayerState()
 
 void PlayerState::update(const float dt)
 {
+	if (game->getGameOverBool() == true)
+	{
+		game->multiplayerStart(false);
+		game->setGameOverBool(false);
+		delete player1;
+		delete player2;
+		game->popState();
+		std::cout << "Back to main menu\n";
+		return;
+	}
 	player1->update(dt);
 	player2->update(dt);
 }

@@ -33,12 +33,17 @@ public:
 
 	void gameLoop();
 	void multiplayerStart(bool multiplayer);
+	bool getMultiplayerStart();
+	void setGameOverBool(bool gameOver);
+	bool getGameOverBool();
+	sf::Texture setTexture(sf::Texture texture, std::string filePath);
+	sf::Font setFont(sf::Font fontName, std::string filePath);
 
 	Game();
 	~Game();
 
 private:
-	bool multiplayerBool = false;
+	bool multiplayerBool = false, gameOverBool = false;
 	float windowWidth, windowHeight;
 	sf::Event event;
 

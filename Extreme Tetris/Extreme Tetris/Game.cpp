@@ -102,6 +102,39 @@ void Game::multiplayerStart(bool multiplayer)
 	multiplayerBool = multiplayer;
 }
 
+bool Game::getMultiplayerStart()
+{
+	return multiplayerBool;
+}
+
+void Game::setGameOverBool(bool gameOver)
+{
+	gameOverBool = gameOver;
+}
+
+bool Game::getGameOverBool()
+{
+	return gameOverBool;
+}
+
+sf::Texture Game::setTexture(sf::Texture texture, std::string filePath)
+{
+	if (!texture.loadFromFile(filePath))
+	{
+		std::cout << "Error loading texture!";
+	}
+	return texture;
+}
+
+sf::Font Game::setFont(sf::Font fontName, std::string filePath)
+{
+	if (!fontName.loadFromFile(filePath))
+	{
+		std::cout << "Error loading font!";
+	}
+	return fontName;
+}
+
 float Game::getWindowWidth()
 {
 	return windowWidth;

@@ -58,6 +58,10 @@ void Game::gameLoop()
 		{
 			switch (event.type)
 			{
+			case sf::Event::Closed:
+			{
+				window.close();
+			}
 			case sf::Event::KeyPressed:
 			{
 				peekState()->handleInput();

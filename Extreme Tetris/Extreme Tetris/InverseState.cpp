@@ -10,7 +10,7 @@ InverseState::InverseState(Game* game)
 	bgTexture = game->setTexture(bgTexture, "..\\Graphics\\Background.png");
 	font = game->setFont(font, "..\\Graphics\\8bitOperatorPlus8-Regular.ttf");
 
-	// Setting up frames for blocks and other information
+	// Setting up fields for blocks and other information
 	field.setTexture(fieldTexture);
 	field.setColor(sf::Color(red, blue, green));
 	bg.setTexture(bgTexture);
@@ -66,9 +66,8 @@ InverseState::InverseState(Game* game)
 
 void InverseState::draw(const float dt)
 {
-	// Clears screen and draws everything in order: background, frames, text, next block, all the other blocks
+	// Clears screen and draws everything
 	game->window.draw(bg);
-	game->window.draw(field);
 	game->window.draw(pointsField);
 	game->window.draw(pointsText);
 	game->window.draw(levelText);
@@ -91,6 +90,7 @@ void InverseState::draw(const float dt)
 	{
 		game->window.draw(allSprites[i]);
 	}
+	game->window.draw(field);
 	if (gameOver == true)
 	{
 		ss << "Game Over!\nPoints:\n" << points << "\nPress enter.";
@@ -259,20 +259,20 @@ void InverseState::update(const float dt)
 			ss << points;
 			pointsText.setString(ss.str());
 
-			if (currentRandomBlock == 2 || currentRandomBlock == 3 || currentRandomBlock == 4)
+			if (randomBlock == 2 || randomBlock == 3 || randomBlock == 4)
 			{
 				randomRotation = rand() % 2 + 1;
 				for (int j = 0; j < randomRotation; j++)
 				{
-					blockVector[locationNumber]->rotateClockwise(currentRandomBlock, allSprites);
+					block->rotateClockwise(randomBlock, allSprites);
 				}
 			}
-			else if (currentRandomBlock == 5 || currentRandomBlock == 6 || currentRandomBlock == 7)
+			else if (randomBlock == 5 || randomBlock == 6 || randomBlock == 7)
 			{
 				randomRotation = rand() % 4 + 1;
 				for (int j = 0; j < randomRotation; j++)
 				{
-					blockVector[locationNumber]->rotateClockwise(currentRandomBlock, allSprites);
+					block->rotateClockwise(randomBlock, allSprites);
 				}
 			}
 			break;

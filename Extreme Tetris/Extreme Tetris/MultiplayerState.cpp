@@ -76,7 +76,6 @@ void MultiplayerState::draw(const float dt)
 {
 	// Clears screen and draws everything in order: background, frames, text, next block, all the other blocks
 	game->window.draw(bg);
-	game->window.draw(field);
 	game->window.draw(pointsField);
 	game->window.draw(pointsText);
 	game->window.draw(levelText);
@@ -99,6 +98,7 @@ void MultiplayerState::draw(const float dt)
 	{
 		game->window.draw(allSprites[i]);
 	}
+	game->window.draw(field);
 	if (gameOver == true)
 	{
 		ss << "Game Over!\nPoints:\n" << points << "\nPress enter.";

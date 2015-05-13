@@ -211,16 +211,6 @@ void InverseState::handleInput()
 			}
 			positionCounter = 0;
 		}
-
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::H))
-		{
-			blockVector[locationNumber]->rotateClockwise(currentRandomBlock, allSprites);
-		}
-
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::G))
-		{
-			blockVector[locationNumber]->rotateCounterClockwise(currentRandomBlock, allSprites);
-		}
 	}
 }
 
@@ -268,6 +258,23 @@ void InverseState::update(const float dt)
 			}
 			ss << points;
 			pointsText.setString(ss.str());
+
+			if (currentRandomBlock == 2 || currentRandomBlock == 3 || currentRandomBlock == 4)
+			{
+				randomRotation = rand() % 2 + 1;
+				for (int j = 0; j < randomRotation; j++)
+				{
+					blockVector[locationNumber]->rotateClockwise(currentRandomBlock, allSprites);
+				}
+			}
+			else if (currentRandomBlock == 5 || currentRandomBlock == 6 || currentRandomBlock == 7)
+			{
+				randomRotation = rand() % 4 + 1;
+				for (int j = 0; j < randomRotation; j++)
+				{
+					blockVector[locationNumber]->rotateClockwise(currentRandomBlock, allSprites);
+				}
+			}
 			break;
 		}
 	}

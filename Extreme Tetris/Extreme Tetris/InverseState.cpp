@@ -1,5 +1,6 @@
 #include "InverseState.h"
 
+// SingleplayerState with some changes to make it a new game mode. Changes have been commented below.
 
 InverseState::InverseState(Game* game)
 {
@@ -10,16 +11,55 @@ InverseState::InverseState(Game* game)
 	bgTexture = game->setTexture(bgTexture, "..\\Graphics\\Background.png");
 	font = game->setFont(font, "..\\Graphics\\8bitOperatorPlus8-Regular.ttf");
 
-	// Setting up fields for blocks and other information
-	field.setTexture(fieldTexture);
-	field.setColor(sf::Color(red, blue, green));
 	bg.setTexture(bgTexture);
 	bg.setPosition(blockSize, blockSize);
+
+	field.setTexture(fieldTexture);
+	field.setColor(sf::Color(red, blue, green));
+
 	pointsField.setTexture(pointsFieldTexture);
 	pointsField.setColor(sf::Color(red, blue, green));
 	pointsField.setPosition(blockSize * 12, 0);
 
-	// Making of the first block and inserting it into a vector
+	pointsText.setFont(font);
+	pointsText.setCharacterSize(25);
+	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.60));
+
+	levelText.setFont(font);
+	levelText.setCharacterSize(25);
+	levelText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 11.60));
+
+	ss << points;
+	pointsText.setString(ss.str());
+	ss.clear();
+	ss.str("");
+	ss << level;
+	levelText.setString(ss.str());
+	ss.clear();
+	ss.str("");
+
+	controlsText.setFont(font);
+	controlsText.setCharacterSize(12);
+	controlsText.setPosition(blockSize * 13.2, blockSize * 15.25);
+	controlsText.setString("Left: A\nRight: D\nDown: S");
+
+	if (red > 150 && blue > 150 && green > 150)
+	{
+		pointsText.setColor(sf::Color::Black);
+		levelText.setColor(sf::Color::Black);
+		controlsText.setColor(sf::Color::Black);
+	}
+
+	gameOverRectangle.setPosition(blockSize * 2, blockSize * 5);
+	gameOverRectangle.setSize(sf::Vector2f(blockSize * 8, blockSize * 6));
+	gameOverRectangle.setOutlineColor(sf::Color::Blue);
+	gameOverRectangle.setOutlineThickness(2);
+
+	gameOverText.setFont(font);
+	gameOverText.setColor(sf::Color::Black);
+	gameOverText.setCharacterSize(20);
+	gameOverText.setPosition(blockSize * 3, blockSize * 6);
+
 	currentRandomBlock = randomBlock;
 	blockVector.push_back(new Blocks(randomBlock));
 	randomBlock = rand() % 7 + 1;
@@ -30,47 +70,19 @@ InverseState::InverseState(Game* game)
 	{
 		spriteVector = blockVector[i]->getVector();
 	}
+}
 
-	// Setting up text for points
-	pointsText.setFont(font);
-	pointsText.setColor(sf::Color::Black);
-	pointsText.setCharacterSize(25);
-	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.60));
-	levelText.setFont(font);
-	levelText.setColor(sf::Color::Black);
-	levelText.setCharacterSize(25);
-	levelText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 11.60));
-	ss << points;
-	pointsText.setString(ss.str());
-	ss.clear();
-	ss.str("");
-	ss << level;
-	levelText.setString(ss.str());
-	if (red < 150 && blue < 150 && green < 150)
-	{
-		pointsText.setColor(sf::Color::White);
-		levelText.setColor(sf::Color::White);
-	}
-	ss.clear();
-	ss.str("");
-
-	gameOverRectangle.setPosition(blockSize * 2, blockSize * 5);
-	gameOverRectangle.setSize(sf::Vector2f(blockSize * 8, blockSize * 6));
-	gameOverRectangle.setOutlineColor(sf::Color::Blue);
-	gameOverRectangle.setOutlineThickness(2);
-	gameOverText.setFont(font);
-	gameOverText.setColor(sf::Color::Black);
-	gameOverText.setCharacterSize(20);
-	gameOverText.setPosition(blockSize * 3, blockSize * 6);
+InverseState::~InverseState()
+{
 }
 
 void InverseState::draw(const float dt)
 {
-	// Clears screen and draws everything
 	game->window.draw(bg);
 	game->window.draw(pointsField);
 	game->window.draw(pointsText);
 	game->window.draw(levelText);
+	game->window.draw(controlsText);
 
 	for (int i = 0; i < blockVector.size(); i++)
 	{
@@ -90,7 +102,9 @@ void InverseState::draw(const float dt)
 	{
 		game->window.draw(allSprites[i]);
 	}
+
 	game->window.draw(field);
+
 	if (gameOver == true)
 	{
 		ss << "Game Over!\nPoints:\n" << points << "\nPress enter.";
@@ -129,7 +143,7 @@ void InverseState::handleInput()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			// Moves your current block left while checking if it collides to another block or wall
+			// Moves your dropped blocks left while checking if they collide to the dropping block.
 			for (int i = 0; i < vectorSize; i++)
 			{
 				for (int j = 0; j < allSprites.size() - vectorSize; j++)
@@ -152,7 +166,7 @@ void InverseState::handleInput()
 
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			// Moves your current block right while checking if it collides to another block or wall
+			// Moves your dropped blocks right while checking if they collide to the dropping block.
 			for (int i = 0; i < vectorSize; i++)
 			{
 				for (int j = 0; j < allSprites.size() - vectorSize; j++)
@@ -175,9 +189,9 @@ void InverseState::handleInput()
 
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && clock.getElapsedTime().asMicroseconds() < 600000 / (level + 1))
 		{
-			// Moves your current block down while checking if it collides to another block or floor
-			// If the block hits floor collision turns to true and another block is made in update section
-			// If the block doesn't collide pointsCounter goes up providing you better points if you drop blocks at your own will
+			// Moves the dropping block down while checking if it collides to another block or floor.
+			// If the block hits floor collision turns to true and another block is made in update section.
+			// If the block doesn't collide pointsCounter goes up providing you better points if you drop blocks at your own will.
 			for (int i = 0; i < vectorSize; i++)
 			{
 				if (spriteVector[i].getPosition().y + blockSize > 18 * blockSize)
@@ -216,7 +230,7 @@ void InverseState::handleInput()
 
 void InverseState::update(const float dt)
 {
-	// Inserts the next block in the vector or replaces the old one
+	// Updates allSprites vector by clearing it and inserting new information.
 
 	allSprites.erase(allSprites.begin(), allSprites.end());
 	for (int i = 0; i < blockVector.size(); i++)
@@ -229,7 +243,6 @@ void InverseState::update(const float dt)
 		}
 	}
 
-	// Makes a new block and updates points
 	for (int i = 0; i < vectorSize; i++)
 	{
 		if (collision == true && gameOver == false)
@@ -259,6 +272,7 @@ void InverseState::update(const float dt)
 			ss << points;
 			pointsText.setString(ss.str());
 
+			// Rotates the block in any of its possible position
 			if (randomBlock == 2 || randomBlock == 3 || randomBlock == 4)
 			{
 				randomRotation = rand() % 2 + 1;
@@ -279,7 +293,6 @@ void InverseState::update(const float dt)
 		}
 	}
 
-	// Drops your current block according to your current level and quits the game if you reach the top or you somehow end up dropping a block on top of another block
 	if (clock.getElapsedTime().asMicroseconds() >= 600000 / (level + 1) && gameOver == false)
 	{
 		for (int i = 0; i < vectorSize; i++)
@@ -310,7 +323,6 @@ void InverseState::update(const float dt)
 
 void InverseState::rowClearing()
 {
-	// Goes through allSprites vector finding blocks that should be removed or dropped down and gives you points according to how many rows you cleared at the same time
 	for (int i = 0; i < blockSize * blockSize; i += blockSize)
 	{
 		for (int j = 0; j < blockVector.size(); j++)
@@ -371,9 +383,3 @@ void InverseState::rowClearing()
 		}
 	}
 }
-
-
-InverseState::~InverseState()
-{
-}
-

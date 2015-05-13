@@ -1,5 +1,7 @@
 #include "SingleplayerState.h"
 
+// Basic singleplayer game.
+
 SingleplayerState::SingleplayerState(Game* game)
 {
 	this->game = game;
@@ -9,16 +11,57 @@ SingleplayerState::SingleplayerState(Game* game)
 	bgTexture = game->setTexture(bgTexture, "..\\Graphics\\Background.png");
 	font = game->setFont(font, "..\\Graphics\\8bitOperatorPlus8-Regular.ttf");
 
-	// Setting up frames for blocks and other information
-	field.setTexture(fieldTexture);
-	field.setColor(sf::Color(red, blue, green));
+	// Making of the play field and setting up texts for points, level, etc.
 	bg.setTexture(bgTexture);
 	bg.setPosition(blockSize, blockSize);
+
+	field.setTexture(fieldTexture);
+	field.setColor(sf::Color(red, blue, green));
+
 	pointsField.setTexture(pointsFieldTexture);
 	pointsField.setColor(sf::Color(red, blue, green));
 	pointsField.setPosition(blockSize * 12, 0);
 
-	// Making of the first block and inserting it into a vector
+	pointsText.setFont(font);
+	pointsText.setCharacterSize(25);
+	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.60));
+
+	levelText.setFont(font);
+	levelText.setCharacterSize(25);
+	levelText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 11.60));
+
+	ss << points;
+	pointsText.setString(ss.str());
+	ss.clear();
+	ss.str("");
+	ss << level;
+	levelText.setString(ss.str());
+	ss.clear();
+	ss.str("");
+
+	controlsText.setFont(font);
+	controlsText.setCharacterSize(12);
+	controlsText.setPosition(blockSize * 13.2, blockSize * 15.25);
+	controlsText.setString("Left: A\nRight: D\nDown: S\nClockwise: H\nCCwise: G");
+
+	if (red > 150 && blue > 150 && green > 150)
+	{
+		pointsText.setColor(sf::Color::Black);
+		levelText.setColor(sf::Color::Black);
+		controlsText.setColor(sf::Color::Black);
+	}
+
+	gameOverRectangle.setPosition(blockSize * 2, blockSize * 5);
+	gameOverRectangle.setSize(sf::Vector2f(blockSize * 8, blockSize * 6));
+	gameOverRectangle.setOutlineColor(sf::Color::Blue);
+	gameOverRectangle.setOutlineThickness(2);
+
+	gameOverText.setFont(font);
+	gameOverText.setColor(sf::Color::Black);
+	gameOverText.setCharacterSize(20);
+	gameOverText.setPosition(blockSize * 3, blockSize * 6);
+
+	// Making of the first block and inserting it into a vector.
 	currentRandomBlock = randomBlock;
 	blockVector.push_back(new Blocks(randomBlock));
 	randomBlock = rand() % 7 + 1;
@@ -29,47 +72,19 @@ SingleplayerState::SingleplayerState(Game* game)
 	{
 		spriteVector = blockVector[i]->getVector();
 	}
+}
 
-	// Setting up text for points
-	pointsText.setFont(font);
-	pointsText.setColor(sf::Color::Black);
-	pointsText.setCharacterSize(25);
-	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.60));
-	levelText.setFont(font);
-	levelText.setColor(sf::Color::Black);
-	levelText.setCharacterSize(25);
-	levelText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 11.60));
-	ss << points;
-	pointsText.setString(ss.str());
-	ss.clear();
-	ss.str("");
-	ss << level;
-	levelText.setString(ss.str());
-	if (red < 150 && blue < 150 && green < 150)
-	{
-		pointsText.setColor(sf::Color::White);
-		levelText.setColor(sf::Color::White);
-	}
-	ss.clear();
-	ss.str("");
-
-	gameOverRectangle.setPosition(blockSize * 2, blockSize * 5);
-	gameOverRectangle.setSize(sf::Vector2f(blockSize * 8, blockSize * 6));
-	gameOverRectangle.setOutlineColor(sf::Color::Blue);
-	gameOverRectangle.setOutlineThickness(2);
-	gameOverText.setFont(font);
-	gameOverText.setColor(sf::Color::Black);
-	gameOverText.setCharacterSize(20);
-	gameOverText.setPosition(blockSize * 3, blockSize * 6);
+SingleplayerState::~SingleplayerState()
+{
 }
 
 void SingleplayerState::draw(const float dt)
 {
-	// Clears screen and draws everything in order: background, frames, text, next block, all the other blocks
 	game->window.draw(bg);
 	game->window.draw(pointsField);
 	game->window.draw(pointsText);
 	game->window.draw(levelText);
+	game->window.draw(controlsText);
 
 	for (int i = 0; i < blockVector.size(); i++)
 	{
@@ -89,7 +104,9 @@ void SingleplayerState::draw(const float dt)
 	{
 		game->window.draw(allSprites[i]);
 	}
+
 	game->window.draw(field);
+
 	if (gameOver == true)
 	{
 		ss << "Game Over!\nPoints:\n" << points << "\nPress enter.";
@@ -107,6 +124,7 @@ void SingleplayerState::handleInput()
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 		{
+			// Checks whether you're playing single or multiplayer and quits the mode according to that info.
 			if (game->getMultiplayerStart() == true)
 			{
 				game->setGameOverBool(true);
@@ -128,7 +146,7 @@ void SingleplayerState::handleInput()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			// Moves your current block left while checking if it collides to another block or wall
+			// Moves your current block left while checking if it collides to another block or wall.
 			for (int i = 0; i < vectorSize; i++)
 			{
 				if (spriteVector[i].getPosition().x - blockSize > 0)
@@ -159,7 +177,7 @@ void SingleplayerState::handleInput()
 
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		{
-			// Moves your current block right while checking if it collides to another block or wall
+			// Moves your current block right while checking if it collides to another block or wall.
 			for (int i = 0; i < vectorSize; i++)
 			{
 				if (spriteVector[i].getPosition().x + blockSize < 11 * blockSize)
@@ -190,9 +208,9 @@ void SingleplayerState::handleInput()
 
 		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) && clock.getElapsedTime().asMicroseconds() < 600000 / (level + 1))
 		{
-			// Moves your current block down while checking if it collides to another block or floor
-			// If the block hits floor collision turns to true and another block is made in update section
-			// If the block doesn't collide pointsCounter goes up providing you better points if you drop blocks at your own will
+			// Moves your current block down while checking if it collides to another block or floor.
+			// If the block hits floor collision turns to true and another block is made in update section.
+			// If the block doesn't collide pointsCounter goes up providing you better points if you drop blocks at your own will.
 			for (int i = 0; i < vectorSize; i++)
 			{
 				if (spriteVector[i].getPosition().y + blockSize > 18 * blockSize)
@@ -241,7 +259,7 @@ void SingleplayerState::handleInput()
 
 void SingleplayerState::update(const float dt)
 {
-	// Inserts the next block in the vector or replaces the old one
+	// Inserts the next block in the vector or replaces the old one.
 	if (newBlock == true)
 	{
 		for (int i = 0; i < vectorSize; i++)
@@ -259,7 +277,7 @@ void SingleplayerState::update(const float dt)
 		}
 	}
 
-	// Makes a new block and updates points
+	// Makes a new block and updates points.
 	for (int i = 0; i < vectorSize; i++)
 	{
 		if (collision == true && gameOver == false)
@@ -293,7 +311,7 @@ void SingleplayerState::update(const float dt)
 		}
 	}
 
-	// Drops your current block according to your current level and quits the game if you reach the top or you somehow end up dropping a block on top of another block
+	// Drops your current block according to your current level and quits the game if you reach the top or if you somehow end up moving a block inside another block.
 	if (clock.getElapsedTime().asMicroseconds() >= 600000 / (level + 1) && gameOver == false)
 	{
 		for (int i = 0; i < vectorSize; i++)
@@ -324,7 +342,7 @@ void SingleplayerState::update(const float dt)
 
 void SingleplayerState::rowClearing()
 {
-	// Goes through allSprites vector finding blocks that should be removed or dropped down and gives you points according to how many rows you cleared at the same time
+	// Goes through allSprites vector finding blocks that should be removed or dropped down and gives you points according to how many rows you cleared at the same time.
 	for (int i = 0; i < blockSize * blockSize; i += blockSize)
 	{
 		for (int j = 0; j < allSprites.size(); j++)
@@ -396,8 +414,4 @@ void SingleplayerState::rowClearing()
 			i = -vectorSize;
 		}
 	}
-}
-
-SingleplayerState::~SingleplayerState()
-{
 }

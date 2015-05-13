@@ -4,7 +4,7 @@
 PlayerState::PlayerState(Game* game)
 {
 	this->game = game;
-	player1 = new StateStart(game);
+	player1 = new SingleplayerState(game);
 	player2 = new MultiplayerState(game);
 	game->multiplayerStart(true);
 }

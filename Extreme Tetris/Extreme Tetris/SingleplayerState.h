@@ -1,13 +1,16 @@
-#ifndef MULTIPLAYERSTATE_H
-#define MULTIPLAYERSTATE_H
+#ifndef SINGLEPLAYERSTATE_H
+#define SINGLEPLAYERSTATE_H
 
-#include "SingleplayerState.h"
+#include "GameState.h"
+#include "Blocks.h"
+#include "MainMenu.h"
+#include <sstream>
 
-class MultiplayerState : public GameState
+class SingleplayerState : public GameState
 {
 public:
-	MultiplayerState(Game* game);
-	~MultiplayerState();
+	SingleplayerState(Game* game);
+	~SingleplayerState();
 
 	void draw(const float dt);
 	void update(const float dt);
@@ -23,6 +26,7 @@ private:
 	sf::RectangleShape gameOverRectangle;
 	sf::Sprite field, pointsField, bg;
 	sf::Text pointsText, levelText, gameOverText;
+	float animationTime;
 	sf::Font font;
 	std::stringstream ss;
 	sf::Texture fieldTexture, pointsFieldTexture, bgTexture;

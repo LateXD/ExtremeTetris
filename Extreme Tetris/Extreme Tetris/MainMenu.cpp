@@ -1,5 +1,5 @@
 #include "MainMenu.h"
-#include "StateStart.h"
+#include "SingleplayerState.h"
 #include "OptionsState.h"
 #include "PlayerState.h"
 #include "InverseState.h"
@@ -112,7 +112,7 @@ void MainMenu::handleInput()
 		{
 
 		case 1:
-			this->game->pushState(new StateStart(this->game));
+			this->game->pushState(new SingleplayerState(this->game));
 			std::cout << "Single player" << std::endl;
 			return;
 		case 2:

@@ -13,120 +13,144 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Block Types">
+    <Filter Include="Source Files\Game Modes">
+      <UniqueIdentifier>{9a648018-a773-4409-9df6-a5c68466f643}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game Modes">
+      <UniqueIdentifier>{588fe07c-56f5-41da-afca-e3dff5feed9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Blocks">
+      <UniqueIdentifier>{166a6166-a77e-4ad1-a310-e44c6b64735c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Blocks">
       <UniqueIdentifier>{b7d58418-381c-4622-b6f8-1c9736dc68fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Block Types">
-      <UniqueIdentifier>{166a6166-a77e-4ad1-a310-e44c6b64735c}</UniqueIdentifier>
+    <Filter Include="Source Files\Manager Files">
+      <UniqueIdentifier>{f7b4a417-f432-4144-a3ad-87ac683a3b51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Manager Files">
+      <UniqueIdentifier>{752dade0-700c-4ff1-92ca-4ae1d8df5e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Menu Files">
+      <UniqueIdentifier>{e6eea554-bef3-4d76-9b46-91a8db68ec91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Menu Files">
+      <UniqueIdentifier>{697323a2-6ea1-4817-a6a9-38303870e73b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Block_Z.cpp">
+      <Filter>Source Files\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_I.cpp">
+      <Filter>Source Files\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_J.cpp">
+      <Filter>Source Files\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_L.cpp">
+      <Filter>Source Files\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_O.cpp">
+      <Filter>Source Files\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_S.cpp">
+      <Filter>Source Files\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Block_T.cpp">
+      <Filter>Source Files\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="InverseState.cpp">
+      <Filter>Source Files\Game Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerState.cpp">
+      <Filter>Source Files\Game Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleplayerState.cpp">
+      <Filter>Source Files\Game Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiplayerState.cpp">
+      <Filter>Source Files\Game Modes</Filter>
+    </ClCompile>
+    <ClCompile Include="Blocks.cpp">
+      <Filter>Source Files\Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Manager Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files\Manager Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Manager Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputState.cpp">
+      <Filter>Source Files\Menu Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files\Menu Files</Filter>
+    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Blocks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StateStart.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="OptionsState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_Z.cpp">
-      <Filter>Source Files\Block Types</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_I.cpp">
-      <Filter>Source Files\Block Types</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_J.cpp">
-      <Filter>Source Files\Block Types</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_L.cpp">
-      <Filter>Source Files\Block Types</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_O.cpp">
-      <Filter>Source Files\Block Types</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_S.cpp">
-      <Filter>Source Files\Block Types</Filter>
-    </ClCompile>
-    <ClCompile Include="Block_T.cpp">
-      <Filter>Source Files\Block Types</Filter>
-    </ClCompile>
-    <ClCompile Include="MultiplayerState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Menu Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Blocks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateStart.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OptionsState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Block_I.h">
-      <Filter>Header Files\Block Types</Filter>
+      <Filter>Header Files\Blocks</Filter>
     </ClInclude>
     <ClInclude Include="Block_J.h">
-      <Filter>Header Files\Block Types</Filter>
+      <Filter>Header Files\Blocks</Filter>
     </ClInclude>
     <ClInclude Include="Block_L.h">
-      <Filter>Header Files\Block Types</Filter>
+      <Filter>Header Files\Blocks</Filter>
     </ClInclude>
     <ClInclude Include="Block_O.h">
-      <Filter>Header Files\Block Types</Filter>
+      <Filter>Header Files\Blocks</Filter>
     </ClInclude>
     <ClInclude Include="Block_S.h">
-      <Filter>Header Files\Block Types</Filter>
+      <Filter>Header Files\Blocks</Filter>
     </ClInclude>
     <ClInclude Include="Block_T.h">
-      <Filter>Header Files\Block Types</Filter>
+      <Filter>Header Files\Blocks</Filter>
     </ClInclude>
     <ClInclude Include="Block_Z.h">
-      <Filter>Header Files\Block Types</Filter>
+      <Filter>Header Files\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="InverseState.h">
+      <Filter>Header Files\Game Modes</Filter>
     </ClInclude>
     <ClInclude Include="MultiplayerState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game Modes</Filter>
     </ClInclude>
     <ClInclude Include="PlayerState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="SingleplayerState.h">
+      <Filter>Header Files\Game Modes</Filter>
+    </ClInclude>
+    <ClInclude Include="Blocks.h">
+      <Filter>Header Files\Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files\Manager Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Manager Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\Manager Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputState.h">
+      <Filter>Header Files\Menu Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Header Files\Menu Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionsState.h">
+      <Filter>Header Files\Menu Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

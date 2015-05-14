@@ -38,7 +38,6 @@ void PlayerState::update(const float dt)
 		delete player1;
 		delete player2;
 		game->popState();
-		std::cout << "Back to main menu\n";
 		return;
 	}
 	player1->update(dt);

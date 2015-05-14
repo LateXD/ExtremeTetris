@@ -1,5 +1,6 @@
 #ifndef BLOCKS_H
 #define BLOCKS_H
+
 #include "Block_O.h"
 #include "Block_Z.h"
 #include "Block_S.h"
@@ -23,12 +24,9 @@ public:
 	void seperateBlocks();
 	int clearBlocks(bool cr, int rn, int rc, int loopI);
 	std::vector<sf::Sprite> getVector();
-	Game* game;
 
 private:
-	bool error = false;
-	int vectorSize = 4, xPos = 0, yPos = 0, rotation = 0, blockSize = 20, counter = 0;
-	std::vector<sf::Sprite>blockVector;
+	Game* game;
 	Block_O block_O;
 	Block_Z block_Z;
 	Block_S block_S;
@@ -36,6 +34,9 @@ private:
 	Block_I block_I;
 	Block_J block_J;
 	Block_L block_L;
+	bool error = false;
+	int vectorSize = 4, xPos = 0, yPos = 0, rotation = 0, blockSize = 20, counter = 0;
+	std::vector<sf::Sprite>currentBlockSprites;
 };
 
 #endif

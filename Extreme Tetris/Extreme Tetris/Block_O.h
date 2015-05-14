@@ -1,5 +1,6 @@
 #ifndef BLOCK_O_H
 #define BLOCK_O_H
+
 #include "Game.h"
 
 class Block_O

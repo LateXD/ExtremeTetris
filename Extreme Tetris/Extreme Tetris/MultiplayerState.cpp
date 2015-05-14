@@ -24,11 +24,11 @@ MultiplayerState::MultiplayerState(Game* game)
 
 	pointsText.setFont(font);
 	pointsText.setCharacterSize(25);
-	pointsText.setPosition(sf::Vector2f(blockSize * 26, blockSize * 8.60));
+	pointsText.setPosition(sf::Vector2f(blockSize * 25.75, blockSize * 8.60));
 
 	levelText.setFont(font);
 	levelText.setCharacterSize(25);
-	levelText.setPosition(sf::Vector2f(blockSize * 26, blockSize * 11.60));
+	levelText.setPosition(sf::Vector2f(blockSize * 25.75, blockSize * 11.60));
 
 	ss << points;
 	pointsText.setString(ss.str());
@@ -44,7 +44,7 @@ MultiplayerState::MultiplayerState(Game* game)
 	controlsText.setPosition(blockSize * 21.2, blockSize * 15.25);
 	controlsText.setString("Left: Left Arrow\nRight: Right Arrow\nDown: Down Arrow\nClockwise: Period\nCCwise: Comma");
 
-	if (red > 150 && blue > 150 && green > 150)
+	if (red > 100 && blue > 100 && green > 100)
 	{
 		pointsText.setColor(sf::Color::Black);
 		levelText.setColor(sf::Color::Black);

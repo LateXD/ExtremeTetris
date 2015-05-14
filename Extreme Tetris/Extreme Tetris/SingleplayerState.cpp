@@ -24,11 +24,11 @@ SingleplayerState::SingleplayerState(Game* game)
 
 	pointsText.setFont(font);
 	pointsText.setCharacterSize(25);
-	pointsText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 8.60));
+	pointsText.setPosition(sf::Vector2f(blockSize * 17.75, blockSize * 8.60));
 
 	levelText.setFont(font);
 	levelText.setCharacterSize(25);
-	levelText.setPosition(sf::Vector2f(blockSize * 18, blockSize * 11.60));
+	levelText.setPosition(sf::Vector2f(blockSize * 17.75, blockSize * 11.60));
 
 	ss << points;
 	pointsText.setString(ss.str());
@@ -44,7 +44,7 @@ SingleplayerState::SingleplayerState(Game* game)
 	controlsText.setPosition(blockSize * 13.2, blockSize * 15.25);
 	controlsText.setString("Left: A\nRight: D\nDown: S\nClockwise: H\nCCwise: G");
 
-	if (red > 150 && blue > 150 && green > 150)
+	if (red > 100 && blue > 100 && green > 100)
 	{
 		pointsText.setColor(sf::Color::Black);
 		levelText.setColor(sf::Color::Black);
@@ -133,7 +133,6 @@ void SingleplayerState::handleInput()
 			{
 				game->multiplayerStart(false);
 				game->popState();
-				std::cout << "Back to main menu\n";
 				return;
 			}
 		}

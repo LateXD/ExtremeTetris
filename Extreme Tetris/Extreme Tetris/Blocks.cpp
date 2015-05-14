@@ -2,33 +2,29 @@
 
 Blocks::Blocks(int rb)
 {
-	if (rb == 1)
+	switch (rb)
 	{
-		blockVector = block_O.spawn(blockVector);
-	}
-	else if (rb == 2)
-	{
-		blockVector = block_Z.spawn(blockVector);
-	}
-	else if (rb == 3)
-	{
-		blockVector = block_S.spawn(blockVector);
-	}
-	else if (rb == 4)
-	{
-		blockVector = block_I.spawn(blockVector);
-	}
-	else if (rb == 5)
-	{
-		blockVector = block_T.spawn(blockVector);
-	}
-	else if (rb == 6)
-	{
-		blockVector = block_J.spawn(blockVector);
-	}
-	else if (rb == 7)
-	{
-		blockVector = block_L.spawn(blockVector);
+	case 1:
+		currentBlockSprites = block_O.spawn(currentBlockSprites);
+		break;
+	case 2:
+		currentBlockSprites = block_Z.spawn(currentBlockSprites);
+		break;
+	case 3:
+		currentBlockSprites = block_S.spawn(currentBlockSprites);
+		break;
+	case 4:
+		currentBlockSprites = block_I.spawn(currentBlockSprites);
+		break;
+	case 5:
+		currentBlockSprites = block_T.spawn(currentBlockSprites);
+		break;
+	case 6:
+		currentBlockSprites = block_J.spawn(currentBlockSprites);
+		break;
+	case 7:
+		currentBlockSprites = block_L.spawn(currentBlockSprites);
+		break;
 	}
 	rotation = 0;
 }
@@ -41,7 +37,7 @@ void Blocks::moveLeft()
 {
 	for (int i = 0; i < vectorSize; i++)
 	{
-		blockVector[i].move(-blockSize, 0);
+		currentBlockSprites[i].move(-blockSize, 0);
 	}
 }
 
@@ -49,7 +45,7 @@ void Blocks::moveRight()
 {
 	for (int i = 0; i < vectorSize; i++)
 	{
-		blockVector[i].move(blockSize, 0);
+		currentBlockSprites[i].move(blockSize, 0);
 	}
 }
 
@@ -57,14 +53,13 @@ void Blocks::moveDown()
 {
 	for (int i = 0; i < vectorSize; i++)
 	{
-		blockVector[i].move(0, 20);
+		currentBlockSprites[i].move(0, 20);
 	}
 }
 
 void Blocks::rotateClockwise(int rb, std::vector<sf::Sprite> spritesVector)
 {
-	// Rotation decides how the block should be rotated, for example if rb (randomBlock) = 4 (I block) and rotation = 1 it adds one to rotation which makes it 2 but as I block has only 2 poses it will go back to 0
-	// Then it checks which block type you have at the moment, rotate it and if there's something wrong (it's inside a wall or another block), it rotates it back
+	// Rotates a block and if rotating it results in a situation where the block is inside a wall it rotates it back
 	rotation++;
 	if (rb == 1 || rb == 2 || rb == 3 || rb == 4)
 	{
@@ -81,41 +76,38 @@ void Blocks::rotateClockwise(int rb, std::vector<sf::Sprite> spritesVector)
 		}
 	}
 
-	if (rb == 2)
+	switch (rb)
 	{
-		blockVector = block_Z.rotateBlock_Z(rotation, blockVector);
-	}
-	else if (rb == 3)
-	{
-		blockVector = block_S.rotateBlock_S(rotation, blockVector);
-	}
-	else if (rb == 4)
-	{
-		blockVector = block_I.rotateBlock_I(rotation, blockVector);
-	}
-	else if (rb == 5)
-	{
-		blockVector = block_T.rotateBlockC_T(rotation, blockVector);
-	}
-	else if (rb == 6)
-	{
-		blockVector = block_J.rotateBlockC_J(rotation, blockVector);
-	}
-	else if (rb == 7)
-	{
-		blockVector = block_L.rotateBlockC_L(rotation, blockVector);
+	case 2:
+		currentBlockSprites = block_Z.rotateBlock_Z(rotation, currentBlockSprites);
+		break;
+	case 3:
+		currentBlockSprites = block_S.rotateBlock_S(rotation, currentBlockSprites);
+		break;
+	case 4:
+		currentBlockSprites = block_I.rotateBlock_I(rotation, currentBlockSprites);
+		break;
+	case 5:
+		currentBlockSprites = block_T.rotateBlockC_T(rotation, currentBlockSprites);
+		break;
+	case 6:
+		currentBlockSprites = block_J.rotateBlockC_J(rotation, currentBlockSprites);
+		break;
+	case 7:
+		currentBlockSprites = block_L.rotateBlockC_L(rotation, currentBlockSprites);
+		break;
 	}
 
 	for (int i = 0; i < vectorSize; i++)
 	{
-		if (blockVector[i].getPosition().x == 0 || blockVector[i].getPosition().x == blockSize * 11 || blockVector[i].getPosition().x == blockSize * 28 || blockVector[i].getPosition().x == blockSize * 39 || blockVector[i].getPosition().y == blockSize * 19)
+		if (currentBlockSprites[i].getPosition().x == 0 || currentBlockSprites[i].getPosition().x == blockSize * 11 || currentBlockSprites[i].getPosition().x == blockSize * 28 || currentBlockSprites[i].getPosition().x == blockSize * 39 || currentBlockSprites[i].getPosition().y == blockSize * 19)
 		{
 			rotateCounterClockwise(rb, spritesVector);
 			break;
 		}
 		for (int j = 0; j < spritesVector.size() - vectorSize; j++)
 		{
-			if (blockVector[i].getPosition().x == spritesVector[j].getPosition().x && blockVector[i].getPosition().y == spritesVector[j].getPosition().y)
+			if (currentBlockSprites[i].getPosition().x == spritesVector[j].getPosition().x && currentBlockSprites[i].getPosition().y == spritesVector[j].getPosition().y)
 			{
 				rotateCounterClockwise(rb, spritesVector);
 				break;
@@ -126,7 +118,6 @@ void Blocks::rotateClockwise(int rb, std::vector<sf::Sprite> spritesVector)
 
 void Blocks::rotateCounterClockwise(int rb, std::vector<sf::Sprite> spritesVector)
 {
-	// Pretty much the same as before but rotation happens counterclockwise
 	rotation--;
 	if (rotation < 0)
 	{
@@ -140,41 +131,38 @@ void Blocks::rotateCounterClockwise(int rb, std::vector<sf::Sprite> spritesVecto
 		}
 	}
 
-	if (rb == 2)
+	switch (rb)
 	{
-		blockVector = block_Z.rotateBlock_Z(rotation, blockVector);
-	}
-	else if (rb == 3)
-	{
-		blockVector = block_S.rotateBlock_S(rotation, blockVector);
-	}
-	else if (rb == 4)
-	{
-		blockVector = block_I.rotateBlock_I(rotation, blockVector);
-	}
-	else if (rb == 5)
-	{
-		blockVector = block_T.rotateBlockCC_T(rotation, blockVector);
-	}
-	else if (rb == 6)
-	{
-		blockVector = block_J.rotateBlockCC_J(rotation, blockVector);
-	}
-	else if (rb == 7)
-	{
-		blockVector = block_L.rotateBlockCC_L(rotation, blockVector);
+	case 2:
+		currentBlockSprites = block_Z.rotateBlock_Z(rotation, currentBlockSprites);
+		break;
+	case 3:
+		currentBlockSprites = block_S.rotateBlock_S(rotation, currentBlockSprites);
+		break;
+	case 4:
+		currentBlockSprites = block_I.rotateBlock_I(rotation, currentBlockSprites);
+		break;
+	case 5:
+		currentBlockSprites = block_T.rotateBlockCC_T(rotation, currentBlockSprites);
+		break;
+	case 6:
+		currentBlockSprites = block_J.rotateBlockCC_J(rotation, currentBlockSprites);
+		break;
+	case 7:
+		currentBlockSprites = block_L.rotateBlockCC_L(rotation, currentBlockSprites);
+		break;
 	}
 
 	for (int i = 0; i < vectorSize; i++)
 	{
-		if (blockVector[i].getPosition().x == 0 || blockVector[i].getPosition().x == blockSize * 11 || blockVector[i].getPosition().x == blockSize * 28 || blockVector[i].getPosition().x == blockSize * 39 || blockVector[i].getPosition().y == blockSize * 19)
+		if (currentBlockSprites[i].getPosition().x == 0 || currentBlockSprites[i].getPosition().x == blockSize * 11 || currentBlockSprites[i].getPosition().x == blockSize * 28 || currentBlockSprites[i].getPosition().x == blockSize * 39 || currentBlockSprites[i].getPosition().y == blockSize * 19)
 		{
 			rotateClockwise(rb, spritesVector);
 			break;
 		}
 		for (int j = 0; j < spritesVector.size() - vectorSize; j++)
 		{
-			if (blockVector[i].getPosition().x == spritesVector[j].getPosition().x && blockVector[i].getPosition().y == spritesVector[j].getPosition().y)
+			if (currentBlockSprites[i].getPosition().x == spritesVector[j].getPosition().x && currentBlockSprites[i].getPosition().y == spritesVector[j].getPosition().y)
 			{
 				rotateClockwise(rb, spritesVector);
 				break;
@@ -185,52 +173,54 @@ void Blocks::rotateCounterClockwise(int rb, std::vector<sf::Sprite> spritesVecto
 
 void Blocks::nextBlock(bool direction)
 {
-	// Moves the block you have coming next from its place to the playing field and vise versa
+	// Moves the block you have coming next from "next block area" to the playing field and vise versa
 	if (direction == true)
 	{
 		for (int i = 0; i < vectorSize; i++)
 		{
-			blockVector[i].move(blockSize * 10, blockSize);
+			currentBlockSprites[i].move(blockSize * 10, blockSize);
 		}
 	}
 	else
 	{
 		for (int i = 0; i < vectorSize; i++)
 		{
-			blockVector[i].move(-blockSize * 10, -blockSize);
+			currentBlockSprites[i].move(-blockSize * 10, -blockSize);
 		}
 	}
 }
 
 void Blocks::seperateBlocks()
 {
-	for (int i = 0; i < blockVector.size(); i++)
+	// Used in Inverse Tetris to divide the block into two sections when it warps from one side to another
+	for (int i = 0; i < currentBlockSprites.size(); i++)
 	{
-		if (blockVector[i].getPosition().x < blockSize)
+		if (currentBlockSprites[i].getPosition().x < blockSize)
 		{
-			blockVector[i].move(blockSize * 10, 0);
+			currentBlockSprites[i].move(blockSize * 10, 0);
 		}
-		else if (blockVector[i].getPosition().x > blockSize * 10)
+		else if (currentBlockSprites[i].getPosition().x > blockSize * 10)
 		{
-			blockVector[i].move(-blockSize * 10, 0);
+			currentBlockSprites[i].move(-blockSize * 10, 0);
 		}
 	}
 }
 
 int Blocks::clearBlocks(bool cr, int rn, int rc, int loopI)
 {
-	for (int i = 0; i < blockVector.size(); i++)
+	// Another way to clear blocks when the row is full because the original way doesn't work in Inverse Tetris
+	for (int i = 0; i < currentBlockSprites.size(); i++)
 	{
-		if (cr == true && blockVector[i].getPosition().y == rn)
+		if (cr == true && currentBlockSprites[i].getPosition().y == rn)
 		{
-			blockVector[i].move(0, blockSize * 30);
+			currentBlockSprites[i].move(0, blockSize * 30);
 			rc++;
 		}
-		else if (cr == true && blockVector[i].getPosition().y < rn)
+		else if (cr == true && currentBlockSprites[i].getPosition().y < rn)
 		{
-			blockVector[i].move(0, blockSize);
+			currentBlockSprites[i].move(0, blockSize);
 		}
-		if (cr == false && blockVector[i].getPosition().y == loopI)
+		if (cr == false && currentBlockSprites[i].getPosition().y == loopI)
 		{
 			rc++;
 		}
@@ -240,5 +230,5 @@ int Blocks::clearBlocks(bool cr, int rn, int rc, int loopI)
 
 std::vector<sf::Sprite>Blocks::getVector()
 {
-	return blockVector;
+	return currentBlockSprites;
 }

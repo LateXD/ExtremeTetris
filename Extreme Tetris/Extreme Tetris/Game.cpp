@@ -4,47 +4,47 @@
 void Game::pushState(GameState* state)
 {
 	state->initialize();
-
-	this->states.push(state);
-
+	states.push(state);
 	return;
+}
+
+Game::~Game()
+{
+	while (!states.empty())
+	{
+		popState();
+	}
 }
 
 void Game::popState()
 {
-	delete this->states.top();
-	this->states.pop();
-
+	delete states.top();
+	states.pop();
 	return;
 }
 
 void Game::changeState(GameState* state)
 {
-	if (!this->states.empty())
+	if (!states.empty())
 	{
 		popState();
 	}
-
 	pushState(state);
-	
 	return;
 }
 
 GameState* Game::peekState()
 {
-	if (this->states.empty())
+	if (states.empty())
 	{
 		return nullptr;	
 	}
-
-	return this->states.top();
-	
+	return states.top();
 }
 
 void Game::gameLoop()
 {
 	sf::Clock clock;
-
 	while (window.isOpen())
 	{
 		sf::Time elapsed = clock.restart();
@@ -64,16 +64,30 @@ void Game::gameLoop()
 			}
 			case sf::Event::KeyPressed:
 			{
+				if (event.key.code == sf::Keyboard::Z)
+				{
+					window.setSize(sf::Vector2u(800, 400));
+				}
+				else if (event.key.code == sf::Keyboard::X)
+				{
+					window.setPosition(sf::Vector2i(0, 0));
+					window.setSize(sf::Vector2u(1200, 600));
+				}
+				else if (event.key.code == sf::Keyboard::C)
+				{
+					window.setPosition(sf::Vector2i(0, 0));
+					window.setSize(sf::Vector2u(1600, 800));
+				}
 				peekState()->handleInput();
 			}
 			}
 		}
 		peekState()->update(dt);
-		this->window.clear(sf::Color::Black);
+		window.clear(sf::Color::Black);
 		peekState()->draw(dt);
 		if (multiplayerBool == false)
 		{
-			this->window.display();
+			window.display();
 		}
 	}
 }
@@ -81,9 +95,9 @@ void Game::gameLoop()
 Game::Game()
 {
 	windowWidth = 800;
-	windowHeight = 600;
-	this->window.create(sf::VideoMode(windowWidth, windowHeight), "Extreme Tetris");
-	this->window.setFramerateLimit(60);
+	windowHeight = 400;
+	window.create(sf::VideoMode(windowWidth, windowHeight), "Extreme Tetris");
+	window.setFramerateLimit(60);
 
 	//sf::Clock clock;
 	//unsigned short frames = 0;
@@ -146,12 +160,4 @@ float Game::getWindowWidth()
 float Game::getWindowHeight() 
 {
 	return windowHeight;
-}
-
-Game::~Game()
-{
-	while (!this->states.empty())
-	{
-		popState();
-	}
 }

@@ -1,7 +1,7 @@
 #ifndef BLOCK_T_H
 #define BLOCK_T_H
-#include "Game.h"
 
+#include "Game.h"
 
 class Block_T
 {

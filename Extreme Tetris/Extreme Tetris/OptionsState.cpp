@@ -34,17 +34,17 @@ void OptionsState::onInitialize()
 	options[0].setString("Options");
 	options[0].setColor(sf::Color::Yellow);
 	options[0].setCharacterSize(50);
-	options[0].setPosition(sf::Vector2f(width / 3, height / (OPTIONS_ITEMS + 2) * 1));
+	options[0].setPosition(sf::Vector2f(width / 6, height / (OPTIONS_ITEMS + 2) * 1));
 
 	options[1].setString("Controls");
 	options[1].setColor(sf::Color::Red);
 	options[1].setCharacterSize(40);
-	options[1].setPosition(sf::Vector2f(width / 3, height / (OPTIONS_ITEMS + 1) * 2));
+	options[1].setPosition(sf::Vector2f(width / 6, height / (OPTIONS_ITEMS + 1) * 2));
 
 	options[2].setString("Volume");
 	options[2].setColor(sf::Color::White);
 	options[2].setCharacterSize(40);
-	options[2].setPosition(sf::Vector2f(width / 3, height / (OPTIONS_ITEMS + 1) * 3));
+	options[2].setPosition(sf::Vector2f(width / 6, height / (OPTIONS_ITEMS + 1) * 3));
 
 }
 

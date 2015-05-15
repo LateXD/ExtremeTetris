@@ -1,0 +1,36 @@
+﻿Build started 15.5.2015 13:41:49.
+     1>Project "C:\Users\Lauri\Documents\GitHub\ExtremeTetris\Extreme Tetris\Extreme Tetris\Extreme Tetris.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Lauri\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\include" /Zi /nologo /W4 /WX- /O2 /Oi /Oy- /GL /D SFML_STATIC /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
+         Game.cpp
+     1>Game.cpp(8): warning C4244: 'argument' : conversion from 'float' to 'unsigned int', possible loss of data
+     1>Game.cpp(87): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+     1>Game.cpp(96): warning C4244: 'argument' : conversion from 'unsigned int' to 'float', possible loss of data
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Lauri\Documents\GitHub\ExtremeTetris\Extreme Tetris\Release\Extreme Tetris.exe" /INCREMENTAL:NO /NOLOGO /LIBPATH:"C:\Users\Lauri\Documents\GitHub\ExtremeTetris\Extreme Tetris\..\SFML-2.2\lib" freetype.lib glew.lib jpeg.lib opengl32.lib "sfml-graphics-s.lib" "sfml-window-s.lib" "sfml-system-s.lib" winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Lauri\Documents\GitHub\ExtremeTetris\Extreme Tetris\Release\Extreme Tetris.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /ENTRY:"mainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Lauri\Documents\GitHub\ExtremeTetris\Extreme Tetris\Release\Extreme Tetris.lib" /MACHINE:X86 /SAFESEH Release\Blocks.obj
+         Release\Block_I.obj
+         Release\Block_J.obj
+         Release\Block_L.obj
+         Release\Block_O.obj
+         Release\Block_S.obj
+         Release\Block_T.obj
+         Release\Block_Z.obj
+         Release\Game.obj
+         Release\GameState.obj
+         Release\InputManager.obj
+         Release\InputState.obj
+         Release\InverseState.obj
+         Release\Main.obj
+         Release\MainMenu.obj
+         Release\MultiplayerState.obj
+         Release\OptionsState.obj
+         Release\PlayerState.obj
+         Release\SingleplayerState.obj
+         Generating code
+         Finished generating code
+         Extreme Tetris.vcxproj -> C:\Users\Lauri\Documents\GitHub\ExtremeTetris\Extreme Tetris\Release\Extreme Tetris.exe
+     1>Done Building Project "C:\Users\Lauri\Documents\GitHub\ExtremeTetris\Extreme Tetris\Extreme Tetris\Extreme Tetris.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:30.83

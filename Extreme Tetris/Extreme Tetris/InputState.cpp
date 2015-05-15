@@ -35,33 +35,33 @@ void InputState::onInitialize()
 
 	input[0].setString("Controls");
 	input[0].setColor(sf::Color::Magenta);
-	input[0].setCharacterSize(40);
-	input[0].setPosition(sf::Vector2f(width / 4, height / (OPTIONS_ITEMS + 6) * 1));
+	input[0].setCharacterSize(30);
+	input[0].setPosition(sf::Vector2f(width / 20, height / (OPTIONS_ITEMS + 6) * 1));
 
 	input[1].setString("Move left:");
 	input[1].setColor(sf::Color::Red);
-	input[1].setCharacterSize(30);
-	input[1].setPosition(sf::Vector2f(width / 5, height / (OPTIONS_ITEMS + 5) * 2));
+	input[1].setCharacterSize(20);
+	input[1].setPosition(sf::Vector2f(width / 20, height / (OPTIONS_ITEMS + 5) * 2));
 
 	input[2].setString("Move right:");
 	input[2].setColor(sf::Color::White);
-	input[2].setCharacterSize(30);
-	input[2].setPosition(sf::Vector2f(width / 5, height / (OPTIONS_ITEMS + 5) * 3));
+	input[2].setCharacterSize(20);
+	input[2].setPosition(sf::Vector2f(width / 20, height / (OPTIONS_ITEMS + 5) * 3));
 
 	input[3].setString("Move down:");
 	input[3].setColor(sf::Color::White);
-	input[3].setCharacterSize(30);
-	input[3].setPosition(sf::Vector2f(width / 5, height / (OPTIONS_ITEMS + 5) * 4));
+	input[3].setCharacterSize(20);
+	input[3].setPosition(sf::Vector2f(width / 20, height / (OPTIONS_ITEMS + 5) * 4));
 
 	input[4].setString("Rotate counterclockwise:");
 	input[4].setColor(sf::Color::White);
-	input[4].setCharacterSize(30);
-	input[4].setPosition(sf::Vector2f(width / 5, height / (OPTIONS_ITEMS + 5) * 5));
+	input[4].setCharacterSize(20);
+	input[4].setPosition(sf::Vector2f(width / 20, height / (OPTIONS_ITEMS + 5) * 5));
 
 	input[5].setString("Rotate clockwise:");
 	input[5].setColor(sf::Color::White);
-	input[5].setCharacterSize(30);
-	input[5].setPosition(sf::Vector2f(width / 5, height / (OPTIONS_ITEMS + 5) * 6));
+	input[5].setCharacterSize(20);
+	input[5].setPosition(sf::Vector2f(width / 20, height / (OPTIONS_ITEMS + 5) * 6));
 
 	
 }

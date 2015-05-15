@@ -1,11 +1,27 @@
 #include "Game.h"
 #include "GameState.h"
 
-void Game::pushState(GameState* state)
+Game::Game()
 {
-	state->initialize();
-	states.push(state);
-	return;
+	windowWidth = 400;
+	windowHeight = 400;
+	window.create(sf::VideoMode(windowWidth, windowHeight), "Extreme Tetris");
+	window.setFramerateLimit(60);
+
+	//sf::Clock clock;
+	//unsigned short frames = 0;
+
+	//if (clock.getElapsedTime().asMicroseconds() >= 500000)
+	//{
+	//	system("cls");
+	//	std::cout << "FPS: " << frames * 2 << "\n";
+	//	frames = 0;
+	//	clock.restart();
+	//}
+	//else
+	//{
+	//	frames++;
+	//}
 }
 
 Game::~Game()
@@ -14,6 +30,13 @@ Game::~Game()
 	{
 		popState();
 	}
+}
+
+void Game::pushState(GameState* state)
+{
+	state->initialize();
+	states.push(state);
+	return;
 }
 
 void Game::popState()
@@ -42,6 +65,12 @@ GameState* Game::peekState()
 	return states.top();
 }
 
+void Game::initializePlayers(GameState* state)
+{
+	state->initialize();
+	return;
+}
+
 void Game::gameLoop()
 {
 	sf::Clock clock;
@@ -49,6 +78,25 @@ void Game::gameLoop()
 	{
 		sf::Time elapsed = clock.restart();
 		float dt = elapsed.asSeconds();
+
+		if (multiplayerBool == false)
+		{
+			if (window.getSize() != sf::Vector2u(400, 400) && window.getSize() != sf::Vector2u(600, 600) && window.getSize() != sf::Vector2u(800, 800))
+			{
+				window.setSize(sf::Vector2u(400, 400));
+				view.reset(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
+				window.setView(view);
+			}
+		}
+		else if (multiplayerBool == true)
+		{
+			if (window.getSize() != sf::Vector2u(800, 400) && window.getSize() != sf::Vector2u(1200, 600) && window.getSize() != sf::Vector2u(1600, 800))
+			{
+				window.setSize(sf::Vector2u(800, 400));
+				view.reset(sf::FloatRect(0, 0, window.getSize().x, window.getSize().y));
+				window.setView(view);
+			}
+		}
 
 		if (peekState() == nullptr)
 		{
@@ -66,17 +114,38 @@ void Game::gameLoop()
 			{
 				if (event.key.code == sf::Keyboard::Z)
 				{
-					window.setSize(sf::Vector2u(800, 400));
+					if (multiplayerBool == true)
+					{
+						window.setSize(sf::Vector2u(800, 400));
+					}
+					else
+					{
+						window.setSize(sf::Vector2u(400, 400));
+					}
 				}
 				else if (event.key.code == sf::Keyboard::X)
 				{
+					if (multiplayerBool == true)
+					{
+						window.setSize(sf::Vector2u(1200, 600));
+					}
+					else
+					{
+						window.setSize(sf::Vector2u(600, 600));
+					}
 					window.setPosition(sf::Vector2i(0, 0));
-					window.setSize(sf::Vector2u(1200, 600));
 				}
 				else if (event.key.code == sf::Keyboard::C)
 				{
+					if (multiplayerBool == true)
+					{
+						window.setSize(sf::Vector2u(1600, 800));
+					}
+					else
+					{
+						window.setSize(sf::Vector2u(800, 800));
+					}
 					window.setPosition(sf::Vector2i(0, 0));
-					window.setSize(sf::Vector2u(1600, 800));
 				}
 				peekState()->handleInput();
 			}
@@ -90,29 +159,6 @@ void Game::gameLoop()
 			window.display();
 		}
 	}
-}
-
-Game::Game()
-{
-	windowWidth = 800;
-	windowHeight = 400;
-	window.create(sf::VideoMode(windowWidth, windowHeight), "Extreme Tetris");
-	window.setFramerateLimit(60);
-
-	//sf::Clock clock;
-	//unsigned short frames = 0;
-
-	//if (clock.getElapsedTime().asMicroseconds() >= 500000)
-	//{
-	//	system("cls");
-	//	std::cout << "FPS: " << frames * 2 << "\n";
-	//	frames = 0;
-	//	clock.restart();
-	//}
-	//else
-	//{
-	//	frames++;
-	//}
 }
 
 void Game::multiplayerStart(bool multiplayer)

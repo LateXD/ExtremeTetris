@@ -11,6 +11,9 @@ public:
 	void update(const float dt);
 	void handleInput();
 
+protected:
+	void onInitialize();
+
 private:
 	GameState *player1;
 	GameState *player2;

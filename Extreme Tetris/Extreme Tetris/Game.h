@@ -26,6 +26,7 @@ public:
 	void pushState(GameState* state);
 	void popState();
 	void changeState(GameState* state);
+	void initializePlayers(GameState* state);
 	GameState* peekState();
 
 	float getWindowWidth();
@@ -38,6 +39,7 @@ public:
 	bool getGameOverBool();
 	sf::Texture setTexture(sf::Texture texture, std::string filePath);
 	sf::Font setFont(sf::Font fontName, std::string filePath);
+	sf::View view;
 
 	Game();
 	~Game();

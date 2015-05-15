@@ -5,7 +5,14 @@
 InverseState::InverseState(Game* game)
 {
 	this->game = game;
+}
 
+InverseState::~InverseState()
+{
+}
+
+void InverseState::onInitialize()
+{
 	fieldTexture = game->setTexture(fieldTexture, "..\\Graphics\\Frame.png");
 	pointsFieldTexture = game->setTexture(pointsFieldTexture, "..\\Graphics\\Frame2.png");
 	bgTexture = game->setTexture(bgTexture, "..\\Graphics\\Background.png");
@@ -70,10 +77,6 @@ InverseState::InverseState(Game* game)
 	{
 		spriteVector = blockVector[i]->getVector();
 	}
-}
-
-InverseState::~InverseState()
-{
 }
 
 void InverseState::draw(const float dt)

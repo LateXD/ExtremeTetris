@@ -5,7 +5,14 @@
 SingleplayerState::SingleplayerState(Game* game)
 {
 	this->game = game;
-	
+}
+
+SingleplayerState::~SingleplayerState()
+{
+}
+
+void SingleplayerState::onInitialize()
+{
 	fieldTexture = game->setTexture(fieldTexture, "..\\Graphics\\Frame.png");
 	pointsFieldTexture = game->setTexture(pointsFieldTexture, "..\\Graphics\\Frame2.png");
 	bgTexture = game->setTexture(bgTexture, "..\\Graphics\\Background.png");
@@ -72,10 +79,6 @@ SingleplayerState::SingleplayerState(Game* game)
 	{
 		spriteVector = blockVector[i]->getVector();
 	}
-}
-
-SingleplayerState::~SingleplayerState()
-{
 }
 
 void SingleplayerState::draw(const float dt)

@@ -5,14 +5,20 @@
 PlayerState::PlayerState(Game* game)
 {
 	this->game = game;
-	player1 = new SingleplayerState(game);
-	player2 = new MultiplayerState(game);
-	game->multiplayerStart(true);
 }
-
 
 PlayerState::~PlayerState()
 {
+}
+
+void PlayerState::onInitialize()
+{
+	game->window.setView(game->view);
+	player1 = new SingleplayerState(game);
+	player2 = new MultiplayerState(game);
+	game->initializePlayers(player1);
+	game->initializePlayers(player2);
+	game->multiplayerStart(true);
 }
 
 void PlayerState::draw(const float dt)

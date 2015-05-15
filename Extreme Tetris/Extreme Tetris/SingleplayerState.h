@@ -17,6 +17,9 @@ public:
 	void handleInput();
 	void rowClearing();
 
+protected:
+	void onInitialize();
+
 private:
 	Blocks* block;
 	bool direction = true, newBlock = true, collision = false, clearRow = false, gameOver = false;

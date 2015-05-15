@@ -5,7 +5,14 @@
 MultiplayerState::MultiplayerState(Game* game)
 {
 	this->game = game;
+}
 
+MultiplayerState::~MultiplayerState()
+{
+}
+
+void MultiplayerState::onInitialize()
+{
 	fieldTexture = game->setTexture(fieldTexture, "..\\Graphics\\Frame.png");
 	pointsFieldTexture = game->setTexture(pointsFieldTexture, "..\\Graphics\\Frame2.png");
 	bgTexture = game->setTexture(bgTexture, "..\\Graphics\\Background.png");
@@ -38,7 +45,7 @@ MultiplayerState::MultiplayerState(Game* game)
 	levelText.setString(ss.str());
 	ss.clear();
 	ss.str("");
-	
+
 	controlsText.setFont(font);
 	controlsText.setCharacterSize(12);
 	controlsText.setPosition(blockSize * 21.2, blockSize * 15.25);
@@ -79,10 +86,6 @@ MultiplayerState::MultiplayerState(Game* game)
 	{
 		spriteVector = blockVector[i]->getVector();
 	}
-}
-
-MultiplayerState::~MultiplayerState()
-{
 }
 
 void MultiplayerState::draw(const float dt)
